@@ -3,6 +3,7 @@
 namespace App\Verat\Admin;
 
 use App\User;
+use App\Verat\Admin\Collection\Post;
 use Verat\Admin\Bootstrapper;
 
 class App extends Bootstrapper
@@ -13,7 +14,9 @@ class App extends Bootstrapper
      */
     public static function collections()
     {
-        return [];
+        return [
+            Post::class
+        ];
     }
 
     /**

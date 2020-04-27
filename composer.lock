@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d3ddd28ac3a73e5e5b0cfc7d27e40567",
+    "content-hash": "ae2aca443d27cada45b890c536a010f7",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -3426,16 +3426,16 @@
         },
         {
             "name": "verat/admin",
-            "version": "v0.1.1",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kodnificent/verat-admin.git",
-                "reference": "294c16cad01bcc875014d44c7a9380b1b749e8a3"
+                "reference": "4001812b5de3fab3cddb51228394cbcdc7e6265e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kodnificent/verat-admin/zipball/294c16cad01bcc875014d44c7a9380b1b749e8a3",
-                "reference": "294c16cad01bcc875014d44c7a9380b1b749e8a3",
+                "url": "https://api.github.com/repos/kodnificent/verat-admin/zipball/4001812b5de3fab3cddb51228394cbcdc7e6265e",
+                "reference": "4001812b5de3fab3cddb51228394cbcdc7e6265e",
                 "shasum": ""
             },
             "require": {
@@ -3487,7 +3487,7 @@
                 "admin",
                 "verat"
             ],
-            "time": "2020-04-25T13:34:28+00:00"
+            "time": "2020-04-27T02:51:56+00:00"
         },
         {
             "name": "vlucas/phpdotenv",

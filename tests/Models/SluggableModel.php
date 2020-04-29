@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Tests\Models;
 
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;

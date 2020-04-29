@@ -2,12 +2,13 @@
 
 namespace App;
 
+use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Model;
 
 class PostCategory extends Model
 {
-    use HasSlug;
+    use HasSlug, HasMeta;
 
     /**
      * Indicates if the model should be timestamped.

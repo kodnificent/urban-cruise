@@ -8,7 +8,6 @@ use Tests\TestCase;
 
 class HasSlugTest extends TestCase
 {
-
     public function testSlugColumn_With_Null_ShouldFail()
     {
         $this->expectException(LogicException::class);

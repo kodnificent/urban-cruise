@@ -2,63 +2,44 @@
 
 namespace Tests\Feature;
 
-use App\Post;
-use App\PostCategory;
-use App\Traits\HasSlug;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Support\Facades\Schema;
-use Tests\TestCase;
+use App\Traits\HasMeta;
+use Tests\ModelTestCase;
+use Tests\Utils\Model\TestsModelSlug;
+use Tests\Utils\Model\TestsModelTimestamp;
+use Tests\Utils\Model\TestsModelTrait;
 
-class PostCategoryTest extends TestCase
+class PostCategoryTest extends ModelTestCase
 {
-    use RefreshDatabase, WithFaker;
+    use TestsModelTrait,
+        TestsModelSlug,
+        TestsModelTimestamp;
 
-
-    public function testPostCategory_Has_DatabaseColumns()
+    protected function requiredColumns(): array
     {
-        $table = 'post_categories';
-
-        $this->assertTrue(Schema::hasTable($table), "$table table does not exist");
-        $this->assertTrue(Schema::hasColumn($table, 'id'), 'id column does not exist');
-        $this->assertTrue(Schema::hasColumn($table, 'slug'), 'slug column does not exist');
-        $this->assertTrue(Schema::hasColumn($table, 'title'), 'title column does not exist');
-        $this->assertTrue(Schema::hasColumn($table, 'description'), 'description column does not exist');
-        $this->assertTrue(Schema::hasColumn($table, 'file_id'), 'file_id column does not exist');
-        $this->assertTrue(Schema::hasColumn($table, 'meta_id'), 'meta_id column does not exist');
+        return [
+            'id', 'slug', 'title', 'description', 'file_id'
+        ];
     }
 
-    public function testModel_ShouldNot_Use_Timestamps()
+    protected function requiredTraits(): array
     {
-        $this->assertFalse((new PostCategory)->timestamps);
+        return [
+            HasMeta::class,
+        ];
     }
 
-    public function testSlugTrait()
+    protected function shouldBeTimestamped()
     {
-        $traits = class_uses(PostCategory::class);
-
-        $this->assertArrayHasKey(HasSlug::class, $traits);
-
-        $methods = get_class_methods(PostCategory::class);
-        $this->assertContains('slugColumn', $methods);
-        $this->assertContains('slugMirror', $methods);
-
-        $this->assertEquals('slug', (new PostCategory)->slugColumn(), 'invalid slug mirror');
-        $this->assertEquals('title', (new PostCategory)->slugMirror(), 'invalid slug mirror');
+        return false;
     }
 
-    public function testPost_Relationship()
+    public function slugColumnShouldReturn()
     {
-        $this->assertTrue(Schema::hasTable('posts'), 'post table does not exist ');
+        return 'slug';
+    }
 
-        $category = factory(PostCategory::class)->create();
-
-        $post = factory(Post::class)->create([
-            'category_id'   =>  $category->id
-        ]);
-
-        $this->assertCount(1, $category->posts, 'invalid count of posts for the category');
-
-        $this->assertInstanceOf(Post::class, $category->posts->first(), 'category probably has no post');
+    public function slugMirrorShouldReturn()
+    {
+        return 'title';
     }
 }

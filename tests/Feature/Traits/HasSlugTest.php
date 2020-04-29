@@ -4,7 +4,7 @@ namespace Tests\Feature\Traits;
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Tests\SluggableModel;
+use Tests\Models\SluggableModel;
 use Tests\TestCase;
 
 class HasSlugTest extends TestCase

@@ -19,7 +19,6 @@ class CreatePostCategories extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->unsignedBigInteger('file_id')->nullable();
-            $table->unsignedBigInteger('meta_id')->nullable();
         });
     }
 

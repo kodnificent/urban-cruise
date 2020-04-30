@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature;
+namespace Tests\Unit;
 
 use App\Traits\HasMeta;
 use Tests\ModelTestCase;

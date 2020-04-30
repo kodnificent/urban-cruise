@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Unit;
+namespace Tests\Unit\Traits;
 
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Tests\Models\MetaableModel;

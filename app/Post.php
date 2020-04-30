@@ -2,7 +2,7 @@
 
 namespace App;
 
-use App\Traits\HasAuthor;
+use App\Traits\HasCreator;
 use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use App\Traits\HasUpdater;
@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Post extends Model
 {
-    use HasMeta, HasSlug, HasAuthor, HasUpdater, SoftDeletes;
+    use HasMeta, HasSlug, HasCreator, HasUpdater, SoftDeletes;
 
     /**
      * The attributes that aren't mass assignable.

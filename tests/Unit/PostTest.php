@@ -3,9 +3,8 @@
 namespace Tests\Unit;
 
 use App\Post;
-use App\Traits\HasAuthor;
+use App\Traits\HasCreator;
 use App\Traits\HasMeta;
-use App\Traits\HasSlug;
 use App\Traits\HasUpdater;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tests\ModelTestCase;
@@ -29,7 +28,7 @@ class PostTest extends ModelTestCase
         return [
             HasMeta::class,
             SoftDeletes::class,
-            HasAuthor::class,
+            HasCreator::class,
             HasUpdater::class,
         ];
     }

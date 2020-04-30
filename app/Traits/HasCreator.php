@@ -21,7 +21,7 @@ trait HasCreator
     }
 
     /**
-     * Get the author of a post
+     * Get the creator of a model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

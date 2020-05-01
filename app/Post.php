@@ -13,6 +13,10 @@ class Post extends Model
 {
     use HasMeta, HasSlug, HasCreator, HasUpdater, SoftDeletes;
 
+    const HAS_CREATOR_FOREIGN = 'author_id';
+
+    const HAS_UPDATER_FOREIGN = 'updater_id';
+
     /**
      * The attributes that aren't mass assignable.
      *

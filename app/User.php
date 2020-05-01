@@ -2,13 +2,16 @@
 
 namespace App;
 
+use App\Traits\HasCreator;
+use App\Traits\HasPost;
+use App\Traits\HasUpdater;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, HasUpdater, HasCreator, HasPost;
 
     /**
      * The attributes that are mass assignable.
@@ -35,5 +38,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'created_at'    =>  'datetime',
+        'updated_at'    =>  'datetime',
     ];
 }

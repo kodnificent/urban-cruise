@@ -52,9 +52,4 @@ abstract class ModelTestCase extends TestCase
     {
         return $this->modelInstance()->getTable();
     }
-
-    protected function requiredColumns(): array
-    {
-        return [];
-    }
 }

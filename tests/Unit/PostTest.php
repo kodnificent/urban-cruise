@@ -9,12 +9,13 @@ use App\Traits\HasUpdater;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Tests\ModelTestCase;
 use Tests\Utils\Model\TestsModelCast;
+use Tests\Utils\Model\TestsModelConstants;
 use Tests\Utils\Model\TestsModelSlug;
 use Tests\Utils\Model\TestsModelTrait;
 
 class PostTest extends ModelTestCase
 {
-    use TestsModelTrait, TestsModelCast, TestsModelSlug;
+    use TestsModelTrait, TestsModelCast, TestsModelSlug, TestsModelConstants;
 
     protected function requiredCasts(): array
     {
@@ -50,5 +51,13 @@ class PostTest extends ModelTestCase
     protected function slugMirrorShouldReturn()
     {
         return 'title';
+    }
+
+    public function requiredConstants(): array
+    {
+        return [
+            ['HAS_CREATOR_FOREIGN', 'author_id'],
+            ['HAS_UPDATER_FOREIGN', 'updater_id']
+        ];
     }
 }

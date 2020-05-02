@@ -18,7 +18,7 @@ trait HasSlug
     {
         static::verifyColumnFields();
 
-        static::creating(function($model){
+        static::saving(function($model){
             static::slugMirrorListener($model);
         });
     }
@@ -37,8 +37,8 @@ trait HasSlug
 
         $slug_field = $slugger->slugColumn();
 
-        $fields = static::where($mirror_field, $model->{$mirror_field})->get();
-
+        // search for duplicate mirror_fields irrespective of the string case
+        $fields = static::whereRaw("LOWER($mirror_field) = ?", strtolower($model->{$mirror_field}))->get();
 
         if($fields->count() === 0){ // there are no duplicate fields
             $model->{$slug_field} = $slugger->slugify($model->{$mirror_field});

@@ -9,6 +9,8 @@ class SluggableModel extends Model
 {
     use HasSlug;
 
+    protected $fillable = ['title'];
+
     public function slugColumn()
     {
         return 'slug';

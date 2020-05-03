@@ -41,4 +41,14 @@ class User extends Authenticatable
         'created_at'    =>  'datetime',
         'updated_at'    =>  'datetime',
     ];
+
+    /**
+     * Relationships that should be loaded with the model
+     *
+     * @var array
+     */
+    protected $with = [
+        'creator',
+        'updater',
+    ];
 }

@@ -8,11 +8,12 @@ use App\Traits\HasUpdater;
 use Tests\ModelTestCase;
 use Tests\Utils\Model\TestsModel;
 use Tests\Utils\Model\TestsModelCast;
+use Tests\Utils\Model\TestsModelHiddenAttrs;
 use Tests\Utils\Model\TestsModelTrait;
 
 class UserTest extends ModelTestCase
 {
-    use TestsModel, TestsModelTrait, TestsModelCast;
+    use TestsModel, TestsModelTrait, TestsModelCast, TestsModelHiddenAttrs;
 
     protected function requiredColumns(): array
     {
@@ -45,6 +46,14 @@ class UserTest extends ModelTestCase
             ['email_verified_at', 'datetime'],
             ['created_at', 'datetime'],
             ['updated_at', 'datetime'],
+        ];
+    }
+
+    public function requiredHiddenAttributes(): array
+    {
+        return [
+            ['password'],
+            ['remember_token']
         ];
     }
 }

@@ -31,13 +31,10 @@ trait TestsDatabase
     public function testDatabase_Has_RequiredColumns()
     {
         $columns = $this->requiredColumns();
-
         $table = $this->databaseTableName();
 
-        $hasColumn = function($column) use($table){
-            $this->assertTrue(Schema::hasColumn($table, $column), "$column column does not exist");
-        };
-
-        array_walk($columns, $hasColumn);
+        foreach ($columns as $column_name) {
+            $this->assertTrue(Schema::hasColumn($table, $column_name), "$column_name column does not exist");
+        }
     }
 }

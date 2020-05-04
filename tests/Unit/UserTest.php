@@ -4,7 +4,10 @@ namespace Tests\Unit;
 
 use App\Traits\HasCreator;
 use App\Traits\HasPost;
+use App\Traits\HasRole;
 use App\Traits\HasUpdater;
+use App\User;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Tests\ModelTestCase;
 use Tests\Utils\Model\TestsModel;
 use Tests\Utils\Model\TestsModelCast;
@@ -37,6 +40,7 @@ class UserTest extends ModelTestCase
             HasCreator::class,
             HasUpdater::class,
             HasPost::class,
+            HasRole::class,
         ];
     }
 

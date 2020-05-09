@@ -23,12 +23,12 @@ trait TestsDatabase
      */
     protected abstract function requiredColumns(): array;
 
-    public function testDatabase_Exists()
+    public function testDatabaseTable_Exists()
     {
         $this->assertTrue(Schema::hasTable($this->databaseTableName()));
     }
 
-    public function testDatabase_Has_RequiredColumns()
+    public function testDatabaseTable_Has_RequiredColumns()
     {
         $columns = $this->requiredColumns();
         $table = $this->databaseTableName();

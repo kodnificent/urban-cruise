@@ -1,0 +1,14 @@
+.header {
+    &__title {
+        @apply flex-grow;
+    }
+
+    &[data-is-mobile=true] {
+        height: 56px;
+        background-color: #222222;
+        color: #ffffff;
+    }
+
+    &[data-is-mobile=false] {
+    }
+}

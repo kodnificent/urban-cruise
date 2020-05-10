@@ -16,6 +16,7 @@ class AppSettingTest extends ModelTestCase
             'site_name',
             'site_description',
             'site_logo',
+            'site_logo_on_black',
             'socials'
         ];
     }

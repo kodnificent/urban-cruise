@@ -18,6 +18,7 @@ class CreateAppSettingsTable extends Migration
             $table->string('site_name');
             $table->text('site_description')->nullable();
             $table->string('site_logo')->nullable();
+            $table->string('site_logo_on_black')->nullable();
             $table->text('socials')->nullable();
         });
     }

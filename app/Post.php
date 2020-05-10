@@ -6,6 +6,7 @@ use App\Traits\HasCreator;
 use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use App\Traits\HasUpdater;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -30,7 +31,7 @@ class Post extends Model
      * @var array
      */
     protected $with = [
-        'author',
+        'creator',
         'updater',
         'category'
     ];
@@ -42,6 +43,16 @@ class Post extends Model
      */
     protected $casts = [
         'options'   =>  'array'
+    ];
+
+    /**
+     * Default attribute values
+     *
+     * @return array
+     */
+    protected $attributes = [
+        'featured' => false,
+        'status' => 'draft',
     ];
 
     /**
@@ -72,5 +83,56 @@ class Post extends Model
     public function category()
     {
         return $this->belongsTo(PostCategory::class, 'category_id');
+    }
+
+    /**
+     * Get posts that are marked as featured
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeFeatured(Builder $query)
+    {
+        return $query->where('featured', true);
+    }
+
+    /**
+     * Get posts with published status
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopePublished(Builder $query)
+    {
+        return $query->where('status', 'published');
+    }
+
+    /**
+     * Get posts with draft status
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeDrafted(Builder $query)
+    {
+        return $query->where('status', 'draft');
+    }
+
+    /**
+     * Get posts of a certain category
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @param \App\PostCategory $category
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeOfCategory(Builder $query, PostCategory $category)
+    {
+        // first we get the ids of all the children of the category
+        // because a post can be of category news (parent category)
+        // and have category_id value of a politics child category
+        $children = PostCategory::childrenOf($category->id)->pluck('id');
+
+        return $query->where('category_id', $category->id)
+                    ->orWhereIn('category_id', $children);
     }
 }

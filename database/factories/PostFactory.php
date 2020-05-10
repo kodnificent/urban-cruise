@@ -14,10 +14,17 @@ $factory->define(Post::class, function (Faker $faker) {
             'allow_comments'    =>  true,
             'allow_sharing'     =>  true
         ],
-        'status'  => 'draft'
     ];
 });
 
 $factory->state(Post::class, 'published', [
     'status'    =>  'published',
+]);
+
+$factory->state(Post::class, 'draft', [
+    'status'    =>  'draft',
+]);
+
+$factory->state(Post::class, 'featured', [
+    'featured'    =>  true,
 ]);

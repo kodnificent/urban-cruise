@@ -11,3 +11,8 @@ $factory->define(PostCategory::class, function (Faker $faker) {
         'description' => $faker->text(100)
     ];
 });
+
+
+$factory->state(PostCategory::class, 'news', [
+    'title' => 'news'
+]);

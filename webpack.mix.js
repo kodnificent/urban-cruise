@@ -28,7 +28,7 @@ mix.js('resources/js/app.js', 'public/assets/js')
         postcss_nested,
         postcss_custom_nested,
         autoprefixer,
-        ...process.env.NODE_ENV ? [purgecss] : []
+        ...process.env.NODE_ENV === 'production' ? [purgecss] : []
     ])
     .copy('resources/imgs', 'public/assets/imgs')
     .copy('resources/fonts', 'public/assets/fonts')

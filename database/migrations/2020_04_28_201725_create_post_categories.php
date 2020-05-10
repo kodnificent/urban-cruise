@@ -15,6 +15,7 @@ class CreatePostCategories extends Migration
     {
         Schema::create('post_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('parent_id')->nullable(); // id of parent category
             $table->char('slug')->unique();
             $table->string('title');
             $table->text('description')->nullable();

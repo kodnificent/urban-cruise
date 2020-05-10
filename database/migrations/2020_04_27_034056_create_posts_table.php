@@ -21,6 +21,7 @@ class CreatePostsTable extends Migration
             $table->longText('content')->nullable();
             $table->string('options');
             $table->char('status');
+            $table->boolean('featured');
             $table->unsignedBigInteger('file_id')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();

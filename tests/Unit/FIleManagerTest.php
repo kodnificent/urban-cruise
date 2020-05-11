@@ -2,6 +2,7 @@
 
 namespace Tests\Unit;
 
+use App\FileManager;
 use App\Traits\HasCreator;
 use App\Traits\HasUpdater;
 use Tests\ModelTestCase;
@@ -49,5 +50,14 @@ class FileManagerTest extends ModelTestCase
             ['created_at', 'datetime'],
             ['updated_at', 'datetime']
         ];
+    }
+
+    public function testCreateAFile()
+    {
+        $this->seed('ImageTableSeeder');
+
+        $images = FileManager::all();
+
+        $this->assertGreaterThan(0, $images->count());
     }
 }

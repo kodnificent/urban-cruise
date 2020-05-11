@@ -23,7 +23,7 @@ class PostCategoryTest extends ModelTestCase
     protected function requiredColumns(): array
     {
         return [
-            'id', 'parent_id', 'slug', 'title', 'description', 'file_id'
+            'id', 'parent_id', 'slug', 'title', 'description'
         ];
     }
 

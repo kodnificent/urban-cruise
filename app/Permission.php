@@ -8,8 +8,11 @@ class Permission extends Model
 {
     public $timestamps = false;
 
-    protected $casts = [
-        'options'   =>  'array'
+    protected $attributes = [
+        'create' => 'yes',
+        'read' => 'mine',
+        'update' => 'mine',
+        'delete' => 'no'
     ];
 
     /**

@@ -18,7 +18,6 @@ class RoleTest extends ModelTestCase
             'id',
             'title',
             'description',
-            'access_admin'
         ];
     }
 

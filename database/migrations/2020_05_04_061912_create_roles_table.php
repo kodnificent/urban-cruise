@@ -17,7 +17,6 @@ class CreateRolesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->unique();
             $table->text('description')->nullable();
-            $table->boolean('access_admin');
         });
     }
 

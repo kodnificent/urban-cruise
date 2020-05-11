@@ -41,6 +41,22 @@ class MakeAdmin extends Command
      */
     public function handle()
     {
+        $role = $this->createAdminRole();
+
+        $user = $this->createAdmin();
+
+        $user->roles()->attach($role);
+
+        $this->comment("{$user->email} has now been assigned the admin role");
+    }
+
+    /**
+     * Create default admin role
+     *
+     * @return \App\Role
+     */
+    public function createAdminRole()
+    {
         $this->comment('Attempting to create admin role');
 
         // first we are going to create a super admin role
@@ -53,13 +69,22 @@ class MakeAdmin extends Command
         } else {
             $role = new Role();
             $role->title = $role_name;
-            $role->description = "An $role_name has all permissions to all collections of the app. You should have very few of them";
-            $role->access_admin = true;
+            $role->description = "An $role_name has all permissions make any changes to your site. Ensure you have very few of them.";
             $role->save();
 
             $this->comment("$role_name role created successfully!");
         }
 
+        return $role;
+    }
+
+    /**
+     * Create a default admin and return an instance of the model
+     *
+     * @return \App\User
+     */
+    protected function createAdmin()
+    {
         $this->comment("Attempting to create default admin");
 
         $email = 'admin@example.com';
@@ -80,8 +105,6 @@ class MakeAdmin extends Command
             $this->comment("Admin created successfully! Email - $email, Password - $password");
         }
 
-        $user->roles()->attach($role);
-
-        $this->comment("{$user->email} is now an Admin");
+        return $user;
     }
 }

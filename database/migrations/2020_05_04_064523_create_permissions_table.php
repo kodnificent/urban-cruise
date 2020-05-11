@@ -17,7 +17,10 @@ class CreatePermissionsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id');
             $table->string('collection_name');
-            $table->text('options'); //json
+            $table->char('create'); // no, full
+            $table->char('read'); // no, mine, role, full
+            $table->char('update'); // no, mine, role, full
+            $table->char('delete'); // no, mine, role, full
         });
     }
 

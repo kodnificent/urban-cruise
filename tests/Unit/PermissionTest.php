@@ -10,7 +10,7 @@ use Tests\Utils\Model\TestsModelTimestamp;
 
 class PermissionTest extends ModelTestCase
 {
-    use TestsModelTimestamp, TestsModelCast;
+    use TestsModelTimestamp;
 
     protected function requiredColumns(): array
     {
@@ -18,20 +18,16 @@ class PermissionTest extends ModelTestCase
             'id',
             'role_id',
             'collection_name',
-            'options'
+            'create',
+            'read',
+            'update',
+            'delete',
         ];
     }
 
     protected function shouldBeTimestamped(): bool
     {
         return false;
-    }
-
-    protected function requiredCasts(): array
-    {
-        return [
-            ['options', 'array']
-        ];
     }
 
     public function testRole_Relationship()

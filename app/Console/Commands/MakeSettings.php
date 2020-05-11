@@ -45,10 +45,9 @@ class MakeSettings extends Command
         $setting->site_name = 'Urban Cruise';
         $setting->site_description = 'A short description';
         $setting->site_logo = '';
-        $setting->socials = [
-            'facebook' => 'https://fb.com',
-            'instagram' => 'https://instagram.com'
-        ];
+        $setting->facebook = 'https://fb.com';
+        $setting->instagram = 'https://instagram.com';
+        $setting->twitter = 'https://twitter.com';
         $setting->save();
 
         $this->comment('App setting created successfully!');

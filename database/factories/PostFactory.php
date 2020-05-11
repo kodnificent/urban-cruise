@@ -8,13 +8,13 @@ use Faker\Generator as Faker;
 
 $factory->define(Post::class, function (Faker $faker) {
     $files = FileManager::all();
-    $image = $files->count() === 0 ?: $files->random(1);
+    $image = $files->count() === 0 ? null : $files->random(1)->first();
 
     return [
         'title' =>  $faker->words(3, true),
         'summary' => $faker->text(),
         'content' => $faker->text(200, 5),
-        'file_id' => $image->id ?? null,
+        'file_id' => optional($image)->id,
         'options'   =>  [
             'allow_comments'    =>  true,
             'allow_sharing'     =>  true

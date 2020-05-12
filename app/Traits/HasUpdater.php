@@ -21,6 +21,20 @@ trait HasUpdater
     }
 
     /**
+     * Boot updater trait
+     *
+     * @return void
+     */
+    public static function bootHasUpdater()
+    {
+        static::updating(function($model){
+            $attr = (new static)->getHasUpdaterForeign();
+
+            $model->$attr = optional(request()->user())->id;
+        });
+    }
+
+    /**
      * Get the updater of a model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -21,6 +21,20 @@ trait HasCreator
     }
 
     /**
+     * Boot creator trait
+     *
+     * @return void
+     */
+    public static function bootHasCreator()
+    {
+        static::creating(function($model){
+            $attr = (new static)->getHasCreatorForeign();
+
+            $model->$attr = optional(request()->user())->id;
+        });
+    }
+
+    /**
      * Get the creator of a model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -30,7 +30,7 @@ trait HasCreator
         static::creating(function($model){
             $attr = (new static)->getHasCreatorForeign();
 
-            $model->$attr = optional(request()->user())->id;
+            $model->{$attr} = $model->{$attr} ?? optional(request()->user())->id;
         });
     }
 

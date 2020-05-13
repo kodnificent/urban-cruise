@@ -198,7 +198,7 @@ class MakePublishers extends Command
             ]),
         ];
 
-        $this->comment('Assigning permissions to editor role');
+        $this->comment('Assigning permissions to author role');
 
         $this->attachPermissions($author, $permissions);
 

@@ -19,6 +19,7 @@ $factory->define(Post::class, function (Faker $faker) {
             'allow_comments'    =>  true,
             'allow_sharing'     =>  true
         ],
+        'author_id' => 1
     ];
 });
 

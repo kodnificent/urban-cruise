@@ -30,7 +30,7 @@ trait HasUpdater
         static::updating(function($model){
             $attr = (new static)->getHasUpdaterForeign();
 
-            $model->$attr = optional(request()->user())->id;
+            $model->{$attr} = $model->{$attr} ?? optional(request()->user())->id;
         });
     }
 

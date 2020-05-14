@@ -41,7 +41,7 @@ trait HasUpdater
      */
     public function updater()
     {
-        return $this->belongsTo($this->getHasUpdaterRelatedClass());
+        return $this->belongsTo($this->getHasUpdaterRelatedClass(), $this->getHasUpdaterForeign());
     }
 
     /**

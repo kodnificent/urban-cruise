@@ -18,6 +18,17 @@ class PostCategory extends Model
      */
     public $timestamps = false;
 
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute()
+    {
+        return route('post.list', [
+            'category' => $this->attributes['slug']
+        ]);
+    }
+
     /**
      * Column name for the slug field
      *

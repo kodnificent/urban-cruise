@@ -13,7 +13,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         'title' =>  $faker->words(3, true),
         'summary' => $faker->text(),
-        'content' => $faker->text(200, 5),
+        'content' => $faker->realText(800, 5),
         'file_id' => optional($image)->id,
         'options'   =>  [
             'allow_comments'    =>  true,

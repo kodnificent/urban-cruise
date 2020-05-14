@@ -49,7 +49,18 @@ class User extends Authenticatable
      * @var array
      */
     protected $with = [
-        'creator',
-        'updater',
+        //'creator',
+        //'updater',
     ];
+
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute()
+    {
+        return route('author.read', [
+            'id' => $this->attributes['id']
+        ]);
+    }
 }

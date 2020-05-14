@@ -41,7 +41,7 @@ trait HasCreator
      */
     public function creator()
     {
-        return $this->belongsTo($this->getHasCreatorRelatedClass());
+        return $this->belongsTo($this->getHasCreatorRelatedClass(), $this->getHasCreatorForeign());
     }
 
     /**

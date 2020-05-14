@@ -9,13 +9,24 @@ class HomeController extends Controller
 {
     public function __invoke(Request $request)
     {
-        $data = $this->getData();
+        $data = $this->data();
+        $meta = $this->metaData();
 
         if($request->expectsJson()){
-            return response()->json(compact('data'), 200);
+            return response()->json(compact('meta', 'data'), 200);
         } else {
-            return view('layouts.home', compact('data'));
+            return view('layouts.home', compact('meta', 'data'));
         }
+    }
+
+    /**
+     * Get the skeleton view of the home page
+     *
+     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
+     */
+    public function skeleton()
+    {
+        return view('layouts.home');
     }
 
     /**
@@ -23,13 +34,20 @@ class HomeController extends Controller
      *
      * @return array
      */
-    protected function getData()
+    protected function data()
+    {
+        return [
+            'title' => settings('site_name'),
+            'featured_posts' =>  $this->featuredPosts()
+        ];
+    }
+
+    protected function metaData()
     {
         return [
             'title' => settings('site_name'),
             'description' => settings('site_description'),
-            'logo'  =>  settings('site_logo'),
-            'featured_posts' =>  $this->getFeaturedPosts()
+            'canonical' => url(route('home'), [], true)
         ];
     }
 
@@ -38,8 +56,8 @@ class HomeController extends Controller
      *
      * @return array
      */
-    protected function getFeaturedPosts()
+    protected function featuredPosts()
     {
-        return Post::featured()->take(3)->get();
+        return Post::featured()->select('slug', 'title', 'summary', 'file_id', 'category_id', 'author_id')->take(3)->get();
     }
 }

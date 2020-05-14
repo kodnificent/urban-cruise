@@ -3,6 +3,7 @@
 namespace App;
 
 use App\Traits\HasCreator;
+use App\Traits\HasFile;
 use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use App\Traits\HasUpdater;
@@ -10,9 +11,12 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+/**
+ * @method \App\Post featured() Get posts that are marked as featured
+ */
 class Post extends Model
 {
-    use HasMeta, HasSlug, HasCreator, HasUpdater, SoftDeletes;
+    use HasMeta, HasSlug, HasCreator, HasUpdater, HasFile, SoftDeletes;
 
     const HAS_CREATOR_FOREIGN = 'author_id';
 
@@ -31,9 +35,10 @@ class Post extends Model
      * @var array
      */
     protected $with = [
-        'creator',
-        'updater',
-        'category'
+        'creator:id,name',
+        'updater:id,name',
+        'category:id,slug,title',
+        'file:id,disk,path,type'
     ];
 
     /**
@@ -54,6 +59,18 @@ class Post extends Model
         'featured' => false,
         'status' => 'draft',
     ];
+
+    protected $appends = [
+        'url'
+    ];
+
+    public function getUrlAttribute()
+    {
+        return route('post.read', [
+            'category' => $this->category->slug,
+            'slug' => $this->attributes['slug']
+        ]);
+    }
 
     /**
      * Column name for the slug field

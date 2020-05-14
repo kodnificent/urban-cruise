@@ -11,5 +11,26 @@
 |
 */
 
-Route::get('/', 'HomeController')->name('home');
+Route::get('home.sk', 'HomeController@skeleton')->name('home.skeleton');
 
+Route::get('author.sk', 'AuthorController@skeleton')->name('author.skeleton');
+
+Route::get('posts.sk', 'PostController@skeleton')->name('posts.skeleton');
+
+Route::get('post.sk', 'PostController@skeleton-single')->name('post.skeleton');
+
+Route::get('', 'HomeController')->name('home');
+
+Route::prefix('author')
+    ->name('author.')
+    ->group(function () {
+        Route::get('{id}', 'AuthorController@read')->name('read');
+    });
+
+Route::prefix('/{category}')
+    ->name('post.')
+    ->group(function () {
+        Route::get('', 'PostController@list')->name('list');
+
+        Route::get('{slug}', 'PostController@read')->name('read');
+    });

@@ -2,31 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Interfaces\LayoutInterface;
+use App\Http\Controllers\Utils\ControlsLayout;
 use App\Post;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller
+class HomeController extends Controller implements LayoutInterface
 {
+    use ControlsLayout;
+
     public function __invoke(Request $request)
     {
-        $data = $this->data();
-        $meta = $this->metaData();
-
-        if($request->expectsJson()){
-            return response()->json(compact('meta', 'data'), 200);
-        } else {
-            return view('layouts.home', compact('meta', 'data'));
-        }
+        return $this->respond($request);
     }
 
-    /**
-     * Get the skeleton view of the home page
-     *
-     * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
-     */
-    public function skeleton()
+    public function layout()
     {
-        return view('layouts.home');
+        return 'layouts.home';
     }
 
     /**
@@ -34,7 +26,7 @@ class HomeController extends Controller
      *
      * @return array
      */
-    protected function data()
+    public function data()
     {
         return [
             'title' => settings('site_name'),
@@ -42,7 +34,12 @@ class HomeController extends Controller
         ];
     }
 
-    protected function metaData()
+    /**
+     * Get meta data
+     *
+     * @return array
+     */
+    public function meta()
     {
         return [
             'title' => settings('site_name'),
@@ -52,11 +49,23 @@ class HomeController extends Controller
     }
 
     /**
+     * Home endpoints
+     *
+     * @return array
+     */
+    public function endpoints()
+    {
+        return [
+            'base' => route('home'),
+        ];
+    }
+
+    /**
      * Get featured posts
      *
      * @return array
      */
-    protected function featuredPosts()
+    public function featuredPosts()
     {
         return Post::featured()->select('slug', 'title', 'summary', 'file_id', 'category_id', 'author_id')->take(3)->get();
     }

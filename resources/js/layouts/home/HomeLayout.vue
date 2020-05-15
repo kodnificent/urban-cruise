@@ -1,20 +1,26 @@
 <template>
-
+    <div>
+        <header-component>
+            <nav-bar />
+            <header-logo />
+            <header-search />
+        </header-component>
+    </div>
 </template>
-
-
 <script>
+import { layout } from "../../mixins/layout";
 export default {
-    props: {
-        data: {
-            required: true,
-            type: Array,
+    mixins: [layout],
+
+    data(){
+        return {
+            //
         }
     },
 
     mounted()
     {
-        window.$layout = this;
+        //
     }
 }
 </script>

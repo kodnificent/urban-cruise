@@ -1,10 +1,11 @@
 @extends('master')
 
-@section('meta')
-    <meta-component :meta='@json($meta ?? '')'>
-    </meta-component>
-@endsection
+@if (! $res['is_skeleton'])
+    @section('metas')
+        <title>{{ $res['meta']['title'] }}</title>
+    @endsection
+@endif
 
 @section('content')
-    <home-layout :data='@json($data ?? '')'></home-layout>
+    <home-layout :res='@json($res)'></home-layout>
 @endsection

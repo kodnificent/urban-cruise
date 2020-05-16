@@ -9,12 +9,15 @@ export default {
     data(){
         return {
             options: {
-                perView: 2,
+                perView: 3,
                 gap: 16,
                 autoplay: 5000,
                 breakpoints: {
                     767: {
                         perView: 1
+                    },
+                    1279: {
+                        perView: 2
                     }
                 }
             }

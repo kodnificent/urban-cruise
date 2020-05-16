@@ -7,7 +7,10 @@
         </header-component>
 
         <content-component>
-            <featured-posts-skeleton />
+            <section-header>
+                featured
+            </section-header>
+            <featured-posts :posts="data.featured_posts" />
         </content-component>
     </div>
 </template>

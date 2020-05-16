@@ -67,6 +67,6 @@ class HomeController extends Controller implements LayoutInterface
      */
     public function featuredPosts()
     {
-        return Post::featured()->select('slug', 'title', 'summary', 'file_id', 'category_id', 'author_id')->take(3)->get();
+        return Post::featured()->select('slug', 'title', 'summary', 'file_id', 'category_id', 'author_id', 'created_at')->take(3)->get();
     }
 }

@@ -1,0 +1,39 @@
+html {
+    @apply text-gray-800 antialiased leading-normal;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    @apply leading-tight;
+}
+
+h1 {
+    @apply text-2xl;
+}
+
+h2 {
+    @apply text-xl;
+}
+
+h3 {
+    @apply text-lg;
+}
+
+a {
+    @apply text-primary no-underline outline-none;
+
+    &:focus {
+        @apply outline-none;
+    }
+}
+
+button {
+    @apply outline-none;
+
+    &:focus {
+        @apply outline-none;
+    }
+
+    &:disabled, &[disabled], &.disabled {
+        @apply opacity-50 cursor-not-allowed;
+    }
+}

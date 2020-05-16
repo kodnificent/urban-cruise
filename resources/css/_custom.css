@@ -1,0 +1,3 @@
+.app-rounded {
+    @apply rounded-br-lg rounded-tl-lg;
+}

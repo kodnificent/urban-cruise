@@ -1,6 +1,8 @@
 /* purgecss start ignore */
 @import 'tailwindcss/base';
 
+@import '_base';
+
 @import 'components/_skeleton';
 
 @import 'tailwindcss/components';
@@ -10,3 +12,5 @@
 @import 'vue-glide-js/dist/vue-glide.css';
 
 @import 'tailwindcss/utilities';
+
+@import '_custom';

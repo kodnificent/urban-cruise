@@ -1,5 +1,5 @@
 <template>
-    <header class="header">
+    <header class="header ">
         <div class="header__container container mx-auto px-2 md:w-4/5 lg:w-3/4">
             <slot></slot>
         </div>
@@ -10,8 +10,6 @@
     .header
         background-color: #222222
         @apply shadow text-white
-        @screen md
-            @apply bg-gray-200
 
         &__container
             @apply flex

@@ -46,7 +46,7 @@
 
                 <li class="navbar__item">
                     <a class="navbar__link active" href="">
-                        enterntainment
+                        entertainment
                     </a>
                 </li>
 
@@ -132,7 +132,7 @@ export default {
                     @apply bg-primary text-on-primary shadow outline-none ml-2
 
             @screen md
-                @apply px-4 py-2 inline-block uppercase text-gray-800 font-bold border-b-2 border-transparent
+                @apply px-4 py-2 inline-block uppercase text-gray-100 font-bold border-b-2 border-transparent
 
                 &:hover, &:focus, &:active, &.active
                     @apply border-primary text-primary

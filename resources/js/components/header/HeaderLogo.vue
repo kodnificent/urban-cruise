@@ -1,6 +1,6 @@
 <template>
     <div class="logo order-2 md:order-1">
-        <img class="logo__desktop" src="/assets/imgs/desktop-logo.png" alt="urban-cruise logo">
+        <img class="logo__desktop" src="/assets/imgs/mobile-logo.png" alt="urban-cruise logo">
         <img class="logo__mobile" src="/assets/imgs/mobile-logo.png" alt="urban-cruise logo">
     </div>
 </template>
@@ -15,7 +15,7 @@
                 @apply hidden
         &__desktop
             @apply hidden
-            max-height: 100px
+            max-height: 80px
             @screen md
                 @apply block
 </style>

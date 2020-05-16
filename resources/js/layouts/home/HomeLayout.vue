@@ -5,6 +5,10 @@
             <header-logo />
             <header-search />
         </header-component>
+
+        <content-component>
+            <featured-posts-skeleton />
+        </content-component>
     </div>
 </template>
 <script>
@@ -14,7 +18,7 @@ export default {
 
     data(){
         return {
-            //
+
         }
     },
 

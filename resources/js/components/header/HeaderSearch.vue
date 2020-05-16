@@ -1,5 +1,5 @@
 <template>
-    <div class="mobile-search">
+    <div class="mobile-search order-3">
         <button @click="toggleDialog" class="mobile-search__button p-1 rounded-full focus:shadow-outline focus:outline-none" type="button">
             <feather-icon icon="search" />
             <span class="sr-only">open search form</span>

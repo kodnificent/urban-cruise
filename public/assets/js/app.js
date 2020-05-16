@@ -116,6 +116,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -362,12 +395,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "header",
-    { staticClass: "header container mx-auto" },
-    [_vm._t("default")],
-    2
-  )
+  return _c("header", { staticClass: "header" }, [
+    _c(
+      "div",
+      {
+        staticClass:
+          "header__container container mx-auto px-2 md:w-4/5 lg:w-3/4"
+      },
+      [_vm._t("default")],
+      2
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -398,7 +436,15 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "logo" }, [
+    return _c("div", { staticClass: "logo order-2 md:order-1" }, [
+      _c("img", {
+        staticClass: "logo__desktop",
+        attrs: {
+          src: "/assets/imgs/desktop-logo.png",
+          alt: "urban-cruise logo"
+        }
+      }),
+      _vm._v(" "),
       _c("img", {
         staticClass: "logo__mobile",
         attrs: { src: "/assets/imgs/mobile-logo.png", alt: "urban-cruise logo" }
@@ -427,7 +473,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mobile-search" }, [
+  return _c("div", { staticClass: "mobile-search order-3" }, [
     _c(
       "button",
       {
@@ -542,7 +588,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "navbar" }, [
+  return _c("div", { staticClass: "navbar order-1 md:order-2" }, [
     _c(
       "button",
       {
@@ -579,11 +625,70 @@ var render = function() {
         staticClass: "navbar__nav",
         attrs: { "data-expanded": _vm.nav_is_expanded ? "true" : "false" }
       },
-      [_c("ul")]
+      [_vm._m(0), _vm._v(" "), _vm._m(1)]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      {
+        staticClass: "md:hidden",
+        staticStyle: { width: "100%", height: "150px" }
+      },
+      [
+        _c("img", {
+          staticClass: "mx-auto block",
+          attrs: {
+            width: "150px",
+            src: "/assets/imgs/desktop-logo.png",
+            alt: "urban-cruise logo"
+          }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("ul", { staticClass: "navbar__list" }, [
+      _c("li", { staticClass: "navbar__item" }, [
+        _c("a", { staticClass: "navbar__link", attrs: { href: "" } }, [
+          _vm._v("\n                    Home\n                ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "navbar__item" }, [
+        _c("a", { staticClass: "navbar__link", attrs: { href: "" } }, [
+          _vm._v("\n                    news\n                ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "navbar__item" }, [
+        _c("a", { staticClass: "navbar__link active", attrs: { href: "" } }, [
+          _vm._v("\n                    enterntainment\n                ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "navbar__item" }, [
+        _c("a", { staticClass: "navbar__link", attrs: { href: "" } }, [
+          _vm._v("\n                    lifestyle\n                ")
+        ])
+      ]),
+      _vm._v(" "),
+      _c("li", { staticClass: "navbar__item" }, [
+        _c("a", { staticClass: "navbar__link", attrs: { href: "" } }, [
+          _vm._v("\n                    sports\n                ")
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 

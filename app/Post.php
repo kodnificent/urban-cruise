@@ -10,6 +10,7 @@ use App\Traits\HasUpdater;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Str;
 
 /**
  * @method \App\Post featured() Get posts that are marked as featured
@@ -37,7 +38,7 @@ class Post extends Model
     protected $with = [
         'creator:id,name',
         'updater:id,name',
-        'category:id,slug,title',
+        'category:id,slug,title,parent_id',
         'file:id,disk,path,type'
     ];
 
@@ -61,15 +62,33 @@ class Post extends Model
     ];
 
     protected $appends = [
-        'url'
+        'url', 'truncated_title', 'truncated_title_md', 'truncated_summary'
     ];
 
     public function getUrlAttribute()
     {
         return route('post.read', [
-            'category' => $this->category->slug,
+            'category' => $this->category->parent->slug,
+            'sub_category' => $this->category->slug,
             'slug' => $this->attributes['slug']
         ]);
+    }
+
+    public function getTruncatedSummaryAttribute()
+    {
+        $content = $this->attributes['summary'] ?: $this->attributes['content'];
+
+        return Str::limit($content, 150, "");
+    }
+
+    public function getTruncatedTitleAttribute()
+    {
+        return Str::limit($this->attributes['title'], 40, '...');
+    }
+
+    public function getTruncatedTitleMdAttribute()
+    {
+        return Str::limit($this->attributes['title'], 80, '...');
     }
 
     /**
@@ -151,5 +170,16 @@ class Post extends Model
 
         return $query->where('category_id', $category->id)
                     ->orWhereIn('category_id', $children);
+    }
+
+    /**
+     * Get posts in descending order
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeReversedOrder(Builder $query)
+    {
+        return $query->orderBy('id', 'desc');
     }
 }

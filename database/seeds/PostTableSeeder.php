@@ -14,53 +14,63 @@ class PostTableSeeder extends Seeder
     {
         // featured
         factory(Post::class)->states(['published', 'featured'])->create([
-            'category_id' => 1
+            'category_id' =>  rand(2, 6) // new category
         ]);
 
         factory(Post::class)->states(['published', 'featured'])->create([
-            'category_id' => 2
+            'category_id' =>  rand(8, 13) // entertainment category
         ]);
 
         factory(Post::class)->states(['published', 'featured'])->create([
-            'category_id' => 3
+            'category_id' =>  rand(15, 17) // sports category
         ]);
 
         factory(Post::class)->states(['published', 'featured'])->create([
-            'category_id' => 4
+            'category_id' =>  rand(19, 26) // lifestyle category
         ]);
 
         // published
         factory(Post::class, 10)->state('published')->create([
-            'category_id' => 1
+            'category_id' =>  rand(2, 6) // new category
         ]);
 
         factory(Post::class, 10)->state('published')->create([
-            'category_id' => 2
+            'category_id' =>  rand(8, 13) // entertainment category
         ]);
 
         factory(Post::class, 10)->state('published')->create([
-            'category_id' => 3
+            'category_id' =>  rand(15, 17) // sports category
         ]);
 
         factory(Post::class, 10)->state('published')->create([
-            'category_id' => 4
+            'category_id' =>  rand(19, 26) // lifestyle category
         ]);
 
         // drafts
         factory(Post::class, 3)->state('draft')->create([
-            'category_id' => 1
+            'category_id' =>  rand(2, 6) // new category
         ]);
 
         factory(Post::class, 5)->state('draft')->create([
-            'category_id' => 2
+            'category_id' =>  rand(8, 13) // entertainment category
         ]);
 
         factory(Post::class, 1)->state('draft')->create([
-            'category_id' => 3
+            'category_id' =>  rand(15, 17) // sports category
         ]);
 
         factory(Post::class, 5)->state('draft')->create([
-            'category_id' => 4
+            'category_id' =>  rand(19, 26) // lifestyle category
         ]);
+    }
+
+    /**
+     * select a random news category
+     *
+     * @return int
+     */
+    protected function news()
+    {
+        //
     }
 }

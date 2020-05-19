@@ -6,6 +6,7 @@ use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\Paginator;
 
 class PostCategory extends Model
 {
@@ -19,14 +20,22 @@ class PostCategory extends Model
     public $timestamps = false;
 
     protected $appends = [
-        'url'
+        'url', 'parent'
     ];
 
     public function getUrlAttribute()
     {
-        return route('post.list', [
+        return $this->isParent() ? route('post.list', [
             'category' => $this->attributes['slug']
+        ]) : route('post.list', [
+            'category' => $this->parent->slug,
+            'sub_category' => $this->attributes['slug']
         ]);
+    }
+
+    public function getParentAttribute()
+    {
+        return static::where('id', $this->attributes['parent_id'])->first();
     }
 
     /**
@@ -111,5 +120,26 @@ class PostCategory extends Model
     public function isChild()
     {
         return boolval($this->parent_id);
+    }
+
+    /**
+     * Get paginated posts
+     *
+     * @param null|int $perPage
+     * @return Illuminate\Pagination\Paginator
+     */
+    public function paginatedPosts(?int $perPage = null)
+    {
+        $perPage = $perPage ?? $this->perPage;
+
+        $posts = Post::ofCategory($this)
+                        ->published()
+                        ->select('id', 'slug', 'title', 'summary', 'file_id', 'category_id', 'author_id', 'created_at')
+                        ->reversedOrder()
+                        ->get();
+
+        return new Paginator($posts, $perPage, null, [
+            'path' => $this->url
+        ]);
     }
 }

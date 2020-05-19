@@ -11,8 +11,8 @@ $factory->define(Post::class, function (Faker $faker) {
     $image = $files->count() === 0 ? null : $files->random(1)->first();
 
     return [
-        'title' =>  $faker->words(3, true),
-        'summary' => $faker->text(),
+        'title' =>  $faker->words(rand(4, 8), true),
+        'summary' => $faker->text(rand(150, 300)),
         'content' => $faker->realText(800, 5),
         'file_id' => optional($image)->id,
         'options'   =>  [

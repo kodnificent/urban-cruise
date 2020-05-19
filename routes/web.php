@@ -30,7 +30,7 @@ Route::prefix('author')
 Route::prefix('/{category}')
     ->name('post.')
     ->group(function () {
-        Route::get('', 'PostController@list')->name('list');
+        Route::get('{sub_category?}', 'PostController@list')->name('list');
 
-        Route::get('{slug}', 'PostController@read')->name('read');
+        Route::get('{sub_category}/{slug}', 'PostController@read')->name('read');
     });

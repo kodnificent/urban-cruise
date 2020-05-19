@@ -246,6 +246,18 @@
 .feather.xxl {
   height: 48px;
   width: 48px;
+}.dots[data-v-09efecb3] {
+  width: 8px;
+  height: 8px;
+  background-color: #d32f2f;
+  background-color: var(--primary, #d32f2f);
+  display: inline-block;
+  border-radius: 9999px;
+}
+.dots[data-v-09efecb3]:not(:first-child) {
+  margin-left: 0.1rem;
+}.category-section:not(:first-child) {
+  margin-top: 3rem;
 }.slider__item {
   height: 200px;
   background-color: #edf2f7;
@@ -925,6 +937,28 @@ button:focus {
 button:disabled, button[disabled], button.disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+
+.button {
+  text-transform: capitalize;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 9999px;
+}
+
+.button--black {
+    background-color: #222222;
+    color: #fff;
+  }
+
+.button--primary {
+    background-color: #d32f2f;
+    background-color: var(--primary, #d32f2f);
+    color: #ffffff;
+    color: var(--text-on-primary, #ffffff);
   }
 
 .skeleton::after{

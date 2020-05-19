@@ -1,5 +1,7 @@
 <template>
-    <h1 class="text-base capitalize bg-primary-lighter px-2 app-rounded py-1 inline text-primary font-bold">
+    <h1
+        class="text-base capitalize px-2 app-rounded py-1
+            inline font-bold bg-gray-200 text-gray-800">
         <slot></slot>
     </h1>
 </template>

@@ -2,14 +2,17 @@
     <vue-glide class="relative post-slider" v-bind="options">
         <vue-glide-slide class="py-4" v-for="post in posts" :key="post.id">
             <div class="slider__item relative">
-                <img class="rounded" :src="post.file.thumbnails.card" />
 
-                <div class="post__container">
+                <img class="rounded" :src="post.file.thumbnails.medium" />
+
+                <a :href="post.url" class="post__container">
                     <div>
-                        <span class="sr-only">category:</span>
-                        <a class="px-2 text-sm bg-primary text-on-primary app-rounded" :href="post.category.url">
+                        <category-tag :href="post.category.parent.url" class="mr-2">
+                            {{ post.category.parent.title }}
+                        </category-tag>
+                        <category-tag :href="post.category.url">
                             {{ post.category.title }}
-                        </a>
+                        </category-tag>
                     </div>
 
                     <h1 class="capitalize font-bold post__title text-shadow">
@@ -21,7 +24,7 @@
                     <p class="text-sm -mt-1 text-shadow">
                         {{ post.creator.name }}
                     </p>
-                </div>
+                </a>
             </div>
         </vue-glide-slide>
 
@@ -60,7 +63,10 @@ export default {
 
     beforeMount()
     {
-        this.options.autoplay = false;
+        this.options.peek = {
+            before: 0,
+            after: 50
+        };
     }
 }
 </script>

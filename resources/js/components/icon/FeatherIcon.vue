@@ -107,10 +107,10 @@ export default {
             this.height ? attrs.height = this.height : '';
             this.viewBox ? attrs.viewBox = this.viewBox : '';
             this.fill ? attrs.fill = this.fill : '';
-            this.strokeWidth ? attrs.strokeWidth = this.strokeWidth : '';
-            this.strokeLinecap ? attrs.strokeLinecap = this.strokeLinecap : '';
-            this.strokeLinejoin ? attrs.strokeLinejoin = this.strokeLinejoin : '';
-
+            this.stroke ? attrs['stroke'] = this.stroke : '';
+            this.strokeWidth ? attrs['stroke-width'] = this.strokeWidth : '';
+            this.strokeLinecap ? attrs['stroke-linecap'] = this.strokeLinecap : '';
+            this.strokeLinejoin ? attrs['stroke-linejoin'] = this.strokeLinejoin : '';
             this.iconSvg = feather.icons[this.icon].toSvg(attrs);
         }
     },

@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div aria-live="polite">
         <div class="flex flex-wrap">
             <div class="w-full md:w-1/2 overflow-y-hidden rounded shadow h-auto" style="max-height: 200px">
                 <img :src="firstPost.file.thumbnails.medium">
@@ -21,42 +21,18 @@
                     <span class="text-sm text-gray-700">{{ firstPost.creator.name }}</span>
                 </div>
 
-                <div class="mt-4" v-html="firstPost.truncated_summary">
-                </div>
+                <div class="mt-4" v-html="firstPost.truncated_summary"></div>
+
                 <read-more class="block" :href="firstPost.url" />
             </div>
         </div>
 
         <div class="flex flex-wrap -ml-4 mt-8">
-            <div v-for="post in otherPosts" :key="post.id" class="w-full md:w-1/2 mb-8 pl-4 flex">
-                <div class=" w-1/3 overflow-y-hidden rounded shadow h-auto" style="max-height: 80px;">
-                    <img :src="post.file.thumbnails.small">
-                </div>
-
-                <div class="w-2/3 pl-4">
-                    <category-tag-light :href="post.category.url">
-                        {{ post.category.title }}
-                    </category-tag-light>
-
-                    <h2 class="capitalize text-lg font-semibold leading-5">
-                        <a :title="post.title" class="text-gray-800 hover:text-primary" :href="post.url">
-                            {{ post.truncated_title }}
-                        </a>
-                    </h2>
-
-                    <div>
-                        <span class="text-sm text-gray-700">
-                            {{ post.creator.name}}
-                        </span>
-                    </div>
-                </div>
-            </div>
+            <post-small v-for="post in otherPosts" :key="post.id" v-bind="{ post }" class="w-full md:w-1/2 mb-8 pl-4 mt-0" />
         </div>
 
-        <div class="flex items-center justify-center">
-            <button class="button">
-                load more
-            </button>
+        <div class="flex flex-col items-center justify-center">
+            <load-more-posts />
         </div>
     </div>
 </template>
@@ -73,10 +49,6 @@ export default {
             required: true,
             type: Object,
         }
-    },
-
-    methods: {
-
     },
 
     computed: {

@@ -1,9 +1,19 @@
 <template>
     <section class="category-section">
 
-        <section-header>
-            {{ category.title }}
-        </section-header>
+        <div class="flex justify-between">
+            <section-header>
+                {{ category.title }}
+            </section-header>
+
+            <a
+                :href="category.url"
+                class="h-7 text-sm capitalize border-gray-800
+                    text-gray-800 border rounded-full px-4 flex items-center
+                    font-bold hover:text-primary hover:border-primary">
+                all
+            </a>
+        </div>
 
         <category-posts class="mt-6" v-bind="{
             posts: category.posts,

@@ -32,7 +32,18 @@
         </div>
 
         <div class="flex flex-col items-center justify-center">
-            <load-more-posts />
+            <button v-if="category_meta.next_page_url"
+                type="button"
+                @click.stop.prevent="fetchPosts(category_meta.next_page_url)"
+                class="button h-8 flex items-center text-sm bg-gray-200 text-black font-semibold"
+                :disabled="isFetching">
+                <bubble-loader class="bubble-loader--dark" v-if="isFetching">
+                </bubble-loader>
+
+                <span v-else> load more </span>
+            </button>
+
+            <span aria-hidden="true" class="text-sm font-semibold text-gray-600 lowercase italic" v-else>*** no more ***</span>
         </div>
     </div>
 </template>
@@ -54,15 +65,42 @@ export default {
     computed: {
         firstPost()
         {
-            return this.posts[0];
+            return this.category_posts[0];
         },
 
         otherPosts()
         {
-            return this.posts.filter((post, index)=>{
+            return this.category_posts.filter((post, index)=>{
                 return index !== 0;
             });
         }
+    },
+
+    data(){
+        return {
+            isFetching: false,
+            category_posts: this.posts,
+            category_meta: this.meta,
+        }
+    },
+
+    methods: {
+        fetchPosts(url){
+            this.isFetching = true;
+
+            axios.get(url).then(res=>{
+                this.category_posts.push(...res.data.data.posts);
+                this.category_meta = res.data.data.posts_meta;
+            }).catch(err=>{
+                //
+            }).then(()=>{
+                this.isFetching = false;
+            })
+        }
+    },
+
+    mounted(){
+        //
     }
 }
 </script>

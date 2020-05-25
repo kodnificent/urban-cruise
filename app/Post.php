@@ -67,11 +67,11 @@ class Post extends Model
 
     public function getUrlAttribute()
     {
-        return route('post.read', [
+        return url(route('post.read', [
             'category' => $this->category->parent->slug,
             'sub_category' => $this->category->slug,
             'slug' => $this->attributes['slug']
-        ]);
+        ]), [], true);
     }
 
     public function getTruncatedSummaryAttribute()

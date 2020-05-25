@@ -47,11 +47,6 @@ export const layout = {
         assignMeta()
         {
             //
-        },
-
-        create(d)
-        {
-            console.log(d);
         }
     },
 
@@ -63,6 +58,7 @@ export const layout = {
     },
 
     beforeMount(){
+        //console.log(this.meta);
         if (this.res.is_skeleton) {
             this.fetchBase();
         }

@@ -25,12 +25,12 @@ class PostCategory extends Model
 
     public function getUrlAttribute()
     {
-        return $this->isParent() ? route('post.list', [
+        return $this->isParent() ? url(route('post.list', [
             'category' => $this->attributes['slug']
-        ]) : route('post.list', [
+        ]), [], true) : url(route('post.list', [
             'category' => $this->parent->slug,
             'sub_category' => $this->attributes['slug']
-        ]);
+        ]), [], true);
     }
 
     public function getParentAttribute()
@@ -132,13 +132,15 @@ class PostCategory extends Model
     {
         $perPage = $perPage ?? $this->perPage;
 
+        $page = request()->query('page');
+
         $posts = Post::ofCategory($this)
                         ->published()
                         ->select('id', 'slug', 'title', 'summary', 'file_id', 'category_id', 'author_id', 'created_at')
-                        ->reversedOrder()
+                        //->reversedOrder()
                         ->get();
 
-        return new Paginator($posts, $perPage, null, [
+        return new Paginator($posts->toArray(), $perPage, $page, [
             'path' => $this->url
         ]);
     }

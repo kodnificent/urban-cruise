@@ -25,11 +25,22 @@ class HomeControllerTest extends TestCase
      */
     public function testHome()
     {
-        $response = $this->get(route('home'), [
-            'Accept' => 'application/json'
-        ]);
+        $response = $this->json('GET', route('home'));
 
         $response->assertStatus(200);
+
+        $response->assertJsonStructure([
+            'meta' => [
+                'seo_title',
+                'seo_description',
+                'seo_canonical',
+            ],
+            'data' => [
+                'title',
+                'featured_posts',
+                'categories'
+            ]
+        ]);
     }
 
     public function testHomeSkeleton()

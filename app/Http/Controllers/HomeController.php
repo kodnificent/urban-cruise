@@ -45,9 +45,9 @@ class HomeController extends Controller implements LayoutInterface
     public function meta()
     {
         return [
-            'title' => settings('site_name'),
-            'description' => settings('site_description'),
-            'canonical' => url(route('home'), [], true)
+            'seo_title' => settings('site_name'),
+            'seo_description' => settings('site_description'),
+            'seo_canonical' => url(route('home'), [], true)
         ];
     }
 

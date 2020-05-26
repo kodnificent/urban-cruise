@@ -6,8 +6,10 @@ use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Pagination\Paginator;
 
+/**
+ * @method static \Illuminate\Database\Eloquent\Builder parentCategories() Get parent categories
+ */
 class PostCategory extends Model
 {
     use HasSlug, HasMeta;
@@ -20,22 +22,31 @@ class PostCategory extends Model
     public $timestamps = false;
 
     protected $appends = [
-        'url', 'parent'
+        'url', 'endpoints'
     ];
 
     public function getUrlAttribute()
     {
-        return $this->isParent() ? url(route('post.list', [
+        return $this->isParent() ? url(route('category.show', [
             'category' => $this->attributes['slug']
-        ]), [], true) : url(route('post.list', [
+        ]), [], true) : url(route('category.show', [
             'category' => $this->parent->slug,
             'sub_category' => $this->attributes['slug']
         ]), [], true);
     }
 
-    public function getParentAttribute()
+    public function getEndpointsAttribute()
     {
-        return static::where('id', $this->attributes['parent_id'])->first();
+        return [
+            'posts' => $this->isParent()
+                        ? route('category.posts', [
+                            'category' => $this->attributes['slug']
+                        ])
+                        : route('category.posts', [
+                            'category' => $this->parent->slug,
+                            'sub_category' => $this->attributes['slug']
+                        ])
+        ];
     }
 
     /**
@@ -91,15 +102,23 @@ class PostCategory extends Model
     }
 
     /**
-     * Get child categories of a parent
+     * Get the parent of the category
      *
-     * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param int $id
-     * @return \Illuminate\Database\Eloquent\Builder
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function scopeChildrenOf(Builder $query, $id)
+    public function parent()
     {
-        return $query->where('parent_id', $id);
+        return $this->belongsTo(PostCategory::class, 'parent_id');
+    }
+
+    /**
+     * Get the children of the category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function children()
+    {
+        return $this->hasMany(PostCategory::class, 'parent_id');
     }
 
     /**
@@ -120,28 +139,5 @@ class PostCategory extends Model
     public function isChild()
     {
         return boolval($this->parent_id);
-    }
-
-    /**
-     * Get paginated posts
-     *
-     * @param null|int $perPage
-     * @return Illuminate\Pagination\Paginator
-     */
-    public function paginatedPosts(?int $perPage = null)
-    {
-        $perPage = $perPage ?? $this->perPage;
-
-        $page = request()->query('page');
-
-        $posts = Post::ofCategory($this)
-                        ->published()
-                        ->select('id', 'slug', 'title', 'summary', 'file_id', 'category_id', 'author_id', 'created_at')
-                        //->reversedOrder()
-                        ->get();
-
-        return new Paginator($posts->toArray(), $perPage, $page, [
-            'path' => $this->url
-        ]);
     }
 }

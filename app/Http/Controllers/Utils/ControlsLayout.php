@@ -33,17 +33,17 @@ trait ControlsLayout
 
         $endpoints = $this->endpoints();
 
-        $is_skeleton = false;
+        $is_Shell = false;
 
         return compact('meta', 'data', 'endpoints', 'is_skeleton');
     }
 
     /**
-     * Get the skeleton view of the home page
+     * Get the shell view of the home page
      *
      * @return \Illuminate\View\View|\Illuminate\Contracts\View\Factory
      */
-    public function skeleton()
+    public function shell()
     {
         return view($this->layout(), [
             'res' => [

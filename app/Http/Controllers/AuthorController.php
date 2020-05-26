@@ -16,7 +16,7 @@ class AuthorController extends Controller
         //
     }
 
-    public function skeleton()
+    public function shell()
     {
         //
     }

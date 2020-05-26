@@ -2,101 +2,85 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Interfaces\LayoutInterface;
-use App\Http\Controllers\Utils\ControlsLayout;
-use App\Http\Controllers\Utils\SimplePaginates;
 use App\Post;
 use App\PostCategory;
 use Illuminate\Http\Request;
 
-class HomeController extends Controller implements LayoutInterface
+class HomeController extends Controller
 {
-    use ControlsLayout, SimplePaginates;
-
+    /**
+     * Show the home page
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     */
     public function __invoke(Request $request)
     {
-        return $this->respond($request);
+        return $this->respond($this->responseData(), $request, 'layouts.home');
     }
 
-    public function layout()
+    /**
+     * Show the home page Shell
+     *
+     * @return \Illuminate\View\View
+     */
+    public function shell()
+    {
+        return $this->shellResponse($this->layout(), $this->endpoints());
+    }
+
+    /**
+     * Layout view name
+     *
+     * @return string
+     */
+    protected function layout()
     {
         return 'layouts.home';
     }
 
     /**
-     * Get the data for the home page
+     * Get response data
      *
      * @return array
      */
-    public function data()
+    protected function responseData()
     {
         return [
-            'title' => settings('site_name'),
-            'featured_posts' =>  $this->featuredPosts(),
-            'categories' => $this->categories(),
+            'meta' => $this->meta(),
+            'endpoints' => $this->endpoints(),
+            'featured_posts' => $this->featuredPosts(),
         ];
     }
 
     /**
-     * Get meta data
+     * Get featured posts to return with the response
      *
      * @return array
      */
-    public function meta()
+    protected function featuredPosts()
+    {
+        return Post::featured()->published()->get();
+    }
+
+    /**
+     * Get response meta
+     *
+     * @return array
+     */
+    protected function meta()
     {
         return [
             'seo_title' => settings('site_name'),
             'seo_description' => settings('site_description'),
-            'seo_canonical' => url(route('home'), [], true)
+            'seo_canonical' => url(route('home'), [], true),
         ];
     }
 
-    /**
-     * Home endpoints
-     *
-     * @return array
-     */
-    public function endpoints()
+    protected function endpoints()
     {
         return [
-            'base' => route('home'),
+            'base' => route('home')
         ];
-    }
-
-    /**
-     * Get featured posts
-     *
-     * @return array
-     */
-    public function featuredPosts()
-    {
-        return Post::featured()
-                    ->published()
-                    //->select('id', 'slug', 'title', 'summary', 'file_id', 'category_id', 'author_id', 'created_at')
-                    ->reversedOrder()
-                    ->take(10)
-                    ->get();
-        }
-
-    /**
-     * Get categories
-     *
-     * @return array
-     */
-    public function categories()
-    {
-        $categories = PostCategory::parentCategories()->get();
-
-        $categories = $categories->map(function($category){
-
-            $posts = $category->paginatedPosts(10);
-
-            $category->posts_meta = $this->extractMetaFrom($posts);
-            $category->posts = $this->extractItemsFrom($posts);
-
-            return $category;
-        });
-
-        return $categories;
     }
 }

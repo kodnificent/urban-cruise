@@ -4,5 +4,5 @@
 @endcomponent
 
 @section('content')
-    <list-layout :res='@json($res)'></list-layout>
+    <category-show-layout :res='@json($res)'></category-show-layout>
 @endsection

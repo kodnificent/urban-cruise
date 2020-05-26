@@ -11,13 +11,9 @@
 |
 */
 
-Route::get('home.sk', 'HomeController@skeleton')->name('home.skeleton');
+Route::get('home.shell', 'HomeController@shell')->name('home.shell');
 
-Route::get('author.sk', 'AuthorController@skeleton')->name('author.skeleton');
-
-Route::get('posts.sk', 'PostController@skeleton')->name('posts.skeleton');
-
-Route::get('post.sk', 'PostController@skeleton-single')->name('post.skeleton');
+Route::get('category.shell', 'CategoryController@shell')->name('category.shell');
 
 Route::get('', 'HomeController')->name('home');
 
@@ -27,10 +23,16 @@ Route::prefix('author')
         Route::get('{id}', 'AuthorController@read')->name('read');
     });
 
-Route::prefix('/{category}')
-    ->name('post.')
+Route::prefix('posts')
+    ->name('category.')
     ->group(function () {
-        Route::get('{sub_category?}', 'PostController@list')->name('list');
+        Route::get('{category?}/{sub_category?}', 'PostController@list')->name('posts');
+    });
 
-        Route::get('{sub_category}/{slug}', 'PostController@read')->name('read');
+Route::prefix('/{category}')
+    ->name('category.')
+    ->group(function () {
+        Route::get('{sub_category?}', 'CategoryController@show')->name('show');
+
+        Route::get('{sub_category}/{slug}', 'CategoryController@post')->name('post');
     });

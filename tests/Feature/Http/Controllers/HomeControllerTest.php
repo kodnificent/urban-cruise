@@ -18,12 +18,14 @@ class HomeControllerTest extends TestCase
         $this->installApp();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testHome()
+    public function testHomeView()
+    {
+        $response = $this->get(route('home'));
+
+        $response->assertStatus(200);
+    }
+
+    public function testHomeJson()
     {
         $response = $this->json('GET', route('home'));
 
@@ -35,17 +37,13 @@ class HomeControllerTest extends TestCase
                 'seo_description',
                 'seo_canonical',
             ],
-            'data' => [
-                'title',
-                'featured_posts',
-                'categories'
-            ]
+            'featured_posts'
         ]);
     }
 
-    public function testHomeSkeleton()
+    public function testHomeShell()
     {
-        $response = $this->get(route('home.skeleton'));
+        $response = $this->get(route('home.shell'));
 
         $response->assertStatus(200);
     }

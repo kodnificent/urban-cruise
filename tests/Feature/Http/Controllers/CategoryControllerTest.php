@@ -7,7 +7,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use Tests\Utils\InstallsApp;
 
-class PostControllerTest extends TestCase
+class CategoryControllerTest extends TestCase
 {
     use RefreshDatabase, InstallsApp;
 
@@ -25,14 +25,30 @@ class PostControllerTest extends TestCase
      */
     public function testCategoryShow()
     {
-        $response = $this->json('GET', $this->childCategoryTC()->endpoints['posts']);
+        $response = $this->json('GET', $this->childCategoryTC()->url);
 
         $response->assertStatus(200);
 
         $response->assertJsonStructure([
-            'meta',
-            'data'
+            'meta' => [
+                'seo_title',
+                'seo_description',
+                'seo_canonical',
+                'title',
+                'description',
+            ],
+            'data' => [
+                'parent',
+                'children',
+            ]
         ]);
+    }
+
+    public function testCategoryShell()
+    {
+        $response = $this->get(route('category.shell'));
+
+        $response->assertStatus(200);
     }
 
     /**

@@ -67,7 +67,7 @@ class Post extends Model
 
     public function getUrlAttribute()
     {
-        return url(route('post.read', [
+        return url(route('category.post', [
             'category' => $this->category->parent->slug,
             'sub_category' => $this->category->slug,
             'slug' => $this->attributes['slug']
@@ -166,7 +166,7 @@ class Post extends Model
         // first we get the ids of all the children of the category
         // because a post can be of category news (parent category)
         // and have category_id value of a politics child category
-        $children = PostCategory::childrenOf($category->id)->pluck('id');
+        $children = $category->children()->pluck('id');
 
         return $query->where('category_id', $category->id)
                     ->orWhereIn('category_id', $children);

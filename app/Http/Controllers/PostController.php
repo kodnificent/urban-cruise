@@ -2,101 +2,49 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Interfaces\LayoutInterface;
-use App\Http\Controllers\Utils\ControlsLayout;
 use App\Http\Controllers\Utils\SimplePaginates;
+use App\Post;
 use App\PostCategory;
 use Illuminate\Http\Request;
 
-class PostController extends Controller implements LayoutInterface
+class PostController extends Controller
 {
-    use SimplePaginates, ControlsLayout;
+    use SimplePaginates;
 
     /**
-     * @var \App\PostCategory
-     */
-    protected $category;
-
-    public function read()
-    {
-        return abort(404);
-    }
-
-    /**
-     * List all posts in a category
+     * Get a list of posts based on the category
      *
      * @param \Illuminate\Http\Request $request
-     * @param string $this->category
+     * @param string $category
      * @param null|string $sub_category
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View|\Illuminate\Contracts\View\Factor
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function list(Request $request, string $category, ?string $sub_category = null)
+    public function list(Request $request, ?string $category = null, ?string $sub_category = null)
     {
-        // first we need to check that the parent category model exists
-        $this->category = PostCategory::where('slug', $category)->firstOrFail();
-
-        // next we check if this is a sub category route
-        // if yes, the we assign the category value
-        if ($sub_category) {
-            $this->category = PostCategory::where('slug', $sub_category)->firstOrFail();
+        if (! $request->expectsJson()) {
+            abort(404);
         }
 
-        $posts = $this->category->paginatedPosts(10);
+        if ($category) {
 
-        $this->category->posts_meta = $this->extractMetaFrom($posts);
-        $this->category->posts = $this->extractItemsFrom($posts);
+            // first we need to check that the parent category model exists
+            $category = PostCategory::where('slug', $category)->firstOrFail();
 
-        return $this->respond($request);
-    }
+            // next we check if this is a sub category route
+            // if yes, the we assign the category value
+            if ($sub_category) {
+                $category = PostCategory::where('slug', $sub_category)->firstOrFail();
+            }
 
-    /**
-     * Get the layout view name
-     *
-     * @return string
-     */
-    public function layout()
-    {
-        return 'layouts.list';
-    }
+            $posts = Post::ofCategory($category)->published()->reversedOrder()->simplePaginate($request->query('limit'));
+        } else {
+            $posts = Post::published()->reversedOrder()->simplePaginate($request->query('limit'));
+        }
 
-    /**
-     * Get the intended response data
-     *
-     * @return \App\PostCategory
-     */
-    public function data()
-    {
-        return $this->category;
-    }
+        $data = $this->extractItemsFrom($posts);
 
-    /**
-     * Get the intended response meta
-     *
-     * @return array
-     */
-    public function meta()
-    {
-        return [
-            'seo_title' => "{$this->category->title} | ".settings('site_name'),
-            'seo_description' => $this->category->description,
-            'seo_canonical' => $this->category->url,
-            'title' => $this->category->title,
-            'description' => $this->category->description,
-        ];
-    }
+        $meta = $this->extractMetaFrom($posts);
 
-    /**
-     * Get the endpoints
-     *
-     * @return array
-     */
-    public function endpoints()
-    {
-        return [
-            'base' => route('post.list', [
-                'category' => '%category',
-                'sub_category' => '%sub_category'
-            ]),
-        ];
+        return response()->json(compact('meta', 'data'), 200);
     }
 }

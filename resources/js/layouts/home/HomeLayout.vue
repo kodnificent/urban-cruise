@@ -26,6 +26,8 @@
                         v-bind="{category}" />
                 </main-layout>
             </content-component>
+
+            <footer-component />
         </template>
     </div>
 </template>

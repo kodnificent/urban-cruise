@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import PostSlider from "./post-slider";
+import PostSlider from "../../mixins/slider/post-slider";
 
 export default {
     mixins: [PostSlider],
@@ -72,7 +72,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import './post-slider'
+@import '../../mixins/slider/post-slider'
 
 .post-slider [data-glide-el=controls]
     top: -11%

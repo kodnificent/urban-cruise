@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\Http\Controllers;
 
+use App\Post;
 use App\PostCategory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -18,40 +19,33 @@ class PostControllerTest extends TestCase
         $this->installApp();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    public function testCategoryShow()
+    public function testPostList()
     {
-        $response = $this->json('GET', $this->childCategoryTC()->endpoints['posts']);
+        $category = PostCategory::firstOrFail();
 
+        $response = $this->json('GET', $category->endpoints['posts']);
         $response->assertStatus(200);
-
         $response->assertJsonStructure([
             'meta',
             'data'
         ]);
     }
 
-    /**
-     * Get a parent category test case
-     *
-     * @return \App\PostCategory
-     */
-    protected function parentCategoryTC()
+    public function testPostRead()
     {
-        return PostCategory::parentCategories()->firstOrFail();
+        $post = Post::firstOrFail();
+
+        $response = $this->json('GET', $post->url);
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'meta',
+            'data'
+        ]);
     }
 
-    /**
-     * Get a child category test case
-     *
-     * @return \App\PostCategory
-     */
-    protected function childCategoryTC()
+    public function testPostShell()
     {
-        return PostCategory::childCategories()->firstOrFail();
+        $response = $this->get(route('post.shell'));
+        $response->assertStatus(200);
     }
 }

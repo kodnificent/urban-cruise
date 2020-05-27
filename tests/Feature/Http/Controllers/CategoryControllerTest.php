@@ -18,11 +18,6 @@ class CategoryControllerTest extends TestCase
         $this->installApp();
     }
 
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
     public function testCategoryShow()
     {
         $response = $this->json('GET', $this->childCategoryTC()->url);

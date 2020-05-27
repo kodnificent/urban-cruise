@@ -50,17 +50,7 @@ class CategoryController extends Controller
             'data' => $this->data(),
         ];
 
-        return $this->respond($res, $request, 'layouts.category.show');
-    }
-
-    /**
-     * Display a listing of all parent categories
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function list()
-    {
-        //
+        return $this->respond($res, $request, $this->layout());
     }
 
     /**

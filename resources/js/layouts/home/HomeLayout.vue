@@ -1,16 +1,17 @@
 <template>
     <div>
-        <div v-if="base_fetching">
-            fetching
-        </div>
-        <template v-else-if="base_fetched">
-            <header-component>
-                <nav-bar />
-                <header-logo />
-                <header-search />
-            </header-component>
+        <header-component>
+            <nav-bar />
+            <header-logo />
+            <header-search />
+        </header-component>
 
-            <content-component>
+        <content-component>
+            <div v-if="base_fetching">
+                fetching
+            </div>
+
+            <template v-else>
                 <section>
                     <section-header>
                         featured
@@ -19,16 +20,16 @@
                     <featured-posts :posts="res.featured_posts" />
                 </section>
 
-                <main-layout>
+                <main-layout class="py-8">
                     <category-section
                         v-for="category in res.categories"
                         :key="category.id"
                         v-bind="{category}" />
                 </main-layout>
-            </content-component>
+            </template>
+        </content-component>
 
-            <footer-component />
-        </template>
+        <footer-component />
     </div>
 </template>
 <script>

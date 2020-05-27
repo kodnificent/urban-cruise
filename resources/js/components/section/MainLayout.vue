@@ -1,5 +1,5 @@
 <template>
-    <div class="py-8 flex flex-wrap">
+    <div class="flex flex-wrap">
         <div class="w-full lg:w-2/3">
             <slot></slot>
         </div>

@@ -36,5 +36,6 @@ const app = new Vue({
         primary_menu: [],
         social_links: [],
         categories: [],
+        endpoints: {},
     }
 });

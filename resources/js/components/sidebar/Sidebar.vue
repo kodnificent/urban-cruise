@@ -10,41 +10,30 @@
 
         <div class="flex mt-8">
             <div class="icon-container">
-                <a target="__blank" href="https://facebook.com" class="social-icon">
+                <a target="__blank" :href="$root.social_links.facebook" class="social-icon">
                     <span class="sr-only">Facebook</span>
 
                     <feather-icon fill="#3b5998" stroke-width="0" icon="facebook" size="lg" />
 
-                    <span class="font-bold text-gray-700 text-sm mt">
-                        5,000 <span class="sr-only">likes</span>
-                    </span>
-
-                    <span class="text-xs capitalize text-gray-700">likes</span>
+                    <span class="text-xs capitalize text-gray-700">like</span>
                 </a>
             </div>
 
             <div class="icon-container">
-                <a target="__blank" href="https://twitter.com" class="social-icon">
+                <a target="__blank" :href="$root.social_links.twitter" class="social-icon">
                     <span class="sr-only">Twitter</span>
+
                     <feather-icon fill="#1da1f2" stroke-width="0" icon="twitter" size="lg" />
 
-                    <span class="font-bold text-gray-700 text-sm mt">
-                        900 <span class="sr-only">follows</span>
-                    </span>
-
-                    <span class="text-xs capitalize text-gray-700">follows</span>
+                    <span class="text-xs capitalize text-gray-700">follow</span>
                 </a>
             </div>
 
             <div class="icon-container">
-                <a target="__blank" href="https://instagram.com" class="social-icon">
+                <a target="__blank" :href="$root.social_links.instagram" class="social-icon">
                     <feather-icon stroke="#e1306c" icon="instagram" size="lg" />
 
-                    <span class="font-bold text-gray-700 text-sm mt">
-                        5,300 <span class="sr-only">likes</span>
-                    </span>
-
-                    <span class="text-xs capitalize text-gray-700">likes</span>
+                    <span class="text-xs capitalize text-gray-700">like</span>
                 </a>
             </div>
         </div>

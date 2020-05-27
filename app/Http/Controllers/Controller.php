@@ -34,6 +34,11 @@ class Controller extends BaseController
 
         $res['categories'] = $this->categories();
 
+        $endpoints = [
+            'posts' => route('category.posts')
+        ];
+        $res['endpoints'] = $endpoints;
+
         if ($request->expectsJson()) {
             return response()->json($res, 200);
         } else {
@@ -50,6 +55,8 @@ class Controller extends BaseController
      */
     public function shellResponse($layout, $endpoints = [])
     {
+        $endpoints['posts'] = route('category.posts');
+
         $res = [
             'endpoints' => $endpoints,
             'is_shell' => true,

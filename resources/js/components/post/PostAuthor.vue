@@ -5,3 +5,14 @@
         </span>
     </div>
 </template>
+
+<script>
+export default {
+    props: {
+        author: {
+            required: true,
+            type: String
+        }
+    }
+}
+</script>

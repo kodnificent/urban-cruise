@@ -7,20 +7,19 @@
         </header-component>
 
         <content-component>
-            <!--<section>
-                <section-header>
-                    featured
-                </section-header>
+            <div v-if="base_fetching">
+                fetching
+            </div>
 
-                <featured-posts :posts="data.featured_posts" />
-            </section>-->
-
-            <main-layout class="pt-0">
-                <category-section
-                    :key="data.id"
-                    v-bind="{category: data, meta}" />
-            </main-layout>
+            <template v-else>
+                <main-layout>
+                    <category-section
+                        v-bind="{category: res.data, show_description: true }" />
+                </main-layout>
+            </template>
         </content-component>
+
+        <footer-component />
     </div>
 </template>
 <script>

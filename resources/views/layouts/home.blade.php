@@ -4,5 +4,5 @@
 @endcomponent
 
 @section('content')
-    <home-layout :res='@json($res)'></home-layout>
+    <home-layout :server_res='@json($res)'></home-layout>
 @endsection

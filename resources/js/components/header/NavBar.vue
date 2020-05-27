@@ -32,33 +32,12 @@
             </div>
 
             <ul class="navbar__list">
-                <li class="navbar__item">
-                    <a class="navbar__link" href="">
-                        Home
-                    </a>
-                </li>
-
-                <li class="navbar__item">
-                    <a class="navbar__link" href="">
-                        news
-                    </a>
-                </li>
-
-                <li class="navbar__item">
-                    <a class="navbar__link active" href="">
-                        entertainment
-                    </a>
-                </li>
-
-                <li class="navbar__item">
-                    <a class="navbar__link" href="">
-                        lifestyle
-                    </a>
-                </li>
-
-                <li class="navbar__item">
-                    <a class="navbar__link" href="">
-                        sports
+                <li v-for="(menu, index) in $root.primary_menu" :key="index" class="navbar__item">
+                    <a class="navbar__link"
+                        :class="{
+                            active: menu.active
+                        }" :href="menu.url">
+                        {{ menu.name }}
                     </a>
                 </li>
             </ul>

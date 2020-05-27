@@ -24,7 +24,7 @@
     </div>
 </template>
 <script>
-import { layout } from "../../mixins/layout";
+import { layout } from "../../mixins/layout/layout";
 export default {
     mixins: [layout],
 

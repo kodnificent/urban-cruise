@@ -16,8 +16,8 @@
         </div>
 
         <category-posts class="mt-6" v-bind="{
-            posts: category.posts,
-            meta: category.posts_meta
+            posts: [],
+            meta: {}
         }" />
     </section>
 </template>

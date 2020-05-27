@@ -4,5 +4,5 @@
 @endcomponent
 
 @section('content')
-    <category-post-layout :res='@json($res)'></category-post-layout>
+    <category-post-layout :server_res='@json($res)'></category-post-layout>
 @endsection

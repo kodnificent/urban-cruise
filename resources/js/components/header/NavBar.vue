@@ -17,7 +17,7 @@
         </span>
 
         <nav class="navbar__nav" :data-expanded="nav_is_expanded ? 'true' : 'false'">
-            <!--<button
+            <button
                 ref="close-btn"
                 @click="toggleNav"
                 class="navbar__close-btn"
@@ -26,7 +26,7 @@
                 <span class="sr-only">close navigation bar</span>
 
                 <feather-icon icon="x" size="lg" />
-            </button>-->
+            </button>
             <div class="md:hidden" style="width: 100%; height: 150px;">
                 <img class="mx-auto block" width="150px" src="/assets/imgs/desktop-logo.png" alt="urban-cruise logo">
             </div>
@@ -61,7 +61,7 @@ export default {
                 this.nav_is_expanded = false;
             } else {
                 this.nav_is_expanded = true;
-                //this.$refs['close-btn'].focus();
+                this.$refs['close-btn'].focus();
             }
         }
     }
@@ -77,10 +77,10 @@ export default {
         &__nav
             @apply text-gray-800
             @media(max-width: 767.9px)
-                width: 250px
-                transform: translateX(-255px)
+                width: 100%
+                transform: translateX(-100%)
                 transition: all ease-in 0.25s
-                @apply fixed top-0 left-0 h-screen bg-gray-100 z-30
+                @apply fixed top-0 left-0 h-screen bg-gray-100 z-30 px-10
 
                 &[data-expanded=true]
                     transform: translateX(0)
@@ -111,18 +111,19 @@ export default {
                     @apply bg-primary text-on-primary shadow outline-none ml-2
 
             @screen md
-                @apply px-4 py-2 inline-block uppercase text-gray-100 font-bold border-b-2 border-transparent
+                @apply px-4 py-2 inline-block uppercase text-gray-300 font-bold border-b-2 border-transparent
 
                 &:hover, &:focus, &:active, &.active
-                    @apply border-primary text-primary
+                    @apply border-gray-100 text-gray-100
 
         &__close-btn
             position: absolute
             top: 0.5rem
             right: 0.5rem
+            transition: all ease-in 0.25s
             @screen md
                 @apply hidden
             @apply text-gray-800 p-1 rounded-full
             &:hover, &:focus
-                @apply bg-gray-300 shadow outline-none
+                @apply bg-primary-lighter text-primary outline-none
 </style>

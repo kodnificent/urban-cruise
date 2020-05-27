@@ -434,7 +434,8 @@ __webpack_require__.r(__webpack_exports__);
       if (this.nav_is_expanded === true) {
         this.nav_is_expanded = false;
       } else {
-        this.nav_is_expanded = true; //this.$refs['close-btn'].focus();
+        this.nav_is_expanded = true;
+        this.$refs['close-btn'].focus();
       }
     }
   }
@@ -1888,6 +1889,24 @@ var render = function() {
         attrs: { "data-expanded": _vm.nav_is_expanded ? "true" : "false" }
       },
       [
+        _c(
+          "button",
+          {
+            ref: "close-btn",
+            staticClass: "navbar__close-btn",
+            attrs: { type: "button" },
+            on: { click: _vm.toggleNav }
+          },
+          [
+            _c("span", { staticClass: "sr-only" }, [
+              _vm._v("close navigation bar")
+            ]),
+            _vm._v(" "),
+            _c("feather-icon", { attrs: { icon: "x", size: "lg" } })
+          ],
+          1
+        ),
+        _vm._v(" "),
         _vm._m(0),
         _vm._v(" "),
         _c(

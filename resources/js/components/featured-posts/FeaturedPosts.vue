@@ -76,7 +76,9 @@ export default {
 
 .post-slider [data-glide-el=controls]
     top: -11%
-    @apply absolute right-0
+    @apply absolute right-0 hidden
+    @screen md
+        @apply block
 </style>
 
 <style lang="sass" scoped>

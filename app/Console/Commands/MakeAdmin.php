@@ -96,7 +96,7 @@ class MakeAdmin extends Command
         } else {
             $user = new User;
             $user->email = $email;
-            $user->name = "Admin";
+            $user->name = "Urban Cruise";
             $user->password = Hash::make($password);
             $user->email_verified_at = now();
             $user->remember_token = Str::random(10);

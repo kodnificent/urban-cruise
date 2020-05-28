@@ -15,7 +15,7 @@
 
                     <feather-icon fill="#3b5998" stroke-width="0" icon="facebook" size="lg" />
 
-                    <span class="text-xs capitalize text-gray-700">like</span>
+                    <span class="text-xs capitalize text-gray-700 font-bold mt-1">like</span>
                 </a>
             </div>
 
@@ -25,7 +25,7 @@
 
                     <feather-icon fill="#1da1f2" stroke-width="0" icon="twitter" size="lg" />
 
-                    <span class="text-xs capitalize text-gray-700">follow</span>
+                    <span class="text-xs capitalize text-gray-700 font-bold mt-1">follow</span>
                 </a>
             </div>
 
@@ -33,7 +33,7 @@
                 <a target="__blank" :href="$root.social_links.instagram" class="social-icon">
                     <feather-icon stroke="#e1306c" icon="instagram" size="lg" />
 
-                    <span class="text-xs capitalize text-gray-700">like</span>
+                    <span class="text-xs capitalize text-gray-700 font-bold mt-1">like</span>
                 </a>
             </div>
         </div>

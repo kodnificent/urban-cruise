@@ -1,7 +1,7 @@
 <template>
     <section class="category-section" aria-live="polite">
 
-        <div class="flex justify-between mb-6">
+        <div class="flex justify-between mb-6" v-if="show_title">
             <section-header>
                 {{ category.title }}
             </section-header>
@@ -50,7 +50,9 @@
             </div>
         </div>
 
-        <div v-else-if="no_post_found"></div>
+        <div v-else-if="no_post_found">
+            <span class="italic text-gray-600">We've not published any article yet on this category</span>
+        </div>
     </section>
 </template>
 
@@ -60,6 +62,12 @@ export default {
         category: {
             required: true,
             type: Object,
+        },
+
+        show_title: {
+            required: false,
+            type: Boolean,
+            default: true,
         },
 
         show_description: {

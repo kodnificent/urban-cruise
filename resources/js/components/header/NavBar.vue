@@ -1,6 +1,14 @@
 <template>
     <div class="navbar order-1 md:order-2">
+
+        <button @click="goBack" v-if="withBackBtn" class="navbar__toggler p-1 rounded-full focus:shadow-outline focus:outline-none">
+            <span class="sr-only">back btn</span>
+
+            <feather-icon icon="arrow-left" />
+        </button>
+
         <button
+            v-else
             @click="toggleNav"
             class="navbar__toggler p-1 rounded-full focus:shadow-outline focus:outline-none"
             type="button" :aria-expanded="nav_is_expanded ? 'true' : 'false'">
@@ -47,6 +55,14 @@
 
 <script>
 export default {
+    props: {
+        withBackBtn: {
+            required: false,
+            type: Boolean,
+            default: false
+        }
+    },
+
     data()
     {
         return {
@@ -55,6 +71,10 @@ export default {
     },
 
     methods: {
+        goBack(){
+            window.history.back();
+        },
+
         toggleNav()
         {
             if (this.nav_is_expanded === true) {

@@ -5,7 +5,9 @@
         </div>
 
         <div class="w-full lg:w-1/3 lg:pl-8 mt-8 lg:mt-0 md:w-2/3 md:mx-auto">
-            <sidebar />
+            <slot name="sidebar">
+                <sidebar />
+            </slot>
         </div>
     </div>
 </template>

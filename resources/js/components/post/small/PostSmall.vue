@@ -15,7 +15,7 @@
                 </post-header-link>
             </post-header>
 
-            <post-author :author="post.creator.name" />
+            <post-author :post="post" />
         </div>
     </div>
 </template>

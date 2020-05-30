@@ -37,5 +37,50 @@ const app = new Vue({
         social_links: [],
         categories: [],
         endpoints: {},
+        device_width: null,
+    },
+
+    computed: {
+
+        /**
+         * Check if the viewport is mobile
+         */
+        isMobile()
+        {
+            return this.device_width < 768;
+        },
+
+        /**
+         * Check if the viewport is tablet
+         */
+        isTablet()
+        {
+            return this.device_width >= 768;
+        },
+
+        /**
+         * Checks if the viewport is desktop
+         */
+        isDesktop()
+        {
+            return this.device_width >= 1280;
+        },
+
+        /**
+         * Check if the view port is a tablet and not a desktop
+         */
+        isTabletOnly()
+        {
+            return this.isTablet() && !this.isDesktop();
+        }
+    },
+
+    mounted(){
+        this.device_width = window.outerWidth;
+        let $this = this;
+        window.addEventListener('resize', function(){
+            let width = window.outerWidth;
+            $this.device_width = width;
+        });
     }
 });

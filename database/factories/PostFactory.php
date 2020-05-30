@@ -9,17 +9,17 @@ use Faker\Generator as Faker;
 $factory->define(Post::class, function (Faker $faker) {
     $files = FileManager::all();
     $image = $files->count() === 0 ? null : $files->random(1)->first();
-
+    $content = "<p>{$faker->realText()}</p><p>{$faker->realText()}</p><p>{$faker->realText()}</p><p>{$faker->realText()}</p><p>{$faker->realText()}</p>";
     return [
-        'title' =>  $faker->words(rand(4, 8), true),
+        'title' =>  ucfirst($faker->words(rand(4, 8), true)),
         'summary' => $faker->text(rand(150, 300)),
-        'content' => $faker->realText(800, 5),
+        'content' => $content,
         'file_id' => optional($image)->id,
         'options'   =>  [
             'allow_comments'    =>  true,
             'allow_sharing'     =>  true
         ],
-        'author_id' => 1
+        'author_id' => rand(1, 5)
     ];
 });
 

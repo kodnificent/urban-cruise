@@ -4,6 +4,8 @@ namespace App\Console\Commands;
 
 use App\Role;
 use App\User;
+use App\UserProfile;
+use Faker\Factory;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -101,6 +103,18 @@ class MakeAdmin extends Command
             $user->email_verified_at = now();
             $user->remember_token = Str::random(10);
             $user->save();
+
+            $profile = new UserProfile([
+                'job_title' => 'Founder',
+                'company' => 'Urban Cruise',
+                'about' => Factory::create()->text(300),
+                'facebook' => 'https://facebook.com',
+                'twitter' => 'https://twitter.com',
+                'linkedin' => 'https://linkedin.com',
+                'website' => 'https://urbancruise.com',
+            ]);
+
+            $user->profile()->save($profile);
 
             $this->comment("Admin created successfully! Email - $email, Password - $password");
         }

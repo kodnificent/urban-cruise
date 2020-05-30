@@ -3,9 +3,19 @@
         <header-component>
             <nav-bar :with-back-btn="true" />
 
-            <header-logo :text="res.data.title" />
+            <div v-if="$root.isMobile" class="order-2 md:hidden truncate" aria-live="polite">
+                <template v-if="res">
+                    <span class="block uppercase text-base font-bold">
+                        {{ res.data.title }}
+                    </span>
+                </template>
+            </div>
 
-            <header-search />
+            <header-logo v-else />
+
+            <div class="order-3 flex-grow"></div>
+
+            <mobile-secondary-menu />
         </header-component>
 
         <content-component>

@@ -39,7 +39,9 @@ class PostControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonStructure([
             'meta',
-            'data'
+            'data',
+            'prev_post',
+            'next_post',
         ]);
     }
 

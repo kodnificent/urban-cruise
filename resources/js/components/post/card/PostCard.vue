@@ -16,7 +16,7 @@
                 </post-header-link>
             </post-header>
 
-            <post-author :author="post.creator.name" />
+            <post-author :post="post" />
 
             <div class="mt-4" v-html="post.truncated_summary"></div>
 

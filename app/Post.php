@@ -37,7 +37,6 @@ class Post extends Model
      */
     protected $with = [
         'creator:id,name',
-        'updater:id,name',
         'category:id,slug,title,parent_id',
         'file:id,disk,path,type'
     ];
@@ -62,11 +61,13 @@ class Post extends Model
     ];
 
     protected $appends = [
-        'url', 'truncated_title', 'truncated_title_md', 'truncated_summary'
+        'url', 'truncated_title', 'truncated_title_md', 'truncated_summary', 'created_at_for_humans'
     ];
 
     public function getUrlAttribute()
     {
+        if (! isset($this->attributes['slug']) || ! $this->category) return null;
+
         return url(route('category.post', [
             'category' => $this->category->parent->slug,
             'sub_category' => $this->category->slug,
@@ -76,6 +77,8 @@ class Post extends Model
 
     public function getTruncatedSummaryAttribute()
     {
+        if (! isset($this->attributes['summary']) || ! isset($this->attributes['content'])) return null;
+
         $content = $this->attributes['summary'] ?: $this->attributes['content'];
 
         return Str::limit($content, 150, "");
@@ -83,12 +86,31 @@ class Post extends Model
 
     public function getTruncatedTitleAttribute()
     {
+        if (! isset($this->attributes['title'])) return null;
+
         return Str::limit($this->attributes['title'], 40, '...');
     }
 
     public function getTruncatedTitleMdAttribute()
     {
+        if (! isset($this->attributes['title'])) return null;
+
         return Str::limit($this->attributes['title'], 80, '...');
+    }
+
+    public function getCreatedAtForHumansAttribute()
+    {
+        if (! $this->created_at) return null;
+
+        if ($this->created_at->isCurrentWeek()) { // was published less than a week ago
+            $created_at = $this->created_at->diffForHumans();
+        } elseif ($this->created_at->isCurrentYear()) {
+            $created_at = $this->created_at->shortEnglishMonth .' ' .$this->created_at->day;
+        } else {
+            $created_at = $this->created_at->shortEnglishMonth .' ' .$this->created_at->day .' ' .$this->created_at->year;
+        }
+
+        return $created_at;
     }
 
     /**

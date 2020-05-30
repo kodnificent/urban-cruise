@@ -65,9 +65,15 @@ class PostController extends Controller
 
         $post = $category->posts()->where('slug', $slug)->firstOrFail();
 
+        $prev_post = Post::where('category_id', $post->category->id)->where('id', '<', $post->id)->select('id', 'slug', 'title', 'category_id')->first();
+
+        $next_post = Post::where('category_id', $post->category->id)->where('id', '>', $post->id)->select('id', 'slug', 'title', 'category_id')->first();
+
         $res = [
             'meta' => $this->meta($post),
-            'data' => $post
+            'data' => $post,
+            'prev_post' => $prev_post,
+            'next_post' => $next_post
         ];
 
         return $this->respond($res, $request, $this->layout());

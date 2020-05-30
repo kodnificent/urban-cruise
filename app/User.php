@@ -49,8 +49,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $with = [
-        //'creator',
-        //'updater',
+        'profile'
     ];
 
     protected $appends = [
@@ -62,5 +61,15 @@ class User extends Authenticatable
         return route('author.read', [
             'id' => $this->attributes['id']
         ]);
+    }
+
+    /**
+     * Get the profile of a user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function profile()
+    {
+        return $this->hasOne(UserProfile::class, 'user_id');
     }
 }

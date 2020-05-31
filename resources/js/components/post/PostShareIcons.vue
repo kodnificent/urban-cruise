@@ -10,7 +10,7 @@
             <a
                 :title="icon.title"
                 class="rounded-full w-8 h-8 flex justify-center"
-                :href="icon.link(post)"
+                :href="icon.link(post, $root.isMobile)"
                 target="__blank"
                 rel="nofollow"
                 :style="{
@@ -22,7 +22,7 @@
                     <feather-icon class="flex items-center"
                         :stroke="icon.color" icon="message-circle" />
 
-                    <feather-icon class="absolute" style="top: 1px; left: 7px;"
+                    <feather-icon class="absolute" style="top: 2px; left: 6px;"
                         :fill="icon.color" stroke="0" icon="phone" size="xs" />
                 </div>
 
@@ -64,9 +64,11 @@ export default {
                     color: '#ffffff',
                 },
                 {
-                    link: function (post) {
+                    link: function (post, isMobile) {
                         let text = post.title + '\n\n' + post.url;
-                        let link = `https://api.whatsapp.com/?text=${encodeURI(text)}`;
+                        let link = isMobile
+                                    ? `https://wa.me/?text=${encodeURI(text)}`
+                                    : `https://api.whatsapp.com/?text=${encodeURI(text)}`;
 
                         return link;
                     },

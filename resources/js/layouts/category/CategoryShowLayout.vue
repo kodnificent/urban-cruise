@@ -51,11 +51,14 @@
 
                     <category-section class="mt-2"
                         v-bind="{category: res.data, show_description: true, show_title: false }" />
+
+                    <template v-slot:sidebar>
+                        <sidebar v-if="! $root.isMobile" />
+                        <span v-else></span>
+                    </template>
                 </main-layout>
             </template>
         </content-component>
-
-        <footer-component />
     </div>
 </template>
 

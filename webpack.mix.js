@@ -14,7 +14,7 @@ const
     purgecss = require('@fullhuman/postcss-purgecss')({
         content: [
             './resources/**/*.blade.php',
-            './resoruces/**/*.vue',
+            './resources/**/*.vue',
         ],
 
         defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []

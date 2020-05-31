@@ -7,10 +7,9 @@
 @import 'components/_skeleton';
 
 @import 'tailwindcss/components';
-/* purgecss end ignore */
-
-
 @import 'vue-glide-js/dist/vue-glide.css';
+
+/* purgecss end ignore */
 
 @import 'tailwindcss/utilities';
 

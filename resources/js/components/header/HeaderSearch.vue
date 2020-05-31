@@ -23,7 +23,7 @@
                     ref="dialog-input"
                     class="mobile-search__dialog-input"
                     type="search"
-                    placeholder="Enter a keyword here to search" autofocus />
+                    placeholder="Enter a keyword here to search" />
             </div>
 
             <div class="flex flex-col h-screen mx-auto items-center justify-center px-8">

@@ -18,21 +18,28 @@
 
         <p class="italic text-gray-600 mb-6" v-if="post.summary" v-text="post.summary"></p>
 
-        <!-- POST IMAGE -->
-        <div
-            style="max-height: 350px;"
-            class="mb-6 overflow-hidden flex justify-center"
-            v-if="post.file && post.file.type === 'image'">
-            <img :src="post.file.url" />
-        </div>
+        <div class="md:flex">
+            <div class="w-auto md:pr-2">
 
-        <!-- POST CONTENT -->
-        <div class="mb-6 article__content" v-html="post.content">
-        </div>
+                <!-- POST IMAGE -->
+                <div
+                    style="max-height: 350px;"
+                    class="mb-6 overflow-hidden flex justify-center"
+                    v-if="post.file && post.file.type === 'image'">
+                    <img :src="post.file.url" />
+                </div>
 
-        <!-- Share Button here -->
-        <div class="mb-6">
-            share button here
+                <!-- POST CONTENT -->
+                <div class="mb-6 article__content" v-html="post.content">
+                </div>
+            </div>
+
+            <!-- Share Button here -->
+            <div class="mb-6 md:w-12">
+                <div class="sticks-to-top">
+                    <post-share-icons :post="post" />
+                </div>
+            </div>
         </div>
 
         <!-- NEXT AND PREV POSTS -->

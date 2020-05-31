@@ -10,7 +10,7 @@
 
         <div class="flex mt-8">
             <div class="icon-container">
-                <a target="__blank" :href="$root.social_links.facebook" class="social-icon">
+                <a title="like us on facebook" target="__blank" :href="$root.social_links.facebook" class="social-icon">
                     <span class="sr-only">Facebook</span>
 
                     <feather-icon fill="#3b5998" stroke-width="0" icon="facebook" size="lg" />
@@ -20,7 +20,7 @@
             </div>
 
             <div class="icon-container">
-                <a target="__blank" :href="$root.social_links.twitter" class="social-icon">
+                <a title="follow us on twitter" target="__blank" :href="$root.social_links.twitter" class="social-icon">
                     <span class="sr-only">Twitter</span>
 
                     <feather-icon fill="#1da1f2" stroke-width="0" icon="twitter" size="lg" />
@@ -30,10 +30,10 @@
             </div>
 
             <div class="icon-container">
-                <a target="__blank" :href="$root.social_links.instagram" class="social-icon">
+                <a title="follow us on instagram" target="__blank" :href="$root.social_links.instagram" class="social-icon">
                     <feather-icon stroke="#e1306c" icon="instagram" size="lg" />
 
-                    <span class="text-xs capitalize text-gray-700 font-bold mt-1">like</span>
+                    <span class="text-xs capitalize text-gray-700 font-bold mt-1">follow</span>
                 </a>
             </div>
         </div>
@@ -64,12 +64,4 @@ export default {
         min-height: 80px
         @apply border border-gray-200 w-full py-2 flex flex-col items-center shadow
 
-</style>
-
-<style lang="sass" scoped>
-    .sticks-to-top
-        @screen lg
-            top: 160px
-            bottom: auto
-            @apply sticky z-20 overflow-y-auto
 </style>

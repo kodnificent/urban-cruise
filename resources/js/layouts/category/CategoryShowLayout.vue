@@ -15,7 +15,9 @@
 
             <div class="order-3 flex-grow"></div>
 
-            <mobile-secondary-menu />
+            <div class="order-3">
+                <mobile-secondary-menu />
+            </div>
         </header-component>
 
         <content-component>

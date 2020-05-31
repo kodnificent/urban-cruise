@@ -14,7 +14,7 @@
         &__container
             @apply flex
             @screen md
-                @apply pt-4 flex-col
+                @apply pt-4
 
             @media(max-width: 767.9px)
                 height: 60px

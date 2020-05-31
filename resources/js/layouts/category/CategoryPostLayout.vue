@@ -25,9 +25,14 @@
 
             <div class="order-3 flex-grow"></div>
 
-            <mobile-share-button />
+            <div class="order-3">
+                <mobile-share-button v-if="res.data" :data="{
+                    title: res.data.title,
+                    url: res.data.url
+                }" />
 
-            <mobile-secondary-menu />
+                <mobile-secondary-menu />
+            </div>
         </header-component>
 
         <content-component>

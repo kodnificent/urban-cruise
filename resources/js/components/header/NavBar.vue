@@ -1,7 +1,7 @@
 <template>
     <div class="navbar order-1 md:order-2">
 
-        <button @click="goBack" v-if="withBackBtn" class="navbar__toggler p-1 rounded-full focus:shadow-outline focus:outline-none">
+        <button @click="goBack" v-if="withBackBtn & $root.isMobile" class="navbar__toggler p-1 rounded-full focus:shadow-outline focus:outline-none">
             <span class="sr-only">back btn</span>
 
             <feather-icon icon="arrow-left" />
@@ -90,6 +90,8 @@ export default {
 
 <style lang="sass">
     .navbar
+        @screen md
+            @apply flex items-center
         &__toggler
             @apply mr-3
             @screen md

@@ -21,7 +21,11 @@ const
     });
 
 mix.js('resources/js/app.js', 'public/assets/js')
-    .sass('resources/scss/vendor.scss', 'public/assets/css')
+    .sass('resources/scss/vendor.scss', 'public/assets/css', {
+        sassOptions: {
+            includePaths: ['node_modules'],
+        }
+    })
     .postCss('resources/css/app.css', 'public/assets/css', [
         postcss_import,
         tailwindcss,

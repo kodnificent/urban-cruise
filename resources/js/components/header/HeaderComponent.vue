@@ -9,7 +9,7 @@
 <style lang="sass">
     .header
         background-color: #222222
-        @apply shadow text-white sticky top-0 z-30
+        @apply shadow text-white fixed top-0 z-30 w-full
 
         &__container
             @apply flex
@@ -20,5 +20,10 @@
                 height: 60px
                 background-color: #222222
                 color: #ffffff
-                @apply flex flex-row items-center sticky top-0
+                @apply flex flex-row items-center
+
+    .header + .after-header
+        margin-top: 60px
+        @screen md
+            margin-top: 96px
 </style>

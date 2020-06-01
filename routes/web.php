@@ -17,6 +17,8 @@ Route::get('category.shell', 'CategoryController@shell')->name('category.shell')
 
 Route::get('post.shell', 'PostController@shell')->name('post.shell');
 
+Route::get('author.shell', 'AuthorController@shell')->name('author.shell');
+
 Route::get('', 'HomeController')->name('home');
 
 Route::prefix('author')

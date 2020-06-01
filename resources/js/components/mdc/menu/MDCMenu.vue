@@ -1,5 +1,5 @@
 <template>
-    <div class="mdc-menu mdc-menu-surface px-2 py-3">
+    <div class="mdc-menu mdc-menu-surface px-2 py-3 z-30">
         <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
             <slot></slot>
         </ul>

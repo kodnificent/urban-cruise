@@ -6,13 +6,33 @@
                 <a class="text-current" :href="category.url">{{ category.title }}</a>
             </section-header>
 
-            <a v-if="category.children.length > 0"
-                :href="category.url"
-                class="h-7 text-sm capitalize border-gray-800
-                    text-gray-800 border rounded-full px-4 flex items-center
-                    font-bold hover:text-primary hover:border-primary">
-                all
-            </a>
+            <div class="mdc-menu-surface--anchor">
+                <button aria-expanded="false" @click.prevent.stop="toggleCategoryMenu" v-if="category.children.length > 0"
+                    class="h-7 text-sm capitalize border-gray-800
+                        text-gray-800 border rounded-full px-4 flex items-center
+                        font-bold hover:text-primary hover:border-primary">
+                    {{ selected_category }}
+                </button>
+
+                <MDC-menu ref="category_menu">
+
+                    <MDC-menu-item>
+                        <button @click.prevent="selectCategory(category)">
+                            <MDC-menu-text>
+                                All
+                            </MDC-menu-text>
+                        </button>
+                    </MDC-menu-item>
+
+                    <MDC-menu-item v-for="child in category.children" :key="child.id">
+                        <button @click.prevent="selectCategory(child)">
+                            <MDC-menu-text>
+                                {{ child.title }}
+                            </MDC-menu-text>
+                        </button>
+                    </MDC-menu-item>
+                </MDC-menu>
+            </div>
         </div>
 
         <p class="italic text-gray-600 mb-6" v-if="show_description">
@@ -86,6 +106,7 @@ export default {
             fetching_posts_failed: false,
             fetching_more_posts: false,
             fetch_limit: 7,
+            selected_category: 'all',
         }
     },
 
@@ -107,11 +128,11 @@ export default {
         /**
          * Fetch posts for the first time
          */
-        fetchInitialPosts()
+        fetchInitialPosts(url)
         {
             this.fetching_initial_posts = true;
 
-            axios.get(`${this.category.endpoints.posts}?limit=${this.fetch_limit}`).then(res=>{
+            axios.get(`${url}?limit=${this.fetch_limit}`).then(res=>{
                 this.meta = res.data.meta;
                 this.posts = res.data.data;
 
@@ -141,10 +162,27 @@ export default {
                 this.fetching_more_posts = false;
             })
         },
+
+        toggleCategoryMenu(e)
+        {
+            return this.$refs['category_menu'].toggleMenu(e);
+        },
+
+        selectCategory(category)
+        {
+            if (category.id === this.category.id)
+            {
+                this.selected_category = 'all';
+            } else {
+                this.selected_category = category.title;
+            }
+
+            this.fetchInitialPosts(category.endpoints.posts)
+        }
     },
 
     mounted(){
-        this.fetchInitialPosts();
+        this.fetchInitialPosts(this.category.endpoints.posts);
     }
 }
 </script>

@@ -79,6 +79,26 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     category: {
@@ -104,7 +124,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       fetching_initial_posts: false,
       fetching_posts_failed: false,
       fetching_more_posts: false,
-      fetch_limit: 7
+      fetch_limit: 7,
+      selected_category: 'all'
     };
   },
   computed: {
@@ -121,11 +142,11 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     /**
      * Fetch posts for the first time
      */
-    fetchInitialPosts: function fetchInitialPosts() {
+    fetchInitialPosts: function fetchInitialPosts(url) {
       var _this = this;
 
       this.fetching_initial_posts = true;
-      axios.get("".concat(this.category.endpoints.posts, "?limit=").concat(this.fetch_limit)).then(function (res) {
+      axios.get("".concat(url, "?limit=").concat(this.fetch_limit)).then(function (res) {
         _this.meta = res.data.meta;
         _this.posts = res.data.data;
 
@@ -157,10 +178,22 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }).then(function () {
         _this2.fetching_more_posts = false;
       });
+    },
+    toggleCategoryMenu: function toggleCategoryMenu(e) {
+      return this.$refs['category_menu'].toggleMenu(e);
+    },
+    selectCategory: function selectCategory(category) {
+      if (category.id === this.category.id) {
+        this.selected_category = 'all';
+      } else {
+        this.selected_category = category.title;
+      }
+
+      this.fetchInitialPosts(category.endpoints.posts);
     }
   },
   mounted: function mounted() {
-    this.fetchInitialPosts();
+    this.fetchInitialPosts(this.category.endpoints.posts);
   }
 });
 
@@ -2037,17 +2070,92 @@ var render = function() {
                 )
               ]),
               _vm._v(" "),
-              _vm.category.children.length > 0
-                ? _c(
-                    "a",
-                    {
-                      staticClass:
-                        "h-7 text-sm capitalize border-gray-800\n                text-gray-800 border rounded-full px-4 flex items-center\n                font-bold hover:text-primary hover:border-primary",
-                      attrs: { href: _vm.category.url }
-                    },
-                    [_vm._v("\n            all\n        ")]
+              _c(
+                "div",
+                { staticClass: "mdc-menu-surface--anchor" },
+                [
+                  _vm.category.children.length > 0
+                    ? _c(
+                        "button",
+                        {
+                          staticClass:
+                            "h-7 text-sm capitalize border-gray-800\n                    text-gray-800 border rounded-full px-4 flex items-center\n                    font-bold hover:text-primary hover:border-primary",
+                          attrs: { "aria-expanded": "false" },
+                          on: {
+                            click: function($event) {
+                              $event.preventDefault()
+                              $event.stopPropagation()
+                              return _vm.toggleCategoryMenu($event)
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                " +
+                              _vm._s(_vm.selected_category) +
+                              "\n            "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "MDC-menu",
+                    { ref: "category_menu" },
+                    [
+                      _c("MDC-menu-item", [
+                        _c(
+                          "button",
+                          {
+                            on: {
+                              click: function($event) {
+                                $event.preventDefault()
+                                return _vm.selectCategory(_vm.category)
+                              }
+                            }
+                          },
+                          [
+                            _c("MDC-menu-text", [
+                              _vm._v(
+                                "\n                            All\n                        "
+                              )
+                            ])
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._l(_vm.category.children, function(child) {
+                        return _c("MDC-menu-item", { key: child.id }, [
+                          _c(
+                            "button",
+                            {
+                              on: {
+                                click: function($event) {
+                                  $event.preventDefault()
+                                  return _vm.selectCategory(child)
+                                }
+                              }
+                            },
+                            [
+                              _c("MDC-menu-text", [
+                                _vm._v(
+                                  "\n                            " +
+                                    _vm._s(child.title) +
+                                    "\n                        "
+                                )
+                              ])
+                            ],
+                            1
+                          )
+                        ])
+                      })
+                    ],
+                    2
                   )
-                : _vm._e()
+                ],
+                1
+              )
             ],
             1
           )
@@ -3103,22 +3211,26 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "mdc-menu mdc-menu-surface px-2 py-3" }, [
-    _c(
-      "ul",
-      {
-        staticClass: "mdc-list",
-        attrs: {
-          role: "menu",
-          "aria-hidden": "true",
-          "aria-orientation": "vertical",
-          tabindex: "-1"
-        }
-      },
-      [_vm._t("default")],
-      2
-    )
-  ])
+  return _c(
+    "div",
+    { staticClass: "mdc-menu mdc-menu-surface px-2 py-3 z-30" },
+    [
+      _c(
+        "ul",
+        {
+          staticClass: "mdc-list",
+          attrs: {
+            role: "menu",
+            "aria-hidden": "true",
+            "aria-orientation": "vertical",
+            tabindex: "-1"
+          }
+        },
+        [_vm._t("default")],
+        2
+      )
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true

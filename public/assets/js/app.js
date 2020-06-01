@@ -99,6 +99,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     category: {
@@ -2229,12 +2231,15 @@ var render = function() {
                           }
                         },
                         [
-                          _vm._v(
-                            "\n                " +
-                              _vm._s(_vm.selected_category) +
-                              "\n            "
-                          )
-                        ]
+                          _c("span", { staticClass: "mr-1" }, [
+                            _vm._v(_vm._s(_vm.selected_category))
+                          ]),
+                          _vm._v(" "),
+                          _c("feather-icon", {
+                            attrs: { icon: "chevron-down", size: "sm" }
+                          })
+                        ],
+                        1
                       )
                     : _vm._e(),
                   _vm._v(" "),

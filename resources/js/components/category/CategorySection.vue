@@ -11,7 +11,9 @@
                     class="h-7 text-sm capitalize border-gray-800
                         text-gray-800 border rounded-full px-4 flex items-center
                         font-bold hover:text-primary hover:border-primary">
-                    {{ selected_category }}
+                    <span class="mr-1">{{ selected_category }}</span>
+
+                    <feather-icon icon="chevron-down" size="sm" />
                 </button>
 
                 <MDC-menu ref="category_menu">

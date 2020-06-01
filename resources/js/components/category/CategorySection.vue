@@ -3,7 +3,7 @@
 
         <div class="flex justify-between mb-6" v-if="show_title">
             <section-header>
-                {{ category.title }}
+                <a class="text-current" :href="category.url">{{ category.title }}</a>
             </section-header>
 
             <a v-if="category.children.length > 0"

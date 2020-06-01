@@ -98,7 +98,7 @@ class Controller extends BaseController
             $menu[] = [
                 'name' => $category->title,
                 'url' => $category->url,
-                'active' => request()->is( extractPath($category->url) )
+                'active' => request()->is( extractPath($category->url).'*' )
             ];
         }
 

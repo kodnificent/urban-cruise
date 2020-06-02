@@ -27,7 +27,9 @@ class AuthorControllerTest extends TestCase
         $response->assertJsonStructure([
             'meta',
             'data',
-            'endpoints'
+            'endpoints' => [
+                'author_posts'
+            ]
         ]);
     }
 

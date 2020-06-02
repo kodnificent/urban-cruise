@@ -65,7 +65,7 @@ class AuthorController extends Controller
             'base' => route('author.read', [
                 'id' => $author ? $author->id : '%id',
             ]),
-            'posts' => route('category.posts', [
+            'author_posts' => route('category.posts', [
                 'author' => $author ? $author->id : '%id'
             ])
         ];

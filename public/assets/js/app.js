@@ -9,99 +9,90 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+/* harmony import */ var _mixins_post_posts__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/post/posts */ "./resources/js/mixins/post/posts.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mixins: [_mixins_post_posts__WEBPACK_IMPORTED_MODULE_0__["posts"]],
   props: {
     category: {
       required: true,
@@ -120,67 +111,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   },
   data: function data() {
     return {
-      meta: {},
-      posts: [],
-      no_post_found: false,
-      fetching_initial_posts: false,
-      fetching_posts_failed: false,
-      fetching_more_posts: false,
-      fetch_limit: 7,
       selected_category: 'all'
     };
   },
-  computed: {
-    firstPost: function firstPost() {
-      return this.posts[0];
-    },
-    otherPosts: function otherPosts() {
-      return this.posts.filter(function (post, index) {
-        return index !== 0;
-      });
-    }
-  },
   methods: {
-    /**
-     * Fetch posts for the first time
-     */
-    fetchInitialPosts: function fetchInitialPosts(url) {
-      var _this = this;
-
-      this.fetching_initial_posts = true;
-      axios.get("".concat(url, "?limit=").concat(this.fetch_limit)).then(function (res) {
-        _this.meta = res.data.meta;
-        _this.posts = res.data.data;
-
-        if (_this.posts.length === 0) {
-          _this.no_post_found = true;
-        }
-      })["catch"](function (err) {
-        _this.fetching_posts_failed = true;
-      }).then(function () {
-        _this.fetching_initial_posts = false;
-      });
-    },
-
-    /**
-     * Fetch more posts
-     */
-    fetchMorePosts: function fetchMorePosts(url) {
-      var _this2 = this;
-
-      this.fetching_more_posts = true;
-      axios.get("".concat(url, "&limit=").concat(this.fetch_limit)).then(function (res) {
-        var _this2$posts;
-
-        _this2.meta = res.data.meta;
-
-        (_this2$posts = _this2.posts).push.apply(_this2$posts, _toConsumableArray(res.data.data));
-      })["catch"](function (err) {
-        _this2.fetching_posts_failed = true;
-      }).then(function () {
-        _this2.fetching_more_posts = false;
-      });
-    },
     toggleCategoryMenu: function toggleCategoryMenu(e) {
       return this.$refs['category_menu'].toggleMenu(e);
     },
@@ -1612,6 +1546,42 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _mixins_layout_layout__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../mixins/layout/layout */ "./resources/js/mixins/layout/layout.js");
+/* harmony import */ var _mixins_post_posts__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../mixins/post/posts */ "./resources/js/mixins/post/posts.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1691,8 +1661,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mixins: [_mixins_layout_layout__WEBPACK_IMPORTED_MODULE_0__["layout"]],
+  mixins: [_mixins_layout_layout__WEBPACK_IMPORTED_MODULE_0__["layout"], _mixins_post_posts__WEBPACK_IMPORTED_MODULE_1__["posts"]],
   data: function data() {
     return {};
   },
@@ -1735,7 +1706,8 @@ __webpack_require__.r(__webpack_exports__);
       return links;
     }
   },
-  mounted: function mounted() {//
+  mounted: function mounted() {
+    this.fetchInitialPosts(this.res.endpoints.author_posts);
   }
 });
 
@@ -4976,10 +4948,127 @@ var render = function() {
                     _c("section", [
                       _c(
                         "div",
-                        { staticClass: "mb-3" },
+                        { staticClass: "mb-6" },
                         [_c("section-header", [_vm._v("articles")])],
                         1
-                      )
+                      ),
+                      _vm._v(" "),
+                      _vm.fetching_initial_posts
+                        ? _c("div", [
+                            _c(
+                              "div",
+                              { staticClass: "flex flex-wrap" },
+                              [_c("post-card-skeleton")],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "div",
+                              { staticClass: "flex flex-wrap -ml-4 mt-8" },
+                              _vm._l([1, 2, 3, 4], function(index) {
+                                return _c("post-small-skeleton", {
+                                  key: index,
+                                  staticClass: "w-full md:w-1/2 mb-8 pl-4 mt-0"
+                                })
+                              }),
+                              1
+                            )
+                          ])
+                        : _vm.posts.length > 0
+                        ? _c(
+                            "div",
+                            [
+                              _c("post-card", {
+                                attrs: { post: _vm.firstPost }
+                              }),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                { staticClass: "flex flex-wrap -ml-4 mt-8" },
+                                _vm._l(_vm.otherPosts, function(post) {
+                                  return _c(
+                                    "post-small",
+                                    _vm._b(
+                                      {
+                                        key: post.id,
+                                        staticClass:
+                                          "w-full md:w-1/2 mb-8 pl-4 mt-0"
+                                      },
+                                      "post-small",
+                                      { post: post },
+                                      false
+                                    )
+                                  )
+                                }),
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "flex flex-col items-center justify-center"
+                                },
+                                [
+                                  _vm.meta.next_page_url
+                                    ? _c(
+                                        "button",
+                                        {
+                                          staticClass:
+                                            "button h-8 flex items-center text-sm bg-gray-200 text-black font-semibold",
+                                          attrs: {
+                                            type: "button",
+                                            disabled: _vm.fetching_more_posts
+                                          },
+                                          on: {
+                                            click: function($event) {
+                                              $event.stopPropagation()
+                                              $event.preventDefault()
+                                              return _vm.fetchMorePosts(
+                                                _vm.meta.next_page_url
+                                              )
+                                            }
+                                          }
+                                        },
+                                        [
+                                          _vm.fetching_more_posts
+                                            ? _c("bubble-loader", {
+                                                staticClass:
+                                                  "bubble-loader--dark"
+                                              })
+                                            : _c("span", [
+                                                _vm._v(" load more ")
+                                              ])
+                                        ],
+                                        1
+                                      )
+                                    : _c(
+                                        "span",
+                                        {
+                                          staticClass:
+                                            "text-sm font-semibold text-gray-600 lowercase italic",
+                                          attrs: { "aria-hidden": "true" }
+                                        },
+                                        [_vm._v("*** no more ***")]
+                                      )
+                                ]
+                              )
+                            ],
+                            1
+                          )
+                        : _vm.no_post_found
+                        ? _c("div", [
+                            _c(
+                              "span",
+                              { staticClass: "italic text-gray-600" },
+                              [
+                                _vm._v(
+                                  "We've not published any article yet on this category"
+                                )
+                              ]
+                            )
+                          ])
+                        : _vm._e()
                     ])
                   ]
                 )
@@ -5038,7 +5127,7 @@ var render = function() {
                     _vm._v(" "),
                     _c(
                       "span",
-                      { staticClass: "block uppercase text-sm" },
+                      { staticClass: "block uppercase text-sm truncate" },
                       [
                         _c(
                           "a",
@@ -8747,6 +8836,104 @@ var layout = {
       this.fetchBase();
     } else {
       this.base_fetched = true;
+    }
+  }
+};
+
+/***/ }),
+
+/***/ "./resources/js/mixins/post/posts.js":
+/*!*******************************************!*\
+  !*** ./resources/js/mixins/post/posts.js ***!
+  \*******************************************/
+/*! exports provided: posts */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "posts", function() { return posts; });
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(n); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+var posts = {
+  data: function data() {
+    return {
+      meta: {},
+      posts: [],
+      no_post_found: false,
+      fetching_initial_posts: false,
+      fetching_posts_failed: false,
+      fetching_more_posts: false,
+      fetch_limit: 7
+    };
+  },
+  computed: {
+    firstPost: function firstPost() {
+      return this.posts[0];
+    },
+    otherPosts: function otherPosts() {
+      return this.posts.filter(function (post, index) {
+        return index !== 0;
+      });
+    }
+  },
+  methods: {
+    /**
+     * Fetch posts for the first time
+     */
+    fetchInitialPosts: function fetchInitialPosts(url) {
+      var _this = this;
+
+      this.fetching_initial_posts = true;
+      axios.get("".concat(url), {
+        params: {
+          limit: this.fetch_limit
+        }
+      }).then(function (res) {
+        _this.meta = res.data.meta;
+        _this.posts = res.data.data;
+
+        if (_this.posts.length === 0) {
+          _this.no_post_found = true;
+        }
+      })["catch"](function (err) {
+        _this.fetching_posts_failed = true;
+      }).then(function () {
+        _this.fetching_initial_posts = false;
+      });
+    },
+
+    /**
+     * Fetch more posts
+     */
+    fetchMorePosts: function fetchMorePosts(url) {
+      var _this2 = this;
+
+      this.fetching_more_posts = true;
+      axios.get("".concat(url), {
+        params: {
+          limit: this.fetch_limit
+        }
+      }).then(function (res) {
+        var _this2$posts;
+
+        _this2.meta = res.data.meta;
+
+        (_this2$posts = _this2.posts).push.apply(_this2$posts, _toConsumableArray(res.data.data));
+      })["catch"](function (err) {
+        _this2.fetching_posts_failed = true;
+      }).then(function () {
+        _this2.fetching_more_posts = false;
+      });
     }
   }
 };

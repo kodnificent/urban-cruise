@@ -34,10 +34,7 @@ class Controller extends BaseController
 
         $res['categories'] = $this->categories();
 
-        $endpoints = [
-            'posts' => route('category.posts')
-        ];
-        $res['endpoints'] = $endpoints;
+        $res['endpoints']['posts'] = route('category.posts');
 
         if ($request->expectsJson()) {
             return response()->json($res, 200);

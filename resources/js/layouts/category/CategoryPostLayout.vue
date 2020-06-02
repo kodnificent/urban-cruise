@@ -9,7 +9,7 @@
                 <template v-if="res">
                     <span class="block text-gray-500 text-xs">Published in</span>
 
-                    <span class="block uppercase text-sm">
+                    <span class="block uppercase text-sm truncate">
                         <a :href="res.data.category.parent.url" class="font-semibold text-gray-100">
                             {{ res.data.category.parent.title }}
                         </a>

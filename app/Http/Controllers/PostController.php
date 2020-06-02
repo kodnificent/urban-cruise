@@ -36,14 +36,21 @@ class PostController extends Controller
                 $category = $category->children()->where('slug', $sub_category)->firstOrFail();
             }
 
-            $posts = Post::ofCategory($category)->published()->reversedOrder()->simplePaginate($request->query('limit'));
+            $posts = $request->query('author')
+                        ? Post::ofCategory($category)->where('author_id', $request->query('author'))
+                        : Post::ofCategory($category);
+
+            $posts = $posts->published()->reversedOrder()->simplePaginate($request->query('limit'));
         } else {
-            $posts = Post::published()->reversedOrder()->simplePaginate($request->query('limit'));
+            $posts = $request->query('author')
+                        ? Post::where('author_id', $request->query('author'))->published()
+                        : Post::published();
+            $posts = $posts->reversedOrder()->simplePaginate($request->query('limit'));
         }
 
         $data = $this->extractItemsFrom($posts);
 
-        $meta = $this->extractMetaFrom($posts);
+        $meta = $this->extractMetaFrom($posts->appends($request->except('limit')));
 
         return response()->json(compact('meta', 'data'), 200);
     }

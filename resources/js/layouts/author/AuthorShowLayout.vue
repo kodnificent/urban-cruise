@@ -61,8 +61,43 @@
                     </section>
 
                     <section>
-                        <div class="mb-3">
+                        <div class="mb-6">
                             <section-header>articles</section-header>
+                        </div>
+
+                        <div v-if="fetching_initial_posts">
+                            <div class="flex flex-wrap">
+                                <post-card-skeleton />
+                            </div>
+                            <div class="flex flex-wrap -ml-4 mt-8">
+                                <post-small-skeleton v-for="index in [1,2,3,4]" :key="index" class="w-full md:w-1/2 mb-8 pl-4 mt-0" />
+                            </div>
+                        </div>
+
+                        <div v-else-if="posts.length > 0">
+                            <post-card :post="firstPost" />
+
+                            <div class="flex flex-wrap -ml-4 mt-8">
+                                <post-small v-for="post in otherPosts" :key="post.id" v-bind="{ post }" class="w-full md:w-1/2 mb-8 pl-4 mt-0" />
+                            </div>
+
+                            <div class="flex flex-col items-center justify-center">
+                                <button v-if="meta.next_page_url"
+                                    type="button"
+                                    @click.stop.prevent="fetchMorePosts(meta.next_page_url)"
+                                    class="button h-8 flex items-center text-sm bg-gray-200 text-black font-semibold"
+                                    :disabled="fetching_more_posts">
+                                    <bubble-loader class="bubble-loader--dark" v-if="fetching_more_posts" />
+
+                                    <span v-else> load more </span>
+                                </button>
+
+                                <span aria-hidden="true" class="text-sm font-semibold text-gray-600 lowercase italic" v-else>*** no more ***</span>
+                            </div>
+                        </div>
+
+                        <div v-else-if="no_post_found">
+                            <span class="italic text-gray-600">We've not published any article yet on this category</span>
                         </div>
                     </section>
 
@@ -78,8 +113,10 @@
 
 <script>
 import { layout } from "../../mixins/layout/layout";
+import { posts } from '../../mixins/post/posts';
+
 export default {
-    mixins: [layout],
+    mixins: [layout, posts],
 
     data(){
         return {
@@ -130,7 +167,7 @@ export default {
 
     mounted()
     {
-        //
+        this.fetchInitialPosts(this.res.endpoints.author_posts);
     }
 }
 </script>

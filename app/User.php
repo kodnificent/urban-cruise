@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cacheable\Cacheable;
 use App\Traits\HasCreator;
 use App\Traits\HasPost;
 use App\Traits\HasRole;
@@ -12,7 +13,7 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-    use Notifiable, HasUpdater, HasCreator, HasPost, HasRole;
+    use Notifiable, HasUpdater, HasCreator, HasPost, HasRole, Cacheable;
 
     /**
      * The attributes that are mass assignable.

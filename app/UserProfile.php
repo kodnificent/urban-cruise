@@ -2,10 +2,13 @@
 
 namespace App;
 
+use App\Cacheable\Cacheable;
 use Illuminate\Database\Eloquent\Model;
 
 class UserProfile extends Model
 {
+    use Cacheable;
+
     public $timestamps = false;
 
     protected $guarded = [];

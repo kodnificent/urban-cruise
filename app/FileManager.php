@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cacheable\Cacheable;
 use App\Facades\Thumbnailer;
 use App\Traits\HasCreator;
 use App\Traits\HasUpdater;
@@ -11,7 +12,8 @@ use Illuminate\Support\Facades\Storage;
 class FileManager extends Model
 {
     use HasCreator,
-        HasUpdater;
+        HasUpdater,
+        Cacheable;
 
     public $table = 'file_manager';
 

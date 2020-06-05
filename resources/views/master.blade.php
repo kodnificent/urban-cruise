@@ -7,6 +7,9 @@
 
         @yield('metas')
 
+        <link rel="preload" href="{{ asset('css/vendor.css') }}" as="style">
+        <link rel="preload" href="{{ asset('css/app.css') }}" as="style">
+
         <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     </head>

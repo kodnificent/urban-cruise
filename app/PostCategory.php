@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cacheable\Cacheable;
 use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PostCategory extends Model
 {
-    use HasSlug, HasMeta;
+    use HasSlug, HasMeta, Cacheable;
 
     /**
      * Indicates if the model should be timestamped.

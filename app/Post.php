@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Cacheable\Cacheable;
 use App\Traits\HasCreator;
 use App\Traits\HasFile;
 use App\Traits\HasMeta;
@@ -17,7 +18,7 @@ use Illuminate\Support\Str;
  */
 class Post extends Model
 {
-    use HasMeta, HasSlug, HasCreator, HasUpdater, HasFile, SoftDeletes;
+    use HasMeta, HasSlug, HasCreator, HasUpdater, HasFile, SoftDeletes, Cacheable;
 
     const HAS_CREATOR_FOREIGN = 'author_id';
 

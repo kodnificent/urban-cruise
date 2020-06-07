@@ -30,6 +30,8 @@ Route::prefix('author')
 Route::prefix('posts')
     ->name('category.')
     ->group(function () {
+        Route::get('search', 'PostController@search')->name('posts.search');
+
         Route::get('{category?}/{sub_category?}', 'PostController@list')->name('posts');
     });
 

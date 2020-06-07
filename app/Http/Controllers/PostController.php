@@ -87,6 +87,26 @@ class PostController extends Controller
     }
 
     /**
+     * Search for a post by query
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param string $query
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
+        if (! $request->expectsJson() || ! $request->has('q')) {
+            abort(404);
+        }
+
+        $query = $request->query('q');
+
+        $posts = Post::search($query)->get();
+
+        return response()->json($posts);
+    }
+
+    /**
      * Show the home page Shell
      *
      * @return \Illuminate\View\View

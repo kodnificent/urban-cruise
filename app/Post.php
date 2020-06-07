@@ -12,13 +12,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use Laravel\Scout\Searchable;
 
 /**
  * @method \App\Post featured() Get posts that are marked as featured
  */
 class Post extends Model
 {
-    use HasMeta, HasSlug, HasCreator, HasUpdater, HasFile, SoftDeletes, Cacheable;
+    use HasMeta, HasSlug, HasCreator, HasUpdater, HasFile, SoftDeletes, Cacheable, Searchable;
 
     const HAS_CREATOR_FOREIGN = 'author_id';
 
@@ -204,5 +205,10 @@ class Post extends Model
     public function scopeReversedOrder(Builder $query)
     {
         return $query->orderBy('id', 'desc');
+    }
+
+    public function shouldBeSearchable()
+    {
+        return $this->status === 'published';
     }
 }

@@ -1,11 +1,22 @@
 <template>
-    <a title="read more">
-        <span class="sr-only">read more</span>
+    <a :title="title">
+        <span class="sr-only">{{ title }}</span>
         <span class="dots" aria-hidden="true"></span>
         <span class="dots" aria-hidden="true"></span>
         <span class="dots" aria-hidden="true"></span>
     </a>
 </template>
+
+<script>
+export default {
+    props: {
+        title: {
+            required: true,
+            type: String,
+        }
+    }
+}
+</script>
 
 <style lang="sass" scoped>
     .dots

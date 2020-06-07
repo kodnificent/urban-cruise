@@ -1,6 +1,6 @@
 <template>
     <div class="post-card__image">
-        <img :src="src">
+        <img v-lazy="src" :alt="alt">
     </div>
 </template>
 
@@ -10,6 +10,10 @@ export default {
         src: {
             required: true,
             type: String,
+        },
+
+        alt: {
+            required: false
         }
     }
 }

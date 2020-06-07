@@ -80,7 +80,8 @@
             <div class="mb-3 md:mb-0 md:pr-6" v-if="post.creator.profile.photo">
                 <a class="block text-gray-800 hover:text-primary" :href="post.creator.url">
                     <img
-                        :src="post.creator.profile.photo"
+                        v-lazy="post.creator.profile.photo"
+                        :alt="post.creator.name"
                         class="rounded-full h-24 w-24 shadow-md" />
                 </a>
             </div>

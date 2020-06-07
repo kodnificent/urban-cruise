@@ -1,7 +1,7 @@
 <template>
     <div class="post-card">
         <a class="w-full md:w-1/2" :href="post.url">
-            <post-card-image v-if="post.file" :src="post.file.thumbnails.medium" />
+            <post-card-image v-if="post.file" :alt="post.title" :src="post.file.thumbnails.medium" />
         </a>
         <div class="w-full md:w-1/2 pt-4 md:pt-0 md:pl-4">
             <div>
@@ -20,7 +20,7 @@
 
             <div class="mt-4" v-html="post.truncated_summary"></div>
 
-            <read-more class="block" :href="post.url" />
+            <read-more :title="post.title" class="block" :href="post.url" />
         </div>
     </div>
 </template>

@@ -1,5 +1,7 @@
 import VueGlide from "vue-glide-js";
 
+import VueLazyload from 'vue-lazyload';
+
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -9,6 +11,10 @@ import VueGlide from "vue-glide-js";
 require('./bootstrap');
 
 window.Vue = require('vue');
+
+Vue.use(VueLazyload, {
+    loading: '/assets/imgs/loading.svg'
+})
 
 Vue.use(VueGlide);
 

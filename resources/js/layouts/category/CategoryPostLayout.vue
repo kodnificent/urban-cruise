@@ -25,7 +25,7 @@
 
             <div class="order-3 flex-grow"></div>
 
-            <div class="order-3">
+            <div class="order-3 flex">
                 <mobile-share-button v-if="res.data" :data="{
                     title: res.data.title,
                     url: res.data.url

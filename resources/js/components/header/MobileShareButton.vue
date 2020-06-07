@@ -1,5 +1,5 @@
 <template>
-    <button @click.stop.prevent="share" v-if="$root.isMobile && canShare" class="order-3 p-1 rounded-full focus:shadow-outline focus:outline-none">
+    <button @click.stop.prevent="share" v-if="$root.isMobile && canShare" class="p-1 rounded-full focus:shadow-outline focus:outline-none">
         <span class="sr-only">
             <slot>
                 share

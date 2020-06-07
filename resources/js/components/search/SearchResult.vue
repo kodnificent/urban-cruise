@@ -11,7 +11,7 @@
 
                     <div class="mt-4" v-html="post.truncated_summary"></div>
 
-                    <read-more class="block" :href="post.url" />
+                    <read-more :title="post.title" class="block" :href="post.url" />
                 </div>
             </li>
         </ul>

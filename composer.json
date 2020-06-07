@@ -12,6 +12,7 @@
         "fideloper/proxy": "^4.0",
         "fzaninotto/faker": "^1.9.1",
         "laravel/framework": "^6.2",
+        "laravel/scout": "^7",
         "laravel/tinker": "^2.0",
         "watson/rememberable": "3.*"
     },

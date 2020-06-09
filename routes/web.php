@@ -37,8 +37,16 @@ Route::prefix('posts')
 
 Route::prefix('/{category}')
     ->name('category.')
+    ->where([
+        'category' => '^(?!nova|app.*$).*'
+    ])
     ->group(function () {
-        Route::get('{sub_category?}', 'CategoryController@show')->name('show');
+        Route::get('{sub_category}/{slug}', 'PostController@read')
+            ->name('post');
 
-        Route::get('{sub_category}/{slug}', 'PostController@read')->name('post');
+        Route::get('{sub_category}', 'CategoryController@show')
+            ->name('show.child');
+
+        Route::get('', 'CategoryController@show')
+            ->name('show');
     });

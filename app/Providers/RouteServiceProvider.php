@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Laravel\Nova\Nova;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -30,7 +31,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        //'^(?!elfinder)(?!_debugbar)([A-z\d-\/_.]+)?'
+        //Route::pattern('category', '^(?!nova|app.*$).*');
+        //Route::pattern('slug', '^(?!nova|app.*$).*');
 
         parent::boot();
     }

@@ -16,16 +16,6 @@ class CategoryController extends Controller
     protected $category;
 
     /**
-     * Show a single post of a category
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
-     */
-    public function post()
-    {
-        return abort(404);
-    }
-
-    /**
      * Show details of a category
      *
      * @param \Illuminate\Http\Request $request

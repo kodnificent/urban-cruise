@@ -30,7 +30,7 @@ class PostCategory extends Model
     {
         return $this->isParent() ? url(route('category.show', [
             'category' => $this->attributes['slug']
-        ]), [], true) : url(route('category.show', [
+        ]), [], true) : url(route('category.show.child', [
             'category' => $this->parent->slug,
             'sub_category' => $this->attributes['slug']
         ]), [], true);

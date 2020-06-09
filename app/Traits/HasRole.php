@@ -18,4 +18,31 @@ trait HasRole
                 ->using(RoleUser::class)
                 ->withTimestamps();
     }
+
+    /**
+     * Check if the user is an admin
+     *
+     * @return bool
+     */
+    public function hasAnyRole()
+    {
+        return $this->roles->count() > 0;
+    }
+
+    /**
+     * Check if the user has a particular role or more than one role
+     *
+     * @param mixed ...$roles
+     * @return bool
+     */
+    public function hasRole(...$roles)
+    {
+        foreach ($roles as $role) {
+            $admin_role = $this->roles()->where('title', $role)->first();
+
+            if ($admin_role) return true;
+        }
+
+        return false;
+    }
 }

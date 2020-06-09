@@ -54,7 +54,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'url'
+        'url',
     ];
 
     public function getUrlAttribute()

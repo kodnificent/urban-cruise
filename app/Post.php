@@ -49,7 +49,7 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
-        'options'   =>  'array'
+        'options'   =>  'array',
     ];
 
     /**
@@ -154,6 +154,17 @@ class Post extends Model
     public function scopeFeatured(Builder $query)
     {
         return $query->where('featured', true);
+    }
+
+    /**
+     * Get posts that aren't marked as featured
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUnFeatured(Builder $query)
+    {
+        return $query->where('featured', false);
     }
 
     /**

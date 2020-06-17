@@ -15,7 +15,7 @@
         "laravel/framework": "^6.2",
         "laravel/scout": "^7",
         "laravel/tinker": "^2.0",
-        "laravel/nova": "*",
+        "verat/admin": "*",
         "watson/rememberable": "3.*"
     },
     "require-dev": {
@@ -70,6 +70,10 @@
         {
             "type": "path",
             "url": "./nova"
+        },
+        {
+            "type": "path",
+            "url": "../verat-admin"
         }
     ]
 }

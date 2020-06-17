@@ -1,6 +1,6 @@
 <template>
     <div class="post-small">
-        <a class="block w-1/3" :href="post.url">
+        <a class="block w-1/3" :href="post.url" v-if="post.file">
             <post-small-image :alt="post.title" :src="post.file.thumbnails.small" />
         </a>
 

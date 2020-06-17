@@ -2,6 +2,7 @@
 
 namespace App\Verat;
 
+use App\Verat\Admin\Collections\Category;
 use App\Verat\Admin\Collections\Entertainment;
 use App\Verat\Admin\Collections\FileManager;
 use App\Verat\Admin\Collections\Lifestyle;
@@ -23,6 +24,7 @@ class App extends Bootstrapper
             Sports::class,
             Lifestyle::class,
             FileManager::class,
+            Category::class,
         ];
     }
 

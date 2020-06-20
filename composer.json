@@ -11,10 +11,13 @@
         "php": "^7.2",
         "algolia/algoliasearch-client-php": "^2.2",
         "fideloper/proxy": "^4.0",
+        "froala/nova-froala-field": "^3.3",
         "fzaninotto/faker": "^1.9.1",
         "laravel/framework": "^6.2",
+        "laravel/nova": "*",
         "laravel/scout": "^7",
         "laravel/tinker": "^2.0",
+        "owenmelbz/nova-radio-field": "^0.0.5",
         "verat/admin": "*",
         "watson/rememberable": "3.*"
     },

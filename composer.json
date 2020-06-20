@@ -18,7 +18,6 @@
         "laravel/scout": "^7",
         "laravel/tinker": "^2.0",
         "owenmelbz/nova-radio-field": "^0.0.5",
-        "verat/admin": "*",
         "watson/rememberable": "3.*"
     },
     "require-dev": {

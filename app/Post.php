@@ -5,6 +5,7 @@ namespace App;
 use App\Cacheable\Cacheable;
 use App\Traits\HasCreator;
 use App\Traits\HasSlug;
+use App\Traits\HasStatus;
 use App\Traits\HasUpdater;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +18,7 @@ use Laravel\Scout\Searchable;
  */
 class Post extends Model
 {
-    use HasSlug, HasCreator, HasUpdater, SoftDeletes, Cacheable, Searchable;
+    use HasSlug, HasCreator, HasUpdater, SoftDeletes, Cacheable, Searchable, HasStatus;
 
     const HAS_CREATOR_FOREIGN = 'author_id';
 
@@ -48,6 +49,7 @@ class Post extends Model
     protected $casts = [
         'featured'   =>  'boolean',
         'allow_comments' => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     /**
@@ -63,7 +65,7 @@ class Post extends Model
 
     protected $appends = [
         'url', 'truncated_title', 'truncated_title_md',
-        'truncated_summary', 'created_at_for_humans',
+        'truncated_summary', 'published_at_for_humans',
         'image_url', 'image_thumbnail', 'video_url', 'video_thumbnail'
     ];
 
@@ -101,19 +103,19 @@ class Post extends Model
         return Str::limit($this->attributes['title'], 80, '...');
     }
 
-    public function getCreatedAtForHumansAttribute()
+    public function getPublishedAtForHumansAttribute()
     {
-        if (! $this->created_at) return null;
+        if (! $this->published_at) return null;
 
-        if ($this->created_at->isCurrentWeek()) { // was published less than a week ago
-            $created_at = $this->created_at->diffForHumans();
-        } elseif ($this->created_at->isCurrentYear()) {
-            $created_at = $this->created_at->shortEnglishMonth .' ' .$this->created_at->day;
+        if ($this->published_at->isCurrentWeek()) { // was published less than a week ago
+            $published_at = $this->published_at->diffForHumans();
+        } elseif ($this->published_at->isCurrentYear()) {
+            $published_at = $this->published_at->shortEnglishMonth .' ' .$this->published_at->day;
         } else {
-            $created_at = $this->created_at->shortEnglishMonth .' ' .$this->created_at->day .' ' .$this->created_at->year;
+            $published_at = $this->published_at->shortEnglishMonth .' ' .$this->published_at->day .' ' .$this->published_at->year;
         }
 
-        return $created_at;
+        return $published_at;
     }
 
     public function getImageUrlAttribute()
@@ -261,5 +263,57 @@ class Post extends Model
     public function video()
     {
         return $this->belongsTo(FileManager::class, 'video');
+    }
+
+    /**
+     * Allow comments for a post
+     *
+     * @return $this
+     */
+    public function allowComments()
+    {
+        $this->allow_comments = 1;
+        $this->save();
+
+        return $this;
+    }
+
+    /**
+     * Disallow comments for a post
+     *
+     * @return $this
+     */
+    public function disallowComments()
+    {
+        $this->allow_comments = 0;
+        $this->save();
+
+        return $this;
+    }
+
+    /**
+     * Feature a post
+     *
+     * @return $this
+     */
+    public function feature()
+    {
+        $this->featured = 1;
+        $this->save();
+
+        return $this;
+    }
+
+    /**
+     * Unfeature a post
+     *
+     * @return $this
+     */
+    public function unFeature()
+    {
+        $this->featured = 0;
+        $this->save();
+
+        return $this;
     }
 }

@@ -13,7 +13,8 @@ $factory->define(Post::class, function (Faker $faker) {
         'summary' => $faker->text(rand(150, 300)),
         'content' => $content,
         'type' => 'article',
-        'author_id' => rand(1, 5)
+        'author_id' => rand(1, 5),
+        'published_at' => now(),
     ];
 });
 

@@ -28,7 +28,9 @@ class CreatePostsTable extends Migration
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->unsignedBigInteger('updater_id')->nullable();
+            $table->unsignedBigInteger('reviewer_id')->nullable();
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
             $table->softDeletes();
         });
     }

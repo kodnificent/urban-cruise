@@ -10,7 +10,7 @@ trait HasSlug
 {
 
     /**
-     * boot has trait
+     * boot has slug trait
      *
      * @return void
      */

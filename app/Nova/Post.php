@@ -2,6 +2,14 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\AllowComments;
+use App\Nova\Actions\DisallowComments;
+use App\Nova\Actions\Feature;
+use App\Nova\Actions\Publish;
+use App\Nova\Actions\SubmitForReview;
+use App\Nova\Actions\UnFeature;
+use App\Nova\Filters\ArticleStatus;
+use App\Nova\Filters\ArticleTypeByAuthor;
 use App\PostCategory;
 use App\Rules\WordCount;
 use Froala\NovaFroalaField\Froala;
@@ -10,10 +18,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Laravel\Nova\Fields\Badge;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
+use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
-use Laravel\Nova\Fields\Trix;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Panel;
 use OwenMelbz\RadioField\RadioButton;
@@ -55,30 +65,102 @@ abstract class Post extends Resource
     {
         return [
             ID::make()->sortable(),
-            Badge::make('Status')->map([
-                'draft' => 'danger',
-                'published' => 'success',
-            ]),
-            RadioButton::make('Status')->options([
-                'draft' => 'Draft',
-                'published' => 'Published'
-            ])->rules('requires', Rule::in(['draft', 'published']))
-            ->onlyOnForms(),
+
+            Badge::make('Status')
+                ->map([
+                    'draft' => 'danger',
+                    'under-review' => 'warning',
+                    'published' => 'success',
+                ]),
+
+            RadioButton::make('Status')
+                ->options([
+                    'draft' => 'Draft',
+                    'under-review' => 'Under Review',
+                    'published' => 'Published'
+                ])->rules(
+                    'sometimes',
+                    'required',
+                    Rule::in(['draft', 'under-review', 'published']),
+                    function ($attribute, $value, $fail) {
+                        if (
+                                ! in_array(request()->user()->role, ['admin', 'editor'])
+                                && $value === 'published'
+                            ) {
+                                $fail('You dont have the permission to this this. You can only set the status to under review.');
+                            }
+                    }
+                )
+                ->onlyOnForms(),
+
+            Select::make('Category', 'category_id')
+                    ->options(function () {
+                        $options = [];
+                        $category = PostCategory::where('slug', static::getCategorySlug())->first();
+                        $categories = $category->children()->get();
+
+                        foreach ($categories as $category) {
+                            $options[$category->id] = $category->title;
+                        }
+
+                        return $options;
+                    })->onlyOnForms()
+                    ->required(),
+
             Text::make('Title')
                 ->help('Keep your title short and descriptive between 60 to 65 characters. Max. of 70 characters')
                 ->rules('required', 'max:70'),
+
+            BelongsTo::make('Category', 'category', 'App\Nova\Category')
+                ->hideWhenUpdating()
+                ->hideWhenCreating(),
+
+            BelongsTo::make('Author', 'creator', 'App\Nova\User')
+                ->onlyOnDetail(),
+
             Textarea::make('Summary')
                 ->rules('nullable', 'min:60', 'max:160')
                 ->help('Make your summary descriptive enough for better SEO. Must be between 60 to 160 characters.'),
+
             Froala::make('Content')
                 ->help('Min of 500 words')
                 ->rules('required', new WordCount(500))
                 ->withFiles(config('filesystems.default')),
 
             (new Panel('Article Options', [
-                Boolean::make('Featured Post', 'featured')
+                    Boolean::make('Featured Post', 'featured')
+                        ->hideFromIndex()
+                        ->showOnCreating(function ($request) {
+                            return in_array(request()->user()->role, ['admin', 'editor']);
+                        })
+                        ->showOnUpdating(function ($request) {
+                            return in_array(request()->user()->role, ['admin', 'editor']);
+                        }),
+
+                    Boolean::make('Allow Comments')
+                        ->hideFromIndex()
+                        ->showOnCreating(function ($request) {
+                            return in_array(request()->user()->role, ['admin', 'editor']);
+                        })
+                        ->showOnUpdating(function ($request) {
+                            return in_array(request()->user()->role, ['admin', 'editor']);
+                        }),
                 ])
             ),
+
+            (new Panel('Article Info', [
+                DateTime::make('Created at')
+                    ->format('D MMM YY - H:mm a')
+                    ->onlyOnDetail(),
+
+                DateTime::make('Published at')
+                    ->format('D MMM YY - H:mm a')
+                    ->hideWhenCreating()
+                    ->hideWhenUpdating(),
+
+                BelongsTo::make('Reviewed by', 'updater', 'App\Nova\User')
+                    ->onlyOnDetail(),
+            ]))
         ];
     }
 
@@ -101,7 +183,10 @@ abstract class Post extends Resource
      */
     public function filters(Request $request)
     {
-        return [];
+        return [
+            new ArticleTypeByAuthor,
+            new ArticleStatus
+        ];
     }
 
     /**
@@ -123,7 +208,83 @@ abstract class Post extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new AllowComments)->canSee(function ($request) {
+                $post = $request->findModelQuery()->first();
+
+                if ($post && $post->allow_comments) {
+                    return false;
+                }
+
+                return true;
+            })->canRun(function ($request, $post) {
+                return $request->user()->can('allowComments', $post);
+            }),
+
+            (new DisallowComments)->canSee(function ($request) {
+                $post = $request->findModelQuery()->first();
+
+                if ($post && ! $post->allow_comments) {
+                    return false;
+                }
+
+                return true;
+            })->canRun(function ($request, $post) {
+                return $request->user()->can('disallowComments', $post);
+            }),
+
+            (new Feature)->canSee(function ($request) {
+                $post = $request->findModelQuery()->first();
+
+                if ($post && $post->featured) {
+                    return false;
+                }
+
+                return true;
+            })->canRun(function ($request, $post) {
+                return $request->user()->can('feature', $post);
+            }),
+
+            (new UnFeature)->canSee(function ($request) {
+                $post = $request->findModelQuery()->first();
+
+                if ($post && ! $post->featured) {
+                    return false;
+                }
+
+                return true;
+            })->canRun(function ($request, $post) {
+                return $request->user()->can('unFeature', $post);
+            }),
+
+            (new Publish)->canSee(function ($request) {
+                $post = $request->findModelQuery()->first();
+
+                if ($post && ! in_array($post->status, ['draft', 'under-review'])) {
+                    return false;
+                }
+
+                return true;
+            })->canRun(function ($request, $post) {
+                return $request->user()->can('publish', $post);
+            }),
+
+            (new SubmitForReview)->canSee(function ($request) {
+                if (! $request->user()->isAuthor()) {
+                    return false;
+                }
+
+                $post = $request->findModelQuery()->first();
+
+                if ($post && $post->status === 'draft' && ! $post->reviewed_by) {
+                    return false;
+                }
+
+                return true;
+            })->canRun(function ($request, $post) {
+                return $request->user()->can('submitForReview', $post);
+            }),
+        ];
     }
 
     public static function indexQuery(NovaRequest $request, $query)

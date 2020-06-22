@@ -50,7 +50,7 @@ class WordCount implements Rule
             return false;
         }
 
-        return false;
+        return true;
     }
 
     /**

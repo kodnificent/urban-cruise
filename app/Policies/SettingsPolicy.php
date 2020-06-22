@@ -18,4 +18,14 @@ class SettingsPolicy
     {
         //
     }
+
+    public function viewAny(User $user)
+    {
+        return $user->isAdmin();
+    }
+
+    public function view(User $user)
+    {
+        return $user->isAdmin();
+    }
 }

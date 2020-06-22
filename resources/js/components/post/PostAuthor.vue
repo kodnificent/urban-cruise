@@ -3,7 +3,7 @@
         <a :href="post.creator.url" class="text-sm font-semibold mr-2 text-gray-800">{{ post.creator.name }}</a>
 
         <span class="text-gray-600 text-sm">
-            {{ post.created_at_for_humans }}
+            {{ post.published_at_for_humans }}
         </span>
     </div>
 </template>

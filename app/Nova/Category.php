@@ -50,10 +50,15 @@ class Category extends Resource
     {
         return [
             ID::make()->sortable(),
+
             Text::make('Title')
-                ->rules('required'),
+                ->help('Max. of 70 characters')
+                ->rules('required', 'max:70'),
+
             Textarea::make('Description')
-                ->rules('nullable'),
+                ->rules('nullable', 'min:60', 'max:160')
+                ->help('Make your summary descriptive enough for better SEO. Must be between 60 to 160 characters.'),
+
             Select::make('Parent', 'parent_id')
                 ->options(function () {
                     $parents = PostCategory::parentCategories()->get();

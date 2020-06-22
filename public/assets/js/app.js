@@ -4159,10 +4159,10 @@ var staticRenderFns = [
       _c("div", { staticClass: "flex mb-6 items-center" }, [
         _vm.post.creator
           ? _c("a", { attrs: { href: _vm.post.creator.url } }, [
-              _vm.post.creator.profile.photo
+              _vm.post.creator.profile.photo_thumbnail
                 ? _c("img", {
                     staticClass: "w-6 h-6 rounded-full mr-2",
-                    attrs: { src: _vm.post.creator.profile.photo }
+                    attrs: { src: _vm.post.creator.profile.photo_thumbnail }
                   })
                 : _vm._e()
             ])
@@ -4197,14 +4197,14 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "md:flex" }, [
         _c("div", { staticClass: "w-auto md:pr-2" }, [
-          _vm.post.file && _vm.post.file.type === "image"
+          _vm.post.image_url
             ? _c(
                 "div",
                 {
                   staticClass: "mb-6 overflow-hidden flex justify-center",
                   staticStyle: { "max-height": "350px" }
                 },
-                [_c("img", { attrs: { src: _vm.post.file.url } })]
+                [_c("img", { attrs: { src: _vm.post.image_url } })]
               )
             : _vm._e(),
           _vm._v(" "),
@@ -4290,7 +4290,7 @@ var staticRenderFns = [
             [
               _c("h2", { staticClass: "sr-only" }, [_vm._v("Author")]),
               _vm._v(" "),
-              _vm.post.creator.profile.photo
+              _vm.post.creator.profile.photo_thumbnail
                 ? _c("div", { staticClass: "mb-3 md:mb-0 md:pr-6" }, [
                     _c(
                       "a",
@@ -4304,8 +4304,8 @@ var staticRenderFns = [
                             {
                               name: "lazy",
                               rawName: "v-lazy",
-                              value: _vm.post.creator.profile.photo,
-                              expression: "post.creator.profile.photo"
+                              value: _vm.post.creator.profile.photo_thumbnail,
+                              expression: "post.creator.profile.photo_thumbnail"
                             }
                           ],
                           staticClass: "rounded-full h-24 w-24 shadow-md",
@@ -4452,16 +4452,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "post-card" }, [
-    _vm.post.file
+    _vm.post.image
       ? _c(
           "a",
           { staticClass: "w-full md:w-1/2", attrs: { href: _vm.post.url } },
           [
             _c("post-card-image", {
-              attrs: {
-                alt: _vm.post.title,
-                src: _vm.post.file.thumbnails.medium
-              }
+              attrs: { alt: _vm.post.title, src: _vm.post.image_thumbnail }
             })
           ],
           1
@@ -4624,16 +4621,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "post-small" }, [
-    _vm.post.file
+    _vm.post.image
       ? _c(
           "a",
           { staticClass: "block w-1/3", attrs: { href: _vm.post.url } },
           [
             _c("post-small-image", {
-              attrs: {
-                alt: _vm.post.title,
-                src: _vm.post.file.thumbnails.small
-              }
+              attrs: { alt: _vm.post.title, src: _vm.post.image_thumbnail }
             })
           ],
           1
@@ -5188,12 +5182,12 @@ var render = function() {
                   },
                   [
                     _c("div", { staticClass: "flex flex-row mb-6" }, [
-                      _vm.res.data.profile.photo
+                      _vm.res.data.profile.photo_thumbnail
                         ? _c("div", { staticClass: "mr-3" }, [
                             _c("img", {
                               staticClass: "rounded-full h-24 w-24 block",
                               attrs: {
-                                src: _vm.res.data.profile.photo,
+                                src: _vm.res.data.profile.photo_thumbnail,
                                 alt: _vm.res.data.name
                               }
                             })

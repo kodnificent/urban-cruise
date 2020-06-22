@@ -11,7 +11,7 @@ class Install extends Command
      *
      * @var string
      */
-    protected $signature = 'app:install {--with-publishers} {--with-users}';
+    protected $signature = 'app:install {--with-publishers}';
 
     /**
      * The console command description.
@@ -41,10 +41,12 @@ class Install extends Command
 
         $this->call('app:make:admin');
 
-        if ($this->option('with-publishers') || $this->option('with-users')) {
-            $this->call('app:make:publishers', [
-                '--with-users' => $this->option('with-users')
-            ]);
+        if ($this->option('with-publishers')) {
+            $this->call('app:make:publishers');
         }
+
+        $this->call('db:seed', [
+            '--class' => 'CategoryTableSeeder'
+        ]);
     }
 }

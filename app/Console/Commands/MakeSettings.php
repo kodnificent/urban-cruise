@@ -12,7 +12,7 @@ class MakeSettings extends Command
      *
      * @var string
      */
-    protected $signature = 'app:make:settings';
+    protected $signature = 'app:make:settings {--force}';
 
     /**
      * The console command description.
@@ -39,9 +39,13 @@ class MakeSettings extends Command
     public function handle()
     {
         $setting = AppSetting::first();
-        if($setting) return $this->comment('App Setting already exist!');
+        if ($setting && ! $this->option('force')) {
+            return $this->comment('App Setting already exist!');
+        }
+        if (! $setting) {
+            $setting = new AppSetting();
+        }
 
-        $setting = new AppSetting();
         $setting->site_name = 'Urban Cruise';
         $setting->site_description = 'A short description';
         $setting->site_logo = '';

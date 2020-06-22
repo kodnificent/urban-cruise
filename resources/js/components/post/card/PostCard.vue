@@ -1,7 +1,7 @@
 <template>
     <div class="post-card">
-        <a class="w-full md:w-1/2" :href="post.url" v-if="post.file">
-            <post-card-image :alt="post.title" :src="post.file.thumbnails.medium" />
+        <a class="w-full md:w-1/2" :href="post.url" v-if="post.image">
+            <post-card-image :alt="post.title" :src="post.image_thumbnail" />
         </a>
         <div class="w-full md:w-1/2 pt-4 md:pt-0 md:pl-4">
             <div>

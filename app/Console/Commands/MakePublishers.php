@@ -14,7 +14,7 @@ class MakePublishers extends Command
      *
      * @var string
      */
-    protected $signature = 'app:make:publishers {--with-users}';
+    protected $signature = 'app:make:publishers';
 
     /**
      * The console command description.
@@ -40,182 +40,15 @@ class MakePublishers extends Command
      */
     public function handle()
     {
-        Permission::unguard();
+        // we'll create 3 editors and 10 authors
+        factory(User::class, 3)->create([
+            'role' => 'editor',
+        ]);
+        $this->comment('Attaching editor role to 3 new users');
 
-        // first we create the editor and author roles and assign permissions to them
-        $editor_role = $this->createEditorRole();
-        $author_role = $this->createAuthorRole();
-
-        if ($this->option('with-users')) {
-            // we'll create 3 editors and 10 authors
-            $users = factory(User::class, 3)->create();
-
-            $this->comment('Attaching editor role to 3 new users');
-
-            foreach ($users as $user) {
-                $user->roles()->attach($editor_role);
-            }
-
-            $users = factory(User::class, 10)->create();
-
-            $this->comment('Attaching author role to 10 new users');
-
-            foreach ($users as $user) {
-                $user->roles()->attach($author_role);
-            }
-        }
-
-        Permission::reguard();
-    }
-
-    /**
-     * Create a publisher role
-     *
-     * @return \App\Role
-     */
-    protected function createRole($title, $description)
-    {
-        $this->comment("Attempting to create $title role");
-
-        $role = Role::firstWhere('title', $title);
-
-        if ($role) {
-            $this->comment("$title role already exists!");
-        } else {
-            $role = new Role();
-            $role->title = $title;
-            $role->description = $description;
-            $role->save();
-
-            $this->comment("$title role created successfully!");
-        }
-
-        return $role;
-    }
-
-    /**
-     * Creates editor role and saves permission for it
-     *
-     * @return \App\Role
-     */
-    protected function createEditorRole()
-    {
-        $editor = $this->createRole('Editor', 'Editors are content managers.
-        They have access to create, read, edit and delete
-        posts, post categories and pages');
-
-        $permissions = [
-            Permission::updateOrCreate(['role_id' => $editor->id, 'collection_name' => 'news'], [
-                'create' => 'full',
-                'read' => 'full',
-                'update' => 'full',
-                'delete' => 'full'
-            ]),
-            Permission::updateOrCreate(['role_id' => $editor->id, 'collection_name' => 'entertainment'], [
-                'create' => 'full',
-                'read' => 'full',
-                'update' => 'full',
-                'delete' => 'full'
-            ]),
-            Permission::updateOrCreate(['role_id' => $editor->id, 'collection_name' => 'sports'], [
-                'create' => 'full',
-                'read' => 'full',
-                'update' => 'full',
-                'delete' => 'full'
-            ]),
-            Permission::updateOrCreate(['role_id' => $editor->id, 'collection_name' => 'lifestyle'], [
-                'create' => 'full',
-                'read' => 'full',
-                'update' => 'full',
-                'delete' => 'full'
-            ]),
-            Permission::updateOrCreate(['role_id' => $editor->id, 'collection_name' => 'categories'], [
-                'create' => 'full',
-                'read' => 'full',
-                'update' => 'full',
-                'delete' => 'full'
-            ]),
-            Permission::updateOrCreate(['role_id' => $editor->id, 'collection_name' => 'file_manager'], [
-                'create' => 'full',
-                'read' => 'full',
-                'update' => 'full',
-                'delete' => 'full'
-            ]),
-        ];
-
-        $this->comment('Assigning permissions to editor role');
-
-        $this->attachPermissions($editor, $permissions);
-
-        return $editor;
-    }
-
-    /**
-     * Creates author role and saves permission for it
-     *
-     * @return \App\Role
-     */
-    protected function createAuthorRole()
-    {
-        $author = $this->createRole('Author', 'Authors can only create, read, edit and delete their own posts and nothing more.');
-
-        $permissions = [
-            Permission::updateOrCreate(['role_id' => $author->id, 'collection_name' => 'news'], [
-                'create' => 'yes',
-                'read' => 'mine',
-                'update' => 'mine',
-                'delete' => 'mine'
-            ]),
-            Permission::updateOrCreate(['role_id' => $author->id, 'collection_name' => 'entertainment'], [
-                'create' => 'yes',
-                'read' => 'mine',
-                'update' => 'mine',
-                'delete' => 'mine'
-            ]),
-            Permission::updateOrCreate(['role_id' => $author->id, 'collection_name' => 'sports'], [
-                'create' => 'yes',
-                'read' => 'mine',
-                'update' => 'mine',
-                'delete' => 'mine'
-            ]),
-            Permission::updateOrCreate(['role_id' => $author->id, 'collection_name' => 'lifestyle'], [
-                'create' => 'yes',
-                'read' => 'mine',
-                'update' => 'mine',
-                'delete' => 'mine'
-            ]),
-            Permission::updateOrCreate(['role_id' => $author->id, 'collection_name' => 'categories'], [
-                'create' => 'yes',
-                'read' => 'mine',
-                'update' => 'mine',
-                'delete' => 'mine'
-            ]),
-            Permission::updateOrCreate(['role_id' => $author->id, 'collection_name' => 'file_manager'], [
-                'create' => 'yes',
-                'read' => 'mine',
-                'update' => 'mine',
-                'delete' => 'mine'
-            ]),
-        ];
-
-        $this->comment('Assigning permissions to author role');
-
-        $this->attachPermissions($author, $permissions);
-
-        return $author;
-    }
-
-    /**
-     * Attaches permissions to a role
-     *
-     * @param \App\Role $role
-     * @param array $permissions
-     * @return void
-     */
-    protected function attachPermissions(Role $role, array $permissions)
-    {
-        foreach ($permissions as $permission) {
-            $role->permissions()->save($permission);
-        }
+        factory(User::class, 10)->create([
+            'role' => 'author',
+        ]);
+        $this->comment('Attaching author role to 10 new users');
     }
 }

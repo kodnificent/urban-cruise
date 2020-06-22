@@ -57,6 +57,11 @@ class User extends Authenticatable
         'url',
     ];
 
+    protected $attributes = [
+        'role' => 'public',
+        'is_suspended' => 0
+    ];
+
     public function getUrlAttribute()
     {
         return route('author.read', [

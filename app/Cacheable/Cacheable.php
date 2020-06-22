@@ -36,6 +36,10 @@ trait Cacheable
 
         $builder = new Builder($conn, $grammar, $conn->getPostProcessor());
 
+        if (in_array(app()->environment(), ['testing', 'local'])) {
+            return $builder;
+        }
+
         if (isset($this->rememberFor)) {
             $builder->remember($this->rememberFor);
         }

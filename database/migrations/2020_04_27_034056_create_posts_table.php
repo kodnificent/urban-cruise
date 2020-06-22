@@ -19,10 +19,12 @@ class CreatePostsTable extends Migration
             $table->string('title');
             $table->text('summary')->nullable();
             $table->longText('content')->nullable();
-            $table->string('options');
             $table->char('status');
             $table->boolean('featured');
-            $table->unsignedBigInteger('file_id')->nullable();
+            $table->boolean('allow_comments');
+            $table->string('image')->nullable();
+            $table->string('video')->nullable();
+            $table->char('type');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->unsignedBigInteger('updater_id')->nullable();

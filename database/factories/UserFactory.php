@@ -44,7 +44,6 @@ $factory->afterCreating(User::class, function ($user, $faker) {
         'twitter' => 'https://twitter.com',
         'linkedin' => 'https://linkedin.com',
         'website' => 'https://urbancruise.com',
-        'photo' => $image->url,
     ]);
 
     $user->profile()->save($profile);

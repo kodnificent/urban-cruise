@@ -43,41 +43,9 @@ class MakeAdmin extends Command
      */
     public function handle()
     {
-        $role = $this->createAdminRole();
-
         $user = $this->createAdmin();
 
-        $user->roles()->attach($role);
-
         $this->comment("{$user->email} has now been assigned the admin role");
-    }
-
-    /**
-     * Create default admin role
-     *
-     * @return \App\Role
-     */
-    public function createAdminRole()
-    {
-        $this->comment('Attempting to create admin role');
-
-        // first we are going to create a super admin role
-        // we'll warn the console if this role already exists
-        $role_name = 'Administrator';
-        $role = Role::firstWhere('title', $role_name);
-
-        if ($role) {
-            $this->comment("$role_name role already exists.");
-        } else {
-            $role = new Role();
-            $role->title = $role_name;
-            $role->description = "An $role_name has all permissions make any changes to your site. Ensure you have very few of them.";
-            $role->save();
-
-            $this->comment("$role_name role created successfully!");
-        }
-
-        return $role;
     }
 
     /**
@@ -102,6 +70,7 @@ class MakeAdmin extends Command
             $user->password = Hash::make($password);
             $user->email_verified_at = now();
             $user->remember_token = Str::random(10);
+            $user->role = 'admin';
             $user->save();
 
             $profile = new UserProfile([

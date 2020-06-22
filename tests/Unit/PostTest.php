@@ -21,14 +21,14 @@ class PostTest extends ModelTestCase
     protected function requiredCasts(): array
     {
         return [
-            ['options', 'array'],
+            ['featured', 'boolean'],
+            ['allow_comments', 'boolean']
         ];
     }
 
     protected function requiredTraits(): array
     {
         return [
-            HasMeta::class,
             SoftDeletes::class,
             HasCreator::class,
             HasUpdater::class,
@@ -38,8 +38,8 @@ class PostTest extends ModelTestCase
     protected function requiredColumns(): array
     {
         return [
-            'id', 'slug', 'title', 'summary', 'content', 'options', 'status',
-            'featured', 'file_id', 'category_id', 'author_id', 'updater_id',
+            'id', 'slug', 'title', 'summary', 'content', 'allow_comments', 'status',
+            'featured', 'image', 'video', 'type', 'category_id', 'author_id', 'updater_id',
             'created_at', 'updated_at', 'deleted_at'
         ];
     }

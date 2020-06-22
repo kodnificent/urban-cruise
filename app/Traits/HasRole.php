@@ -2,23 +2,8 @@
 
 namespace App\Traits;
 
-use App\Role;
-use App\RoleUser;
-
 trait HasRole
 {
-    /**
-     * Get the roles associated with a user
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class, 'role_user', 'user_id', 'role_id')
-                ->using(RoleUser::class)
-                ->withTimestamps();
-    }
-
     /**
      * Check if the user is an admin
      *
@@ -26,23 +11,51 @@ trait HasRole
      */
     public function hasAnyRole()
     {
-        return $this->roles->count() > 0;
+        return in_array($this->role, [
+            'admin',
+            'editor',
+            'author',
+        ]);
     }
 
     /**
-     * Check if the user has a particular role or more than one role
+     * Check if the user has a particular role
      *
-     * @param mixed ...$roles
+     * @param string $role
      * @return bool
      */
-    public function hasRole(...$roles)
+    public function hasRole($role)
     {
-        foreach ($roles as $role) {
-            $admin_role = $this->roles()->where('title', $role)->first();
+        return $this->role === $role;
+    }
 
-            if ($admin_role) return true;
-        }
+    /**
+     * Check if a user is super admin
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
 
-        return false;
+    /**
+     * Check if a user is an editor
+     *
+     * @return bool
+     */
+    public function isEditor()
+    {
+        return $this->role === 'editor';
+    }
+
+    /**
+     * Check if a user is an author
+     *
+     * @return bool
+     */
+    public function isAuthor()
+    {
+        return $this->role === 'author';
     }
 }

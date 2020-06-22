@@ -41,14 +41,6 @@ class MakeDemoPosts extends Command
     public function handle()
     {
         $this->call('db:seed', [
-            '--class' => ImageTableSeeder::class
-        ]);
-
-        $this->call('db:seed', [
-            '--class' => CategoryTableSeeder::class
-        ]);
-
-        $this->call('db:seed', [
             '--class' => PostTableSeeder::class
         ]);
     }

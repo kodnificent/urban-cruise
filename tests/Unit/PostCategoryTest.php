@@ -11,8 +11,7 @@ use Tests\Utils\Model\TestsModelTrait;
 
 class PostCategoryTest extends ModelTestCase
 {
-    use TestsModelTrait,
-        TestsModelSlug,
+    use TestsModelSlug,
         TestsModelTimestamp;
 
     protected function setUp(): void
@@ -24,13 +23,6 @@ class PostCategoryTest extends ModelTestCase
     {
         return [
             'id', 'parent_id', 'slug', 'title', 'description'
-        ];
-    }
-
-    protected function requiredTraits(): array
-    {
-        return [
-            HasMeta::class,
         ];
     }
 

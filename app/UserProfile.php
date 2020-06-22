@@ -13,6 +13,10 @@ class UserProfile extends Model
 
     protected $guarded = [];
 
+    protected $appends = [
+        'photo_url', 'photo_thumbnail',
+    ];
+
     /**
      * Get the user with this profile
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
@@ -20,5 +24,15 @@ class UserProfile extends Model
     public function user()
     {
         return $this->hasOne(User::class, 'user_id');
+    }
+
+    public function getPhotoUrlAttribute()
+    {
+        return null;
+    }
+
+    public function getPhotoThumbnailAttribute()
+    {
+        return null;
     }
 }

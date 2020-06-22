@@ -17,6 +17,10 @@ class PostControllerTest extends TestCase
         parent::setUp();
 
         $this->installApp();
+
+        $this->artisan('db:seed', [
+            '--class' => 'PostTableSeeder'
+        ]);
     }
 
     public function testPostList()

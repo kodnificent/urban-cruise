@@ -4,8 +4,6 @@ namespace App;
 
 use App\Cacheable\Cacheable;
 use App\Traits\HasCreator;
-use App\Traits\HasFile;
-use App\Traits\HasMeta;
 use App\Traits\HasSlug;
 use App\Traits\HasUpdater;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,7 +17,7 @@ use Laravel\Scout\Searchable;
  */
 class Post extends Model
 {
-    use HasMeta, HasSlug, HasCreator, HasUpdater, HasFile, SoftDeletes, Cacheable, Searchable;
+    use HasSlug, HasCreator, HasUpdater, SoftDeletes, Cacheable, Searchable;
 
     const HAS_CREATOR_FOREIGN = 'author_id';
 
@@ -40,7 +38,6 @@ class Post extends Model
     protected $with = [
         'creator:id,name',
         'category:id,slug,title,parent_id',
-        'file:id,disk,path,type'
     ];
 
     /**
@@ -49,7 +46,8 @@ class Post extends Model
      * @var array
      */
     protected $casts = [
-        'options'   =>  'array',
+        'featured'   =>  'boolean',
+        'allow_comments' => 'boolean',
     ];
 
     /**
@@ -59,11 +57,14 @@ class Post extends Model
      */
     protected $attributes = [
         'featured' => false,
+        'allow_comments' => true,
         'status' => 'draft',
     ];
 
     protected $appends = [
-        'url', 'truncated_title', 'truncated_title_md', 'truncated_summary', 'created_at_for_humans'
+        'url', 'truncated_title', 'truncated_title_md',
+        'truncated_summary', 'created_at_for_humans',
+        'image_url', 'image_thumbnail', 'video_url', 'video_thumbnail'
     ];
 
     public function getUrlAttribute()
@@ -115,6 +116,25 @@ class Post extends Model
         return $created_at;
     }
 
+    public function getImageUrlAttribute()
+    {
+        return null;
+    }
+
+    public function getImageThumbnailAttribute()
+    {
+        return null;
+    }
+
+    public function getVideoUrlAttribute()
+    {
+        return null;
+    }
+
+    public function getVideoThumbnailAttribute()
+    {
+        return null;
+    }
     /**
      * Column name for the slug field
      *
@@ -221,5 +241,25 @@ class Post extends Model
     public function shouldBeSearchable()
     {
         return $this->status === 'published';
+    }
+
+    /**
+     * The image of the post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(FileManager::class, 'image');
+    }
+
+    /**
+     * The video of the post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function video()
+    {
+        return $this->belongsTo(FileManager::class, 'video');
     }
 }

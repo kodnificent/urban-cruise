@@ -8,8 +8,6 @@ trait InstallsApp
     {
         $this->artisan('db:seed');
 
-        $this->artisan('app:install', [
-            '--with-users' => true
-        ]);
+        $this->artisan('app:install');
     }
 }

@@ -26,8 +26,8 @@
             <template v-else>
                 <main-layout>
                     <div class="flex flex-row mb-6">
-                        <div class="mr-3" v-if="res.data.profile.photo">
-                            <img class="rounded-full h-24 w-24 block" :src="res.data.profile.photo" :alt="res.data.name" />
+                        <div class="mr-3" v-if="res.data.profile.photo_thumbnail">
+                            <img class="rounded-full h-24 w-24 block" :src="res.data.profile.photo_thumbnail" :alt="res.data.name" />
                         </div>
                         <div class="w-auto">
                             <h1 class="font-semibold">{{ res.data.name }}</h1>

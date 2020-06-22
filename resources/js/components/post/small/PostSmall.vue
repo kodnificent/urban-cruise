@@ -1,7 +1,7 @@
 <template>
     <div class="post-small">
-        <a class="block w-1/3" :href="post.url" v-if="post.file">
-            <post-small-image :alt="post.title" :src="post.file.thumbnails.small" />
+        <a class="block w-1/3" :href="post.url" v-if="post.image">
+            <post-small-image :alt="post.title" :src="post.image_thumbnail" />
         </a>
 
         <div class="w-2/3 pl-4">

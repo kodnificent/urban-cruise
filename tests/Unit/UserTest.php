@@ -30,7 +30,9 @@ class UserTest extends ModelTestCase
             'created_at',
             'updated_at',
             'created_by',
-            'updated_by'
+            'updated_by',
+            'role',
+            'is_suspended',
         ];
     }
 

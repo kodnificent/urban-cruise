@@ -6,7 +6,7 @@
 
         <div class="flex mb-6 items-center">
             <a v-if="post.creator" :href="post.creator.url">
-                <img v-if="post.creator.profile.photo" :src="post.creator.profile.photo" class="w-6 h-6 rounded-full mr-2" />
+                <img v-if="post.creator.profile.photo_thumbnail" :src="post.creator.profile.photo_thumbnail" class="w-6 h-6 rounded-full mr-2" />
             </a>
 
             <a v-if="post.creator" :href="post.creator.url" class="text-sm font-semibold mr-2 post-nav__link">{{ post.creator.name }}</a>
@@ -25,8 +25,8 @@
                 <div
                     style="max-height: 350px;"
                     class="mb-6 overflow-hidden flex justify-center"
-                    v-if="post.file && post.file.type === 'image'">
-                    <img :src="post.file.url" />
+                    v-if="post.image_url">
+                    <img :src="post.image_url" />
                 </div>
 
                 <!-- POST CONTENT -->
@@ -77,10 +77,10 @@
                 xl:w-3/4">
             <h2 class="sr-only">Author</h2>
 
-            <div class="mb-3 md:mb-0 md:pr-6" v-if="post.creator.profile.photo">
+            <div class="mb-3 md:mb-0 md:pr-6" v-if="post.creator.profile.photo_thumbnail">
                 <a class="block text-gray-800 hover:text-primary" :href="post.creator.url">
                     <img
-                        v-lazy="post.creator.profile.photo"
+                        v-lazy="post.creator.profile.photo_thumbnail"
                         :alt="post.creator.name"
                         class="rounded-full h-24 w-24 shadow-md" />
                 </a>

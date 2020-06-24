@@ -24,7 +24,7 @@ class CreatePostsTable extends Migration
             $table->boolean('allow_comments');
             $table->string('image')->nullable();
             $table->string('video')->nullable();
-            $table->char('type');
+            $table->char('type')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('author_id')->nullable();
             $table->unsignedBigInteger('updater_id')->nullable();

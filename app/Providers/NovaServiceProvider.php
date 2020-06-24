@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Nova\Metrics\RecentArticles;
 use Laravel\Nova\Nova;
 use Laravel\Nova\Cards\Help;
 use Illuminate\Support\Facades\Gate;
@@ -54,7 +55,11 @@ class NovaServiceProvider extends NovaApplicationServiceProvider
     protected function cards()
     {
         return [
-            new Help,
+            //new Help,
+            new \Tightenco\NovaGoogleAnalytics\PageViewsMetric,
+            new \Tightenco\NovaGoogleAnalytics\VisitorsMetric,
+            new \Tightenco\NovaGoogleAnalytics\MostVisitedPagesCard,
+            //(new RecentArticles),
         ];
     }
 

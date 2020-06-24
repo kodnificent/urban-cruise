@@ -4,6 +4,7 @@ namespace App;
 
 use App\Cacheable\Cacheable;
 use Illuminate\Database\Eloquent\Model;
+use JD\Cloudder\Facades\Cloudder;
 
 class UserProfile extends Model
 {
@@ -28,11 +29,17 @@ class UserProfile extends Model
 
     public function getPhotoUrlAttribute()
     {
-        return null;
+        return Cloudder::secureShow($this->photo);
     }
 
     public function getPhotoThumbnailAttribute()
     {
-        return null;
+        return Cloudder::secureShow($this->photo, [
+            'width' => 640,
+            'height' => 480,
+            'transformation' => [
+                "dpr" => "auto", "responsive" => true, "crop" => "scale"
+            ]
+        ]);
     }
 }

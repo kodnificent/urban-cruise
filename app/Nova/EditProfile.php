@@ -4,8 +4,10 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
+use JD\Cloudder\Facades\Cloudder;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\HasOne;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
@@ -60,6 +62,33 @@ class EditProfile extends Resource
     public function fields(Request $request)
     {
         return [
+            Image::make('Photo')
+                ->preview(function () {
+                    return $this->photo_url;
+                })
+                ->thumbnail(function () {
+                    return $this->photo_thumbnail;
+                })
+                ->store(function (Request $request, $model) {
+                    $cloudder = Cloudder::upload($request->photo->getRealPath());
+                    $public_id = $cloudder->getResult()['public_id'];
+
+                    return [
+                        'photo' => $public_id
+                    ];
+                })
+                ->delete(function (Request $request, $model, $disk, $public_id) {
+                    if (! $public_id) {
+                        return;
+                    }
+
+                    Cloudder::delete($public_id);
+
+                    return [
+                        'photo' => null
+                    ];
+                })
+                ->rules('image'),
             BelongsTo::make('Name', 'user', 'App\Nova\AccountSetting')
                 ->hideWhenUpdating(),
             Text::make('Job Title'),
@@ -80,7 +109,7 @@ class EditProfile extends Resource
             })->asHtml(),
             Text::make('Website', function () {
                 return "<a class='text-primary no-underline font-bold' href='{$this->website}' target='__blank'>{$this->website}</a>";
-            })->asHtml(),
+            })->hideFromIndex()->asHtml(),
         ];
     }
 

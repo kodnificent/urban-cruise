@@ -10,9 +10,11 @@
     "require": {
         "php": "^7.2",
         "algolia/algoliasearch-client-php": "^2.2",
+        "dillingham/nova-list-card": "^0.5",
         "fideloper/proxy": "^4.0",
         "froala/nova-froala-field": "^3.3",
         "fzaninotto/faker": "^1.9.1",
+        "gregoriohc/laravel-nova-theme-responsive": "^0.8.1",
         "jrm2k6/cloudder": "^0.6.0",
         "laravel/framework": "^6.2",
         "laravel/nova": "*",

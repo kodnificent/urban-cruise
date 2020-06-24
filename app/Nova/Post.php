@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\File\StorePostImage;
 use App\Nova\Actions\AllowComments;
 use App\Nova\Actions\DisallowComments;
 use App\Nova\Actions\Feature;
@@ -17,10 +18,12 @@ use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
+use JD\Cloudder\Facades\Cloudder;
 use Laravel\Nova\Fields\Badge;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\DateTime;
+use Laravel\Nova\Fields\Image;
 use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
@@ -115,7 +118,7 @@ abstract class Post extends Resource
                 ->hideWhenUpdating()
                 ->hideWhenCreating(),
 
-            BelongsTo::make('Author', 'creator', 'App\Nova\User')
+            BelongsTo::make('Author', 'creator', 'App\Nova\Author')
                 ->onlyOnDetail(),
 
             Textarea::make('Summary')
@@ -125,7 +128,44 @@ abstract class Post extends Resource
             Froala::make('Content')
                 ->help('Min of 500 words')
                 ->rules('required', new WordCount(500))
-                ->withFiles(config('filesystems.default')),
+                ->withFiles(config('filesystems.default'))
+                ->attach(function ($request) {
+                    $type = explode('/', $request->attachment->getMimeType())[0];
+                    $cloudder = $type === 'video'
+                                    ? Cloudder::uploadVideo($request->attachment->getRealPath())
+                                    : Cloudder::upload($request->attachment->getRealPath());
+
+                    return $cloudder->getResult()['secure_url'];
+                }),
+
+            Image::make('Image')
+                ->hideFromIndex()
+                ->preview(function () {
+                    return $this->image_url;
+                })
+                ->thumbnail(function () {
+                    return $this->image_thumbnail;
+                })
+                ->store(function (Request $request, $model) {
+                    $cloudder = Cloudder::upload($request->image->getRealPath());
+                    $public_id = $cloudder->getResult()['public_id'];
+
+                    return [
+                        'image' => $public_id
+                    ];
+                })
+                ->delete(function (Request $request, $model, $disk, $public_id) {
+                    if (! $public_id) {
+                        return;
+                    }
+
+                    Cloudder::delete($public_id);
+
+                    return [
+                        'image' => null
+                    ];
+                })
+                ->rules('image'),
 
             (new Panel('Article Options', [
                     Boolean::make('Featured Post', 'featured')
@@ -158,7 +198,7 @@ abstract class Post extends Resource
                     ->hideWhenCreating()
                     ->hideWhenUpdating(),
 
-                BelongsTo::make('Reviewed by', 'updater', 'App\Nova\User')
+                BelongsTo::make('Reviewed by', 'reviewer', 'App\Nova\Editor')
                     ->onlyOnDetail(),
             ]))
         ];

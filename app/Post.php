@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use JD\Cloudder\Facades\Cloudder;
 use Laravel\Scout\Searchable;
 
 /**
@@ -120,12 +121,18 @@ class Post extends Model
 
     public function getImageUrlAttribute()
     {
-        return null;
+        return Cloudder::secureShow($this->image);
     }
 
     public function getImageThumbnailAttribute()
     {
-        return null;
+        return Cloudder::secureShow($this->image, [
+            'width' => 640,
+            'height' => 480,
+            'transformation' => [
+                "dpr" => "auto", "responsive" => true, "crop" => "scale"
+            ]
+        ]);
     }
 
     public function getVideoUrlAttribute()
@@ -250,20 +257,20 @@ class Post extends Model
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function image()
+    /*public function image()
     {
-        return $this->belongsTo(FileManager::class, 'image');
-    }
+        return $this->belongsTo(FileManager::class, 'image_id');
+    }*/
 
     /**
      * The video of the post
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function video()
+    /*public function video()
     {
-        return $this->belongsTo(FileManager::class, 'video');
-    }
+        return $this->belongsTo(FileManager::class, 'video_id');
+    }*/
 
     /**
      * Allow comments for a post
@@ -315,5 +322,15 @@ class Post extends Model
         $this->save();
 
         return $this;
+    }
+
+    /**
+     * Get the user who review this post
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function reviewer()
+    {
+        return $this->belongsTo('App\User');
     }
 }

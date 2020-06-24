@@ -33,10 +33,10 @@ $factory->define(User::class, function (Faker $faker) {
 
 $factory->afterCreating(User::class, function ($user, $faker) {
 
-    $files = FileManager::all();
-    $image = $files->count() === 0 ? null : $files->random(1)->first();
+    //$files = FileManager::all();
+    //$image = $files->count() === 0 ? null : $files->random(1)->first();
 
-    $profile = new UserProfile([
+    $profile = [
         'job_title' => 'Content Creator',
         'company' => 'Urban Cruise',
         'about' => Factory::create()->text(300),
@@ -44,7 +44,7 @@ $factory->afterCreating(User::class, function ($user, $faker) {
         'twitter' => 'https://twitter.com',
         'linkedin' => 'https://linkedin.com',
         'website' => 'https://urbancruise.com',
-    ]);
+    ];
 
-    $user->profile()->save($profile);
+    $user->profile()->update($profile);
 });

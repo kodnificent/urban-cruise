@@ -19,11 +19,11 @@ class UserProfile extends Model
 
     /**
      * Get the user with this profile
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user()
     {
-        return $this->hasOne(User::class, 'user_id');
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function getPhotoUrlAttribute()

@@ -24,7 +24,28 @@ class UserPolicy
         return $user->isAdmin();
     }
 
-    public function view(User $user)
+    public function view(User $user, $model)
+    {
+        if (request()->resource === 'account-settings') {
+            return $user->id === $model->id;
+        }
+
+        return $user->isAdmin();
+    }
+
+    public function create(User $user)
+    {
+        return $user->isAdmin();
+    }
+
+    public function update(User $user, $model)
+    {
+        if (request()->resource === 'account-settings') {
+            return $user->id === $model->id;
+        }
+    }
+
+    public function suspend(User $user)
     {
         return $user->isAdmin();
     }

@@ -87,7 +87,7 @@ abstract class Post extends Resource
                                 ! in_array(request()->user()->role, ['admin', 'editor'])
                                 && $value === 'published'
                             ) {
-                                $fail('You dont have the permission to this this. You can only set the status to under review.');
+                                $fail('You dont have the permission to do this. You can only set the status to under review.');
                             }
                     }
                 )

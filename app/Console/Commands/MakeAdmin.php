@@ -73,7 +73,7 @@ class MakeAdmin extends Command
             $user->role = 'admin';
             $user->save();
 
-            $profile = new UserProfile([
+            $profile = [
                 'job_title' => 'Founder',
                 'company' => 'Urban Cruise',
                 'about' => Factory::create()->text(300),
@@ -81,9 +81,9 @@ class MakeAdmin extends Command
                 'twitter' => 'https://twitter.com',
                 'linkedin' => 'https://linkedin.com',
                 'website' => 'https://urbancruise.com',
-            ]);
+            ];
 
-            $user->profile()->save($profile);
+            $user->profile()->update($profile);
 
             $this->comment("Admin created successfully! Email - $email, Password - $password");
         }

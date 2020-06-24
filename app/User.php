@@ -69,6 +69,16 @@ class User extends Authenticatable
         ]);
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($model) {
+            $profile = new UserProfile;
+            $model->profile()->save($profile);
+        });
+    }
+
     /**
      * Get the profile of a user
      *

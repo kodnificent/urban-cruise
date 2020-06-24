@@ -4,23 +4,23 @@ namespace App\Nova;
 
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Laravel\Nova\Fields\Text;
-use Laravel\Nova\Fields\Gravatar;
+use Illuminate\Validation\Rule;
+use Laravel\Nova\Fields\DateTime;
 use Laravel\Nova\Fields\HasOne;
 use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\PasswordConfirmation;
-use Laravel\Nova\Fields\Select;
+use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
-abstract class User extends Resource
+class AccountSetting extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = 'App\\User';
+    public static $model = 'App\User';
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -35,21 +35,14 @@ abstract class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        //
     ];
 
-    public static $group = 'User Management';
+    public static $group = 'Settings';
 
     public static function indexQuery(NovaRequest $request, $query)
     {
-        $role = static::getRoleName();
-
-        return $query->where('role', $role);
-    }
-
-    protected static function getRoleName()
-    {
-        return Str::lower(class_basename(get_called_class()));
+        return $query->where('id', $request->user()->id);
     }
 
     /**
@@ -61,33 +54,27 @@ abstract class User extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
-
             Text::make('Name')
-                ->sortable()
-                ->rules('required', 'max:255'),
-
+                ->required(),
             Text::make('Email')
-                ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+                ->rules('required', 'email', Rule::unique('users', 'email')->ignore(request()->user()->id)),
+            Text::make('Role')
+                ->hideWhenUpdating()
+                ->hideWhenCreating(),
+            DateTime::make('Date Joined', 'created_at')
+                ->format('D MMM YY - H:mm a')
+                ->hideWhenUpdating()
+                ->hideFromIndex(),
 
-            Select::make('Role')
-                ->options(function () {
-                    return [
-                        $this->getRoleName() => $this->getRoleName()
-                    ];
-                })
-                ->required()
-                ->onlyOnForms(),
-
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:6', 'confirmed')
-                ->updateRules('nullable', 'string', 'min:6'),
-
-            PasswordConfirmation::make('Confirm Password', 'password_confirmation'),
+            (new Panel('Update Password', [
+                PasswordConfirmation::make('Old Password')
+                    ->rules('nullable', 'password'),
+                Password::make('New Password', 'password')
+                    ->onlyOnForms()
+                    ->rules('nullable', 'min:6', 'confirmed'),
+                PasswordConfirmation::make('Password Confirmation')
+                    ->rules('nullable')
+            ])),
 
             HasOne::make('Profile', 'profile', 'App\Nova\EditProfile')
         ];

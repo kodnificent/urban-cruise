@@ -1,0 +1,11 @@
+.app-rounded {
+    @apply rounded-br-lg rounded-tl-lg;
+}
+
+.sticks-to-top {
+    @screen lg {
+        top: 120px;
+        bottom: auto;
+        @apply sticky z-20 overflow-y-auto;
+    }
+}

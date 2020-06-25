@@ -11,6 +11,42 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('home.shell', 'HomeController@shell')->name('home.shell');
+
+Route::get('category.shell', 'CategoryController@shell')->name('category.shell');
+
+Route::get('post.shell', 'PostController@shell')->name('post.shell');
+
+Route::get('author.shell', 'AuthorController@shell')->name('author.shell');
+
+Route::get('', 'HomeController')->name('home');
+
+Route::prefix('author')
+    ->name('author.')
+    ->group(function () {
+        Route::get('{id}', 'AuthorController@read')->name('read');
+    });
+
+Route::prefix('posts')
+    ->name('category.')
+    ->group(function () {
+        Route::get('search', 'PostController@search')->name('posts.search');
+
+        Route::get('{category?}/{sub_category?}', 'PostController@list')->name('posts');
+    });
+
+Route::prefix('/{category}')
+    ->name('category.')
+    ->where([
+        'category' => '^(?!nova|app.*$).*'
+    ])
+    ->group(function () {
+        Route::get('{sub_category}/{slug}', 'PostController@read')
+            ->name('post');
+
+        Route::get('{sub_category}', 'CategoryController@show')
+            ->name('show.child');
+
+        Route::get('', 'CategoryController@show')
+            ->name('show');
+    });

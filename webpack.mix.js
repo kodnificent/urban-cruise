@@ -14,21 +14,25 @@ const
     purgecss = require('@fullhuman/postcss-purgecss')({
         content: [
             './resources/**/*.blade.php',
-            './resoruces/**/*.vue',
+            './resources/**/*.vue',
         ],
 
         defaultExtractor: content => content.match(/[\w-/:]+(?<!:)/g) || []
     });
 
 mix.js('resources/js/app.js', 'public/assets/js')
-    .sass('resources/scss/vendor.scss', 'public/assets/css')
+    .sass('resources/scss/vendor.scss', 'public/assets/css', {
+        sassOptions: {
+            includePaths: ['node_modules'],
+        }
+    })
     .postCss('resources/css/app.css', 'public/assets/css', [
         postcss_import,
         tailwindcss,
         postcss_nested,
         postcss_custom_nested,
         autoprefixer,
-        ...process.env.NODE_ENV ? [purgecss] : []
+        ...process.env.NODE_ENV === 'production' ? [purgecss] : []
     ])
     .copy('resources/imgs', 'public/assets/imgs')
     .copy('resources/fonts', 'public/assets/fonts')

@@ -1,0 +1,12 @@
+.button {
+    @apply capitalize shadow px-4 py-2 rounded-full;
+
+    &--black {
+        background-color: #222222;
+        @apply text-white;
+    }
+
+    &--primary {
+        @apply bg-primary text-on-primary;
+    }
+}

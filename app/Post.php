@@ -121,11 +121,19 @@ class Post extends Model
 
     public function getImageUrlAttribute()
     {
+        if (! $this->image) {
+            return null;
+        }
+
         return Cloudder::secureShow($this->image);
     }
 
     public function getImageThumbnailAttribute()
     {
+        if (! $this->image) {
+            return null;
+        }
+
         return Cloudder::secureShow($this->image, [
             'width' => 640,
             'height' => 480,

@@ -29,11 +29,19 @@ class UserProfile extends Model
 
     public function getPhotoUrlAttribute()
     {
+        if (! $this->photo) {
+            return '/assets/imgs/guest-user.png';
+        }
+
         return Cloudder::secureShow($this->photo);
     }
 
     public function getPhotoThumbnailAttribute()
     {
+        if (! $this->photo) {
+            return '/assets/imgs/guest-user.png';
+        }
+
         return Cloudder::secureShow($this->photo, [
             'width' => 640,
             'height' => 480,

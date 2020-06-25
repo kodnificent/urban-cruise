@@ -2,14 +2,14 @@
 
 namespace Tests\Unit;
 
-use App\FileManager;
+use App\FileManager as FileManagerModel;
 use App\Traits\HasCreator;
 use App\Traits\HasUpdater;
 use Tests\ModelTestCase;
 use Tests\Utils\Model\TestsModelCast;
 use Tests\Utils\Model\TestsModelTrait;
 
-class FileManagerTest extends ModelTestCase
+class FileManager extends ModelTestCase
 {
     use TestsModelTrait, TestsModelCast;
 
@@ -56,7 +56,7 @@ class FileManagerTest extends ModelTestCase
     {
         $this->seed('ImageTableSeeder');
 
-        $images = FileManager::all();
+        $images = FileManagerModel::all();
 
         $this->assertGreaterThan(0, $images->count());
     }

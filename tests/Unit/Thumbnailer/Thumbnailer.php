@@ -2,14 +2,14 @@
 
 namespace Tests\Unit\Thumbnailer;
 
-use App\Thumbnailer\Thumbnailer;
+use App\Thumbnailer\Thumbnailer as ThumbnailerModel;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;
 use InvalidArgumentException;
 use Tests\TestCase;
 
-class ThumbnailerTest extends TestCase
+class Thumbnailer extends TestCase
 {
     public function keysDataProvider()
     {
@@ -116,7 +116,7 @@ class ThumbnailerTest extends TestCase
             ]
         ];
 
-        $thumbnailer = new Thumbnailer($config);
+        $thumbnailer = new ThumbnailerModel($config);
         $thumbnail = $thumbnailer->make('square', $path, 'test');
 
         Storage::disk('test')->assertExists($thumbnail);

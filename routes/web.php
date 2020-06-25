@@ -38,7 +38,7 @@ Route::prefix('posts')
 Route::prefix('/{category}')
     ->name('category.')
     ->where([
-        'category' => '^(?!nova|app.*$).*'
+        'category' => "^(?!nova|admin-app.*$).*"
     ])
     ->group(function () {
         Route::get('{sub_category}/{slug}', 'PostController@read')

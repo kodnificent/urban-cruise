@@ -185,6 +185,8 @@ export default {
             @apply mb-2
         p
             @apply mb-4
+        p[data-f-id]
+            display: none
     .post-nav
         @apply px-2 py-1
         &__header

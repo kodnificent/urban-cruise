@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Nova\Actions\AssignNewRole;
 use Laravel\Nova\Fields\ID;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -134,6 +135,17 @@ abstract class User extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            (new AssignNewRole)->canSee(function ($request) {
+                $user = $request->findModelQuery()->first();
+
+                if ($user && $user->id === $request->user()->id) {
+                    return false;
+                }
+                return $request->user()->can('assignNewRole', 'App\User');
+            })->canRun(function ($request, $user) {
+                return $request->user()->can('assignNewRole', $user);
+            })->onlyOnDetail()
+        ];
     }
 }

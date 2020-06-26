@@ -99,7 +99,7 @@
 
                 <ul v-if="authorSocialLinks.length > 0" class="mb-4 flex flex-wrap justify-center" aria-label="social links">
                     <li class="pr-2" v-for="(link, index) in authorSocialLinks" :key="index">
-                        <a rel="nofollow" target="__blank" class="rounded-full w-6 h-6 flex justify-center block"
+                        <a rel="nofollow" target="__blank" class="rounded-full w-6 h-6 flex justify-center"
                             :style="{
                                 background: link.bg
                             }"

@@ -3,7 +3,7 @@
         <vue-glide-slide class="py-4" v-for="post in posts" :key="post.id">
             <div class="slider__item relative">
 
-                <img class="rounded" v-if="post.file" :src="post.file.thumbnails.medium" />
+                <img class="rounded" v-if="post.image_thumbnail" :src="post.image_thumbnail" />
 
                 <a :href="post.url" class="post__container">
                     <div>

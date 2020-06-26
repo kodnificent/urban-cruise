@@ -38,7 +38,7 @@ trait HasSlug
         $slug_field = $slugger->slugColumn();
 
         // search for duplicate mirror_fields irrespective of the string case
-        $fields = static::whereRaw("LOWER($mirror_field) = ?", strtolower($model->{$mirror_field}))->get();
+        $fields = static::whereRaw("LOWER($mirror_field) = ?", strtolower($model->{$mirror_field}))->where('id', '!=', $model->id)->get();
 
         if($fields->count() === 0){ // there are no duplicate fields
             $model->{$slug_field} = $slugger->slugify($model->{$mirror_field});

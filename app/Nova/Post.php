@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use App\Facades\Settings;
 use App\File\StorePostImage;
 use App\Nova\Actions\AllowComments;
 use App\Nova\Actions\DisallowComments;
@@ -66,6 +67,7 @@ abstract class Post extends Resource
      */
     public function fields(Request $request)
     {
+        $min = Settings::get('min_number_of_words');
         return [
             ID::make()->sortable(),
 
@@ -126,8 +128,8 @@ abstract class Post extends Resource
                 ->help('Make your summary descriptive enough for better SEO. Must be between 60 to 160 characters.'),
 
             Froala::make('Content')
-                ->help('Min of 500 words')
-                ->rules('required', new WordCount(500))
+                ->help("Min of $min words")
+                ->rules('required', new WordCount($min))
                 ->withFiles(config('filesystems.default'))
                 ->attach(function ($request) {
                     $type = explode('/', $request->attachment->getMimeType())[0];

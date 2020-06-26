@@ -73,7 +73,7 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::created(function ($model) {
+        static::saved(function ($model) {
             $profile = new UserProfile;
             $model->profile()->save($profile);
         });

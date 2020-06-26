@@ -35,6 +35,10 @@ class UserPolicy
 
     public function create(User $user)
     {
+        if (request()->resource === 'account-settings') {
+            return false;
+        }
+
         return $user->isAdmin();
     }
 

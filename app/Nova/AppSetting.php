@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Panel;
 
 class AppSetting extends Resource
 {
@@ -47,23 +48,30 @@ class AppSetting extends Resource
             Textarea::make('Site Description')
                 ->rules('nullable'),
 
-            Text::make('Facebook')->onlyOnForms(),
+            (new Panel('Article Settings', [
+                Text::make('Min number of words')->hideFromIndex()
+            ])),
 
-            Text::make('Instagram')->onlyOnForms(),
+            (new Panel('Social Settings', [
 
-            Text::make('Twitter')->onlyOnForms(),
+                Text::make('Facebook')->onlyOnForms(),
 
-            Text::make('Facebook', function () {
-                return "<a class='text-primary no-underline font-bold' href='{$this->facebook}' target='__blank'>{$this->facebook}</a>";
-            })->asHtml(),
+                Text::make('Instagram')->onlyOnForms(),
 
-            Text::make('Twitter', function () {
-                return "<a class='text-primary no-underline font-bold' href='{$this->twitter}' target='__blank'>{$this->twitter}</a>";
-            })->asHtml(),
+                Text::make('Twitter')->onlyOnForms(),
 
-            Text::make('Instagram', function () {
-                return "<a class='text-primary no-underline font-bold' href='{$this->instagram}' target='__blank'>{$this->instagram}</a>";
-            })->asHtml(),
+                Text::make('Facebook', function () {
+                    return "<a class='text-primary no-underline font-bold' href='{$this->facebook}' target='__blank'>{$this->facebook}</a>";
+                })->asHtml(),
+
+                Text::make('Twitter', function () {
+                    return "<a class='text-primary no-underline font-bold' href='{$this->twitter}' target='__blank'>{$this->twitter}</a>";
+                })->asHtml(),
+
+                Text::make('Instagram', function () {
+                    return "<a class='text-primary no-underline font-bold' href='{$this->instagram}' target='__blank'>{$this->instagram}</a>";
+                })->asHtml(),
+            ])),
         ];
     }
 

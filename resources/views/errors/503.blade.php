@@ -10,7 +10,7 @@
         <img class="mb-6" style="max-height: 400px;" src="{{ asset('imgs/server-error.svg') }}" alt="server error" />
 
         <p class="mb-6 text-center">
-            A server error has occured while fetching this page. Please try later, we are working on it.
+            This service is temporarily unavailable. Please try later, we are working on it.
         </p>
 
         <a class="button button--primary" href="/">Go back Home</a>

@@ -39,7 +39,7 @@ $factory->afterCreating(User::class, function ($user, $faker) {
     $profile = [
         'job_title' => 'Content Creator',
         'company' => 'Urban Cruise',
-        'about' => Factory::create()->text(300),
+        //'about' => Factory::create()->text(300),
         'facebook' => 'https://facebook.com',
         'twitter' => 'https://twitter.com',
         'linkedin' => 'https://linkedin.com',

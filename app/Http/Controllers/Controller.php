@@ -90,6 +90,10 @@ class Controller extends BaseController
                 ];
 
         $categories = PostCategory::parentCategories()->get();
+        $categories = $categories->filter(function ($category) {
+            return $category->hasAtleastOnePost();
+        });
+
 
         foreach ($categories as $category) {
             $menu[] = [
@@ -99,11 +103,28 @@ class Controller extends BaseController
             ];
         }
 
+        $menu[] = [
+            'name' => 'About Us',
+            'url' => route('about-us'),
+            'active' => request()->is( extractPath(route('about-us')) )
+        ];
+
+        $menu[] = [
+            'name' => 'Write for Us',
+            'url' => route('write-for-us'),
+            'active' => request()->is( extractPath(route('write-for-us')) )
+        ];
+
         return $menu;
     }
 
     public function categories()
     {
-        return PostCategory::parentCategories()->with(['children'])->get();
+        $categories = PostCategory::parentCategories()->with(['children'])->get();
+        $categories = $categories->filter(function ($category) {
+            return $category->hasAtleastOnePost();
+        });
+
+        return $categories;
     }
 }

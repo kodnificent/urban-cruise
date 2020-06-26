@@ -12,7 +12,7 @@
             </div>
 
             <template v-else>
-                <section>
+                <section v-if="res.featured_posts.length > 0">
                     <section-header>
                         featured
                     </section-header>

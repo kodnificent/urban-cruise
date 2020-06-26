@@ -140,4 +140,17 @@ class PostCategory extends Model
     {
         return boolval($this->parent_id);
     }
+
+    /**
+     * Check if a parent category has atleast one post
+     *
+     * @return bool
+     */
+    public function hasAtleastOnePost()
+    {
+        $children = $this->children()->pluck('id');
+
+        return (bool) Post::where('category_id', $this->id)
+                    ->orWhereIn('category_id', $children)->first();
+    }
 }

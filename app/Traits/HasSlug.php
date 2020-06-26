@@ -18,8 +18,12 @@ trait HasSlug
     {
         static::verifyColumnFields();
 
-        static::saving(function($model){
+        static::creating(function($model){
             static::slugMirrorListener($model);
+        });
+
+        static::updating(function ($model) {
+            $model->slug = Str::slug($model->slug);
         });
     }
 

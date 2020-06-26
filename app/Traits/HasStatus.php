@@ -31,7 +31,7 @@ trait HasStatus
 
         $this->status = 'published';
         $this->published_at = $this->published_at ? $this->published_at : now();
-        $this->reviewed_by = request()->user()->id;
+        $this->reviewer_id = request()->user()->id;
         $this->save();
 
         return $this;
@@ -49,6 +49,23 @@ trait HasStatus
         }
 
         $this->status = 'draft';
+        $this->save();
+
+        return $this;
+    }
+
+    /**
+     * Submit the post for review
+     *
+     * @return $this
+     */
+    public function submitForReview()
+    {
+        if ($this->status === 'under-review') {
+            return;
+        }
+
+        $this->status = 'under-review';
         $this->save();
 
         return $this;

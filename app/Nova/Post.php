@@ -116,6 +116,14 @@ abstract class Post extends Resource
                 ->help('Keep your title short and descriptive between 60 to 65 characters. Max. of 70 characters')
                 ->rules('required'),
 
+            Text::make('Slug')
+                ->hideWhenCreating()
+                ->hideFromIndex()
+                ->rules('required','unique:posts,slug,{{resourceId}}')
+                ->displayUsing(function () {
+                    return "<a class='no-underline font-bold dim text-primary' target='__blank' href='{$this->url}'>{$this->slug}</a>";
+                })->asHtml(),
+
             BelongsTo::make('Category', 'category', 'App\Nova\Category')
                 ->hideWhenUpdating()
                 ->hideWhenCreating(),

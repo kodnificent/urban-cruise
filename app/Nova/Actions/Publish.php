@@ -24,7 +24,7 @@ class Publish extends Action
     {
         foreach($models as $model)
         {
-            $model->publish();
+            $model->markAsPublished();
         }
     }
 

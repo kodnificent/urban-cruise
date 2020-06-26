@@ -114,7 +114,7 @@ abstract class Post extends Resource
 
             Text::make('Title')
                 ->help('Keep your title short and descriptive between 60 to 65 characters. Max. of 70 characters')
-                ->rules('required', 'max:70'),
+                ->rules('required'),
 
             BelongsTo::make('Category', 'category', 'App\Nova\Category')
                 ->hideWhenUpdating()
@@ -124,8 +124,8 @@ abstract class Post extends Resource
                 ->onlyOnDetail(),
 
             Textarea::make('Summary')
-                ->rules('nullable', 'min:60', 'max:160')
-                ->help('Make your summary descriptive enough for better SEO. Must be between 60 to 160 characters.'),
+                ->rules('nullable', 'min:60')
+                ->help('Make your summary descriptive enough for better SEO. Keep it between 60 to 160 characters.'),
 
             Froala::make('Content')
                 ->help("Min of $min words")

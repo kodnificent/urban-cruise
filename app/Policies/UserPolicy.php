@@ -53,4 +53,9 @@ class UserPolicy
     {
         return $user->isAdmin();
     }
+
+    public function assignNewRole(User $user)
+    {
+        return $user->isAdmin();
+    }
 }

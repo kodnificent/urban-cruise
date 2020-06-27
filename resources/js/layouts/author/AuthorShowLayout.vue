@@ -26,10 +26,10 @@
             <template v-else>
                 <main-layout>
                     <div class="flex flex-row mb-6">
-                        <div class="mr-3" v-if="res.data.profile.photo_thumbnail">
+                        <div class="mr-3 w-24" v-if="res.data.profile.photo_thumbnail">
                             <img class="rounded-full h-24 w-24 block" :src="res.data.profile.photo_thumbnail" :alt="res.data.name" />
                         </div>
-                        <div class="w-auto">
+                        <div style="width: calc(100% - 6rem);">
                             <h1 class="font-semibold">{{ res.data.name }}</h1>
 
                             <span class="block text-gray-600 mb-2 text-sm">
@@ -52,7 +52,7 @@
                         </div>
                     </div>
 
-                    <section class="mb-6">
+                    <section class="mb-6" v-if="res.data.profile.about">
                         <div class="mb-3">
                             <section-header>about</section-header>
                         </div>
@@ -97,7 +97,7 @@
                         </div>
 
                         <div v-else-if="no_post_found">
-                            <span class="italic text-gray-600">We've not published any article yet on this category</span>
+                            <span class="italic text-gray-600">This author has not published any posts yet</span>
                         </div>
                     </section>
 

@@ -17,7 +17,7 @@
 
                     <h1 class="capitalize font-bold post__title text-shadow">
                         <a class="text-current" :href="post.url">
-                            {{ post.title }}
+                            {{ post.truncated_title_md }}
                         </a>
                     </h1>
 

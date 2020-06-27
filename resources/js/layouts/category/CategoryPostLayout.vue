@@ -5,7 +5,7 @@
 
             <header-logo class="hidden md:block" />
 
-            <div class="order-2 md:hidden" aria-live="polite">
+            <div class="order-2 md:hidden truncate" aria-live="polite">
                 <template v-if="res">
                     <span class="block text-gray-500 text-xs">Published in</span>
 

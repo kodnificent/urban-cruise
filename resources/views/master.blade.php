@@ -7,11 +7,11 @@
 
         @yield('metas')
 
-        <link rel="preload" href="{{ asset('css/vendor.css') }}" as="style">
-        <link rel="preload" href="{{ asset('css/app.css') }}" as="style">
+        <link rel="preload" href="{{ mix('assets/css/vendor.css') }}" as="style">
+        <link rel="preload" href="{{ mix('assets/css/app.css') }}" as="style">
 
-        <link rel="stylesheet" href="{{ asset('css/vendor.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+        <link rel="stylesheet" href="{{ mix('assets/css/vendor.css') }}">
+        <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">
 
         @if (app()->environment('production'))
             <script data-ad-client="ca-pub-9135565255758714" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -32,10 +32,11 @@
         </div>
 
         <!-- scripts -->
-        <script src="{{ asset('js/manifest.js') }}"></script>
-        <script src="{{ asset('js/vendor.js') }}"></script>
-        <script src="{{ asset('js/app.js') }}"></script>
+        <script src="{{ mix('assets/js/manifest.js') }}"></script>
+        <script src="{{ mix('assets/js/vendor.js') }}"></script>
+        <script src="{{ mix('assets/js/app.js') }}"></script>
 
+        <!-- stacked scripts -->
         @stack('scripts')
     </body>
 </html>

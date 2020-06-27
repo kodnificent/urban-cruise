@@ -36,6 +36,7 @@
         <script src="{{ mix('assets/js/vendor.js') }}"></script>
         <script src="{{ mix('assets/js/app.js') }}"></script>
 
+        <!-- stacked scripts -->
         @stack('scripts')
     </body>
 </html>

@@ -1,16 +1,10 @@
 const
     mix = require('laravel-mix'),
-
     postcss_import = require('postcss-import'),
-
     tailwindcss = require('tailwindcss'),
-
     postcss_nested = require('postcss-nested'),
-
     postcss_custom_nested = require('postcss-custom-properties'),
-
     autoprefixer = require('autoprefixer'),
-
     purgecss = require('@fullhuman/postcss-purgecss')({
         content: [
             './resources/**/*.blade.php',
@@ -41,3 +35,6 @@ mix.js('resources/js/app.js', 'public/assets/js')
         extractVueStyles: true,
     })
     .extract()
+    if (mix.inProduction()) {
+        mix.version();
+    }

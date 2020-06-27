@@ -54,19 +54,6 @@ class HasSlugTest extends TestCase
         $this->assertEquals('my-title-1', $model2->slug);
     }
 
-    public function testSlugger_ShouldSlug_AnUpdatedModel()
-    {
-
-        $model = new SluggableModel();
-        $model->title = 'My title';
-        $model->save();
-
-        $model->title = 'My new title';
-        $model->update();
-
-        $this->assertEquals('my-new-title', $model->slug);
-    }
-
     public function testSlugger_ShouldSlug_IrrespectiveOf_FieldCase()
     {
         SluggableModel::create([

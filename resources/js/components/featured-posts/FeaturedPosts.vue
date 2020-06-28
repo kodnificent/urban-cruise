@@ -17,13 +17,9 @@
 
                     <h1 class="capitalize font-bold post__title text-shadow">
                         <a class="text-current" :href="post.url">
-                            {{ post.truncated_title_md }}
+                            {{ post.truncated_title }}
                         </a>
                     </h1>
-
-                    <p class="text-sm -mt-1 text-shadow">
-                        {{ post.creator.name }}
-                    </p>
                 </a>
             </div>
         </vue-glide-slide>

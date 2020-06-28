@@ -148,4 +148,9 @@ abstract class User extends Resource
             })->onlyOnDetail()
         ];
     }
+
+    public static function availableForNavigation(Request $request)
+    {
+        return $request->user()->isAdmin();
+    }
 }

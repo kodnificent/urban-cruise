@@ -21,7 +21,7 @@ class UserPolicy
 
     public function viewAny(User $user)
     {
-        return $user->isAdmin();
+        return true;
     }
 
     public function view(User $user, $model)

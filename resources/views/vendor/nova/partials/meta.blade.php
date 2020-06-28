@@ -9,4 +9,7 @@
     .fr-element p {
         margin-bottom: 1rem !important;
     }
+    a[href^="https://www.froala.com"], a[href^="https://froala.com"] {
+        display: none !important;
+    }
 </style>

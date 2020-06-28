@@ -139,6 +139,12 @@ class PostController extends Controller
             'seo_description' => $post->summary,
             'seo_canonical' => $post->url,
             'title' => $post->title,
+            'og' => [
+                'title' => $post->title,
+                'image' => $post->image_thumbnail,
+                'description' => $post->summary,
+                'url' => $post->url,
+            ]
         ];
     }
 

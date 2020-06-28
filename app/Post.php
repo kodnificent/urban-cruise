@@ -83,7 +83,7 @@ class Post extends Model
 
     public function getTruncatedSummaryAttribute()
     {
-        if (! isset($this->attributes['summary']) || ! isset($this->attributes['content'])) return null;
+        if (! isset($this->attributes['summary']) && ! isset($this->attributes['content'])) return null;
 
         $content = $this->attributes['summary'] ?: $this->attributes['content'];
 

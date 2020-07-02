@@ -21,6 +21,7 @@
                     <span class="sr-only"> close search form</span>
                 </button>
 
+                <label class="sr-only">Search</label>
                 <input
                     v-model="query"
                     ref="dialog-input"
@@ -31,7 +32,7 @@
 
             <div class="mobile-search__dialog-body">
                 <div v-if="! has_searched" class="flex flex-col items-center justify-center mt-20">
-                    <img src="/assets/imgs/search.svg" class="mb-6" height="200px" width="200px" />
+                    <img v-lazy="'/assets/imgs/search.svg'" alt="search" class="mb-6" height="200px" width="200px" />
 
                     <p class="text-center text-gray-700">
                         Looking for information on Politics, News, Enterntainment, Sports, Lifestyle? We've got you covered

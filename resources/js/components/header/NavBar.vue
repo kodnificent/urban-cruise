@@ -36,7 +36,7 @@
                 <feather-icon icon="x" size="lg" />
             </button>
             <div class="md:hidden" style="width: 100%; height: 150px;">
-                <img class="mx-auto block" width="150px" src="/assets/imgs/desktop-logo.png" alt="urban-cruise logo">
+                <img class="mx-auto block" width="150px" v-lazy="'/assets/imgs/desktop-logo.png'" alt="urban-cruise logo">
             </div>
 
             <ul class="navbar__list">

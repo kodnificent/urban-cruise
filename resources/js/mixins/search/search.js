@@ -1,3 +1,5 @@
+import debounce from "lodash.debounce";
+
 export const search = {
     data(){
         return {
@@ -45,6 +47,6 @@ export const search = {
     },
 
     created(){
-        this.debouncedSearch = _.debounce(this.search, 500);
+        this.debouncedSearch = debounce(this.search, 500);
     }
 }

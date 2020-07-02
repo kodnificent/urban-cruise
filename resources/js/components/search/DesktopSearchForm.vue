@@ -1,5 +1,6 @@
 <template>
     <form class="px-1 relative" aria-live="assertive">
+        <label class="sr-only">Search</label>
         <input
             v-model="query"
             ref="search"

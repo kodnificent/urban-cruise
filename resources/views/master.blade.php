@@ -12,9 +12,9 @@
 
         <link rel="preload" href="{{ mix('assets/css/vendor.css') }}" as="style">
         <link rel="preload" href="{{ mix('assets/css/app.css') }}" as="style">
-        <link rel="preload" href="{{ mix('assets/css/app.js') }}" as="script">
-        <link rel="preload" href="{{ mix('assets/css/vendor.js') }}" as="script">
-        <link rel="preload" href="{{ mix('assets/css/manifest.js') }}" as="script">
+        <link rel="preload" href="{{ mix('assets/js/app.js') }}" as="script">
+        <link rel="preload" href="{{ mix('assets/js/vendor.js') }}" as="script">
+        <link rel="preload" href="{{ mix('assets/js/manifest.js') }}" as="script">
 
         <link rel="stylesheet" href="{{ mix('assets/css/vendor.css') }}">
         <link rel="stylesheet" href="{{ mix('assets/css/app.css') }}">

@@ -17,7 +17,7 @@
         "es6-promise": "^4.2.8",
         "feather-icons": "^4.25.0",
         "laravel-mix": "^5.0.1",
-        "lodash": "^4.17.15",
+        "lodash.debounce": "^4.0.8",
         "material-components-web": "^5.1.0",
         "pattern.css": "^1.0.0",
         "postcss-custom-properties": "^9.1.1",

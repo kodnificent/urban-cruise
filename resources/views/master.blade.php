@@ -7,7 +7,6 @@
 
         <!-- propeller ads -->
         <meta name="propeller" content="40f137d97b26f3c1b13be05a6a5973fe">
-        <meta name="rankz-verification" content="gayd1PXCquXae63K">
 
         @yield('metas')
 

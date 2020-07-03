@@ -43,5 +43,8 @@
 
         <!-- stacked scripts -->
         @stack('scripts')
+
+        <!-- propeller ads -->
+        <script src="https://propu.sh/pfe/current/tag.min.js?z=3412136" data-cfasync="false" async></script>
     </body>
 </html>

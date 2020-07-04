@@ -45,6 +45,6 @@
         @stack('scripts')
 
         <!-- propeller ads -->
-        <script src="https://propu.sh/pfe/current/tag.min.js?z=3412136" data-cfasync="false" async></script>
+        <script>(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://iclickcdn.com/tag.min.js',3412069,document.body||document.documentElement)</script>
     </body>
 </html>

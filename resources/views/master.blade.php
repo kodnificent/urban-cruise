@@ -5,9 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-        <!-- propeller ads -->
-        <meta name="propeller" content="40f137d97b26f3c1b13be05a6a5973fe">
-
         @yield('metas')
 
         <link rel="preload" href="{{ mix('assets/css/vendor.css') }}" as="style">
@@ -44,7 +41,5 @@
         <!-- stacked scripts -->
         @stack('scripts')
 
-        <!-- propeller ads -->
-        <script>(function(s,u,z,p){s.src=u,s.setAttribute('data-zone',z),p.appendChild(s);})(document.createElement('script'),'https://iclickcdn.com/tag.min.js',3412069,document.body||document.documentElement)</script>
     </body>
 </html>

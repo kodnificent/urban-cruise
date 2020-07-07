@@ -23,6 +23,8 @@ Route::get('', 'HomeController')->name('home');
 
 Route::get('about-us', 'PageController@about')->name('about-us');
 
+Route::get('contact-us', 'PageController@contact')->name('contact-us');
+
 Route::get('write-for-us', 'PageController@write')->name('write-for-us');
 
 Route::prefix('author')

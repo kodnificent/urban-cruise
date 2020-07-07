@@ -15,6 +15,18 @@
                         </li>
                     </ul>
                 </div>
+
+                <div class="w-1/2 md:w-1/4 mb-6">
+                    <h2 class="uppercase text-sm font-bold text-gray-300">
+                        Quick Links
+                    </h2>
+
+                    <ul class="mt-3">
+                        <li class="pb-1" v-for="link in $root.quick_links" :key="link.url">
+                            <a :href="link.url" class="text-gray-300 py-1">{{ link.name }}</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
 
             <div class="py-4 text-center text-sm border-t border-gray-700">

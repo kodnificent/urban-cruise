@@ -37,6 +37,16 @@
                                 driven marketing solutions that engages and converts your target audience.
                             </p>
 
+                            <div class="flex flex-wrap justify-center mt-8">
+                                <a href="mailto:contact@urbancruise.com.ng" class="button bg-primary text-on-primary">
+                                    Email us
+                                </a>
+
+                                <a href="tel:+2347037991066" class="button ml-4 bg-gray-400 text-gray-900">
+                                    Phone us
+                                </a>
+                            </div>
+
                         </div>
                     </section>
 

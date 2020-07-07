@@ -2287,6 +2287,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   mixins: [_mixins_layout_layout__WEBPACK_IMPORTED_MODULE_0__["layout"]],
@@ -6594,7 +6604,45 @@ var render = function() {
                             _vm._v(
                               "\n                            UrbanCruise connects brands with the best audience in entertainment and more.\n                            Whether its sponsored content, custom ad units, display lead acquisition or\n                            strategic partnerships. We cater to your advertising objectives with data\n                            driven marketing solutions that engages and converts your target audience.\n                        "
                             )
-                          ])
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticClass: "flex flex-wrap justify-center mt-8"
+                            },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "button bg-primary text-on-primary",
+                                  attrs: {
+                                    href: "mailto:contact@urbancruise.com.ng"
+                                  }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Email us\n                            "
+                                  )
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass:
+                                    "button ml-4 bg-gray-400 text-gray-900",
+                                  attrs: { href: "tel:+2347037991066" }
+                                },
+                                [
+                                  _vm._v(
+                                    "\n                                Phone us\n                            "
+                                  )
+                                ]
+                              )
+                            ]
+                          )
                         ],
                         1
                       )

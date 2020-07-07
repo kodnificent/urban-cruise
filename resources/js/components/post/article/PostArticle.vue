@@ -212,10 +212,18 @@ export default {
 
         h1, h2, h3, h4, h5, h6
             @apply mb-2
-        p
+        p, ol, ul
             @apply mb-4
         p[data-f-id]
             display: none !important
+        ol, ul
+            @apply ml-6
+            li:not(:first-child)
+                @apply mt-2
+        ol
+            @apply list-disc
+        ul
+            @apply list-decimal
     .post-nav
         @apply px-2 py-1
         &__header

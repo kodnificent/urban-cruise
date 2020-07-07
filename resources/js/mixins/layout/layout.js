@@ -59,6 +59,7 @@ export const layout = {
         this.$root.is_shell = this.res.is_shell;
         this.$root.primary_menu = this.res.primary_menu;
         this.$root.social_links = this.res.social_links;
+        this.$root.quick_links = this.res.quick_links;
         this.$root.categories = this.res.categories;
         this.$root.endpoints = this.res.endpoints;
 

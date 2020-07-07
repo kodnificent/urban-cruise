@@ -42,6 +42,7 @@ const app = new Vue({
         primary_menu: [],
         social_links: [],
         categories: [],
+        quick_links: [],
         endpoints: {},
         device_width: null,
     },

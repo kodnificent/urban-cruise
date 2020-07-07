@@ -59,6 +59,8 @@
                 </main-layout>
             </template>
         </content-component>
+
+        <footer-component v-if="! $root.isMobile" />
     </div>
 </template>
 

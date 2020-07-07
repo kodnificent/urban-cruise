@@ -32,6 +32,8 @@ class Controller extends BaseController
 
         $res['social_links'] = $this->socialLinks();
 
+        $res['quick_links'] = $this->quickLinks();
+
         $res['categories'] = $this->categories();
 
         $res['endpoints']['posts'] = route('category.posts');
@@ -58,6 +60,7 @@ class Controller extends BaseController
             'endpoints' => $endpoints,
             'is_shell' => true,
             'primary_menu' => $this->primaryMenu(),
+            'quick_links' => $this->quickLinks(),
             'social_links' => $this->socialLinks(),
             'categories' => $this->categories(),
         ];
@@ -71,6 +74,29 @@ class Controller extends BaseController
             'facebook' => settings('facebook'),
             'instagram' => settings('instagram'),
             'twitter' => settings('twitter')
+        ];
+    }
+
+    public function quickLinks()
+    {
+        return [
+            [
+                'name' => 'About Us',
+                'url' => route('about-us'),
+                'active' => request()->is( extractPath(route('about-us')) )
+            ],
+
+            [
+                'name' => 'Contact Us',
+                'url' => route('contact-us'),
+                'active' => request()->is( extractPath(route('contact-us')) )
+            ],
+
+            [
+                'name' => 'Write for Us',
+                'url' => route('write-for-us'),
+                'active' => request()->is( extractPath(route('write-for-us')) )
+            ],
         ];
     }
 
@@ -107,6 +133,12 @@ class Controller extends BaseController
             'name' => 'About Us',
             'url' => route('about-us'),
             'active' => request()->is( extractPath(route('about-us')) )
+        ];
+
+        $menu[] = [
+            'name' => 'Contact Us',
+            'url' => route('contact-us'),
+            'active' => request()->is( extractPath(route('contact-us')) )
         ];
 
         $menu[] = [

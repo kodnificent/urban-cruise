@@ -33,6 +33,17 @@ class AuthorControllerTest extends TestCase
         ]);
     }
 
+    public function testGetTeam()
+    {
+        $response = $this->json('GET', route('team'));
+        $response->assertStatus(200);
+        $response->assertJsonStructure([
+            'success',
+            'message',
+            'data'
+        ]);
+    }
+
     public function testAuthorShell()
     {
         $response = $this->get(route('author.shell'));

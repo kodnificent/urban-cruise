@@ -27,6 +27,21 @@ class AuthorController extends Controller
         return $this->respond($res, $request, $this->layout());
     }
 
+    public function team(Request $request)
+    {
+        if (! $request->expectsJson()) {
+            abort(404, 'route not found');
+        }
+
+        $team = User::where('role', 'admin')->orWhere('role', 'editor')->get();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'List of team members',
+            'data' => $team
+        ]);
+    }
+
     public function layout()
     {
         return 'layouts.author.show';

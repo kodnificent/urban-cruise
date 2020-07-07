@@ -19,6 +19,8 @@ Route::get('post.shell', 'PostController@shell')->name('post.shell');
 
 Route::get('author.shell', 'AuthorController@shell')->name('author.shell');
 
+Route::get('team', 'AuthorController@team')->name('team');
+
 Route::get('', 'HomeController')->name('home');
 
 Route::get('about-us', 'PageController@about')->name('about-us');

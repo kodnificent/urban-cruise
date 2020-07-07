@@ -65,6 +65,11 @@
                             <section-header class="mb-4">
                                 Our team
                             </section-header>
+
+                            <div v-if="fetching_team" class="team">
+                                <team-skeleton v-for="index in [1,2,3,4]" :key="index" />
+                            </div>
+                            <team-component v-else :team="team" />
                         </div>
                     </section>
 
@@ -88,13 +93,31 @@ export default {
 
     data(){
         return {
+            team: [],
+            fetch_team_error: false,
+            fetching_team: false,
+        }
+    },
 
+    methods: {
+        getTeam()
+        {
+            this.fetching_team = true;
+            this.fetch_team_error = false;
+
+            return axios.get('/team').then(res => {
+                this.team = res.data.data;
+            }).catch(err=>{
+                this.fetch_team_error = true;
+            }).then(()=>{
+                this.fetching_team = false;
+            });
         }
     },
 
     mounted()
     {
-        //
+        this.getTeam();
     }
 }
 </script>

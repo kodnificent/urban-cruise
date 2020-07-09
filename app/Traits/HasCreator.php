@@ -76,7 +76,7 @@ trait HasCreator
 
         $this->with[] = 'creator';
 
-        return in_array('meta', $this->with);
+        return in_array('creator', $this->with);
     }
 
     /**

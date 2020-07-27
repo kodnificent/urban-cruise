@@ -22,12 +22,12 @@ Route::get('author.shell', 'AuthorController@shell')->name('author.shell');
 Route::get('team', 'AuthorController@team')->name('team');
 
 Route::get('', 'HomeController')->name('home');
-
 Route::get('about-us', 'PageController@about')->name('about-us');
-
 Route::get('contact-us', 'PageController@contact')->name('contact-us');
-
 Route::get('write-for-us', 'PageController@write')->name('write-for-us');
+Route::get('terms-and-condition', 'PageController@terms')->name('terms');
+Route::get('disclaimer', 'PageController@disclaimer')->name('disclaimer');
+Route::get('privacy-policy', 'PageController@privacy')->name('privacy');
 
 Route::prefix('author')
     ->name('author.')

@@ -32,9 +32,9 @@
                             </section-header>
                             <p>
                                 UrbanCruise connects brands with the best audience in entertainment and more.
-                                Whether its sponsored content, custom ad units, display lead acquisition or
-                                strategic partnerships. We cater to your advertising objectives with data
-                                driven marketing solutions that engages and converts your target audience.
+                                Whether it's sponsored content, custom ad units, display lead acquisition, or
+                                strategic partnerships. We cater to your advertising objectives with data-driven
+                                marketing solutions that engage and convert your target audience.
                             </p>
 
                             <div class="flex flex-wrap justify-center mt-8">

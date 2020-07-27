@@ -43,24 +43,24 @@
                                 UrbanCruise believes that values reflects the heart which
                                 is why our foundation has been built on:
                             </p>
-                            <ol class="mb-6">
+                            <ul class="mb-6">
                                 <li>
-                                    Spirit of Adventure -You get to experience the shared thrill, excitement
+                                    <strong>Spirit of Adventure</strong>: You get to experience the shared thrill, excitement
                                     and fun of being on a cruise. Its a promise we'll keep.
                                 </li>
                                 <li>
-                                    Balance- We are open-minded and strive to satisfy your thirst and hunger
+                                    <strong>Balance</strong>: We are open-minded and strive to satisfy your thirst and hunger
                                     with educating and entertaining contents.
                                 </li>
                                 <li>
-                                    Relationship- We know fun is better shared, So is making impacts.
+                                    <strong>Relationship</strong>: We know fun is better shared, So is making impacts.
                                     We are open to strategic partnership and friendships.
                                 </li>
                                 <li>
-                                    Proactive - Our team is geared towards providing timely, quality and relevant contents
+                                    <strong>Proactive</strong>: Our team is geared towards providing timely, quality and relevant contents
                                     to you because you simply deserve the best
                                 </li>
-                            </ol>
+                            </ul>
 
                             <section-header class="mb-4">
                                 Our team

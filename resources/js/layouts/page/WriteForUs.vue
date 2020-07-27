@@ -31,9 +31,24 @@
                                 Write for us
                             </section-header>
                             <p>
-                                We are exited to hear about what you'd like to contribute to UrbanCruise.
-                                We will need a bit of info but this shouldn't take too long.
-                                Please answer in a clear, honest way. Its the best way to ensure you hear from us.
+                                Interested In Being A Writer For UrbanCruise?
+                                We are always looking for insightful and creative writers who
+                                are motivated to develop and deliver engaging content.
+                            </p>
+
+                            <section-header class="mb-6 mt-6">What We Are Looking For</section-header>
+                            <p>
+                                If you can produce quality content with expert knowledge in one or
+                                more of UrbanCruise’s featured categories.
+                                Interesting Facts are that you get credit as the author. Also, you
+                                get compesated for contents written.
+                            </p>
+
+                            <section-header class="mb-6 mt-6">Apply Today!</section-header>
+
+                            <p>
+                                If you know you have what it takes to be part of the UrbanCruise writers' family, apply today.
+                                <strong>Note</strong>: we do not accept any guest posts at the moment.
                             </p>
                         </div>
                     </section>

@@ -221,9 +221,9 @@ export default {
             li:not(:first-child)
                 @apply mt-2
         ol
-            @apply list-disc
-        ul
             @apply list-decimal
+        ul
+            @apply list-disc
     .post-nav
         @apply px-2 py-1
         &__header

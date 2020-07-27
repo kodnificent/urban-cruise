@@ -85,17 +85,20 @@ class Controller extends BaseController
                 'url' => route('about-us'),
                 'active' => request()->is( extractPath(route('about-us')) )
             ],
-
             [
-                'name' => 'Contact Us',
-                'url' => route('contact-us'),
-                'active' => request()->is( extractPath(route('contact-us')) )
+                'name' => 'Privacy Policy',
+                'url' => route('privacy'),
+                'active' => request()->is( extractPath(route('privacy')) )
             ],
-
             [
-                'name' => 'Write for Us',
-                'url' => route('write-for-us'),
-                'active' => request()->is( extractPath(route('write-for-us')) )
+                'name' => 'Disclaimer',
+                'url' => route('disclaimer'),
+                'active' => request()->is( extractPath(route('disclaimer')) )
+            ],
+            [
+                'name' => 'Terms and Conditions',
+                'url' => route('terms'),
+                'active' => request()->is( extractPath(route('terms')) )
             ],
         ];
     }

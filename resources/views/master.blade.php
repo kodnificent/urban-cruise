@@ -19,6 +19,7 @@
         @if (app()->environment('production'))
             <!-- Global site tag (gtag.js) - Google Analytics -->
             <script async src="https://www.googletagmanager.com/gtag/js?id=UA-170743507-1"></script>
+
             <script>
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
@@ -26,6 +27,8 @@
 
                 gtag('config', 'UA-170743507-1');
             </script>
+
+            <!-- Google Ad sense -->
             <script data-ad-client="ca-pub-9135565255758714" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
         @endif
     </head>
@@ -39,8 +42,13 @@
         <script src="{{ mix('assets/js/vendor.js') }}"></script>
         <script src="{{ mix('assets/js/app.js') }}"></script>
 
+        @if (app()->environment('production'))
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        @endif
+
         <!-- stacked scripts -->
         @stack('scripts')
-
     </body>
 </html>

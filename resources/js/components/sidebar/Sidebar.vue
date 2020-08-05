@@ -43,6 +43,16 @@
                 most recent articles
             </section-header>
 
+            <div class="mt-6">
+                <!-- google ads -->
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-format="fluid"
+                    data-ad-layout-key="-ic+f+o-ae+hd"
+                    data-ad-client="ca-pub-9135565255758714"
+                    data-ad-slot="6087733413"></ins>
+            </div>
+
             <most-recent-articles class="mt-6" />
         </div>
     </aside>

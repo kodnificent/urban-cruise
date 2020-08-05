@@ -57,6 +57,16 @@
                 <post-small v-for="post in otherPosts" :key="post.id" v-bind="{ post }" class="w-full md:w-1/2 mb-8 pl-4 mt-0" />
             </div>
 
+            <!-- google ads -->
+            <div class="flex flex-wrap -ml-4 mt-8">
+                <ins class="adsbygoogle"
+                    style="display:block"
+                    data-ad-format="fluid"
+                    data-ad-layout-key="-ic+f+o-ae+hd"
+                    data-ad-client="ca-pub-9135565255758714"
+                    data-ad-slot="6087733413"></ins>
+            </div>
+
             <div class="flex flex-col items-center justify-center">
                 <button v-if="meta.next_page_url"
                     type="button"
